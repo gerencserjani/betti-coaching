@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/gerencserjani/betti-coaching/compare/v1.0.1...v1.1.0) (2026-09-14)
+
+### Features
+
+- **claude:** add /start-issue and /end-issue slash commands ([57d9123](https://github.com/gerencserjani/betti-coaching/commit/57d91236696d4905b8e970b45c9455c04c7c015b))
+
 ## [1.0.1](https://github.com/gerencserjani/betti-coaching/compare/v1.0.0...v1.0.1) (2026-09-14)
 
 ### Bug Fixes
