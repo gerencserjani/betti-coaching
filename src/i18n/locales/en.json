@@ -70,5 +70,15 @@
     "heading": "Be part of a judgment-free, connection-rich, supportive community.",
     "body": "Supporting. Connecting. Speaking honestly. A place where you don't have to carry the load alone — where other mothers and women understand what you're going through, and where you can share your thoughts in a safe space.",
     "cta": "Join us"
+  },
+  "pricing": {
+    "freeCall": {
+      "badge": "First step",
+      "heading": "Free introductory call",
+      "text": "A short online or in-person conversation where we get to know each other, and find out if I'm the right person for you.",
+      "priceLabel": "Free"
+    },
+    "tableCaption": "Coaching sessions",
+    "minutesUnit": "min"
   }
 }
