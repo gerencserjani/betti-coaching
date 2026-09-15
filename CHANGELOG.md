@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/gerencserjani/betti-coaching/compare/v1.18.2...v1.19.0) (2026-09-15)
+
+### Features
+
+- add final hero/community art and real favicon, drop base64 (refs [#21](https://github.com/gerencserjani/betti-coaching/issues/21)) ([e044cb9](https://github.com/gerencserjani/betti-coaching/commit/e044cb9ba7dddeb02df5caffd6685c4a9067bd15))
+- use the real brand logo mark in the header (refs [#21](https://github.com/gerencserjani/betti-coaching/issues/21)) ([9122429](https://github.com/gerencserjani/betti-coaching/commit/9122429432807eb99ba131a973f218d2fba9f0c5))
+
 ## [1.18.2](https://github.com/gerencserjani/betti-coaching/compare/v1.18.1...v1.18.2) (2026-09-15)
 
 ### Bug Fixes
