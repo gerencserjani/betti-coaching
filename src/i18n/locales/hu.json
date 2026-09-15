@@ -80,5 +80,15 @@
     },
     "tableCaption": "Coaching alkalmak",
     "minutesUnit": "perc"
+  },
+  "contact": {
+    "heading": "Kezdjük el a beszélgetést",
+    "intro": "Írj vagy hívj nyugodtan — az első, 30 perces beszélgetés díjmentes, és semmi kötelezettséggel nem jár.",
+    "labels": {
+      "address": "Cím",
+      "phone": "Telefonszám",
+      "email": "E-mail cím"
+    },
+    "mapLink": "Megnyitás Google Térképen ↗"
   }
 }

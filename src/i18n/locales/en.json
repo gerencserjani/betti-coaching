@@ -80,5 +80,15 @@
     },
     "tableCaption": "Coaching sessions",
     "minutesUnit": "min"
+  },
+  "contact": {
+    "heading": "Let's start the conversation",
+    "intro": "Feel free to write or call — the first, 30-minute conversation is free, with no obligation.",
+    "labels": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "mapLink": "Open in Google Maps ↗"
   }
 }
