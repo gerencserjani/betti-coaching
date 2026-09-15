@@ -4,6 +4,7 @@ import Header from "./components/Header.tsx";
 import Hero from "./sections/Hero.tsx";
 import QuoteBlock from "./components/QuoteBlock.tsx";
 import Services from "./sections/Services.tsx";
+import Community from "./sections/Community.tsx";
 
 function App() {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ function App() {
         leadIn={t("quoteBlock.leadIn")}
       />
       <Services />
+      <Community />
     </>
   );
 }
