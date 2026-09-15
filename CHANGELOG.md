@@ -1,3 +1,9 @@
+# [1.15.0](https://github.com/gerencserjani/betti-coaching/compare/v1.14.0...v1.15.0) (2026-09-15)
+
+### Features
+
+- build Community section component ([a7c95ce](https://github.com/gerencserjani/betti-coaching/commit/a7c95ce7e70db9c93343b49997c57897f74938a5)), closes [#kapcsolat](https://github.com/gerencserjani/betti-coaching/issues/kapcsolat) [#12](https://github.com/gerencserjani/betti-coaching/issues/12)
+
 # [1.14.0](https://github.com/gerencserjani/betti-coaching/compare/v1.13.0...v1.14.0) (2026-09-15)
 
 ### Features
