@@ -1,3 +1,9 @@
+## [1.15.1](https://github.com/gerencserjani/betti-coaching/compare/v1.15.0...v1.15.1) (2026-09-15)
+
+### Bug Fixes
+
+- localize the document title ([ce8b641](https://github.com/gerencserjani/betti-coaching/commit/ce8b641cf774b8ea2d2fbb16f808ed2a35d08dd6))
+
 # [1.15.0](https://github.com/gerencserjani/betti-coaching/compare/v1.14.0...v1.15.0) (2026-09-15)
 
 ### Features
