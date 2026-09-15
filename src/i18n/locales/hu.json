@@ -63,5 +63,11 @@
         ]
       }
     }
+  },
+  "community": {
+    "kicker": "Anyák egymásért · Nők önmagunkért",
+    "heading": "Légy része egy ítéletmentes, kapcsolódásban gazdag, támogató közösségnek.",
+    "body": "Támogatni. Kapcsolódni. Őszintén kimondani. Egy olyan hely, ahol nem kell egyedül vinni a terheket — ahol más anyák és nők értik, amit átélsz, és ahol biztonságos térben oszthatod meg a gondolataidat.",
+    "cta": "Csatlakozom"
   }
 }
