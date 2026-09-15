@@ -4,6 +4,7 @@ import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 import { communityCtaHref } from "../content/community";
+import communityArt from "../assets/community-art.webp";
 
 export default function Community(): ReactElement {
   const { t } = useTranslation();
@@ -25,9 +26,11 @@ export default function Community(): ReactElement {
             className,
           ].join(" ")}
         >
-          <div
+          <img
+            src={communityArt}
+            alt=""
             aria-hidden="true"
-            className="order-first mx-auto aspect-square w-full max-w-[260px] rounded-full border border-dashed border-line bg-bg-panel lg:order-none lg:max-w-[420px]"
+            className="order-first mx-auto w-full max-w-[260px] transition-[filter] duration-200 lg:order-none lg:max-w-[420px] dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
           />
 
           <div>
