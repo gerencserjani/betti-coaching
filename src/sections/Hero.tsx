@@ -2,6 +2,7 @@ import type { ReactElement } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
+import heroArt from "../assets/hero-art.webp";
 
 const topics = ["partnership", "communication", "parenting"] as const;
 
@@ -37,10 +38,11 @@ export default function Hero(): ReactElement {
             </div>
           </div>
 
-          {/* Hero illustration placeholder -- real asset lands in #21 */}
-          <div
+          <img
+            src={heroArt}
+            alt=""
             aria-hidden="true"
-            className="order-first mx-auto aspect-square w-full max-w-[280px] rounded-full border border-dashed border-line bg-bg-panel lg:order-none lg:max-w-none"
+            className="order-first mx-auto w-full max-w-[280px] transition-[filter] duration-200 lg:order-none lg:max-w-none dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
           />
         </div>
       </Container>
