@@ -1,3 +1,9 @@
+# [1.6.0](https://github.com/gerencserjani/betti-coaching/compare/v1.5.0...v1.6.0) (2026-09-15)
+
+### Features
+
+- implement light/dark theme system with toggle and persistence ([5ed4c30](https://github.com/gerencserjani/betti-coaching/commit/5ed4c30449a2bfb387549a1b62c9aca49fd2dd0e)), closes [#4](https://github.com/gerencserjani/betti-coaching/issues/4)
+
 # [1.5.0](https://github.com/gerencserjani/betti-coaching/compare/v1.4.0...v1.5.0) (2026-09-15)
 
 ### Features
