@@ -1,7 +1,12 @@
 import "./App.css";
+import ThemeToggle from "./components/ThemeToggle.tsx";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <ThemeToggle />
+    </>
+  );
 }
 
 export default App;
