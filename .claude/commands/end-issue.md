@@ -51,9 +51,28 @@ Do the following steps:
 
 9. Print the PR URL returned by `gh pr create`.
 
-10. Switch back to main:
+10. Once the PR has been opened successfully, move the issue to "Done" on
+    the project board (project "Betti Coaching Website", owner
+    `gerencserjani`, project id `PVT_kwHOA_QCFM4Bjcit`, Status field id
+    `PVTSSF_lAHOA_QCFM4BjcitzhiQzRE`, "Done" option id `98236657`):
+    - Find this issue's project item id: run
+      `gh project item-list 1 --owner gerencserjani --format json` and read
+      the `id` of the entry whose `content.number` equals the issue number.
+    - Run:
+      `gh project item-edit --id <item-id> --field-id PVTSSF_lAHOA_QCFM4BjcitzhiQzRE --project-id PVT_kwHOA_QCFM4Bjcit --single-select-option-id 98236657`
+    - If the IDs above no longer work (project recreated, field renamed) or
+      the issue isn't on this board, look them up fresh with
+      `gh project field-list 1 --owner gerencserjani --format json`. Don't
+      let a failure here undo the already-opened PR — just note it in the
+      final report.
+    - Only do this if the PR was actually created successfully (step 8). If
+      step 4 stopped the flow (NOT READY) and the user chose to cancel, skip
+      this step entirely — the issue isn't done.
+
+11. Switch back to main:
     - `git checkout main`
     - `git pull`
 
-11. At the end, clearly confirm: the PR URL, and that the working directory
-    is now back on `main`, up to date.
+12. At the end, clearly confirm: the PR URL, that the working directory is
+    now back on `main` and up to date, and whether the board status update
+    succeeded.

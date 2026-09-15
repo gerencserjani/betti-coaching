@@ -23,5 +23,21 @@ Do the following steps:
    - `git pull`
    - `git checkout -b <branch-name>`
 
-6. At the end, clearly report: which issue we're working on, which branch
-   we're now on, and a short description of the issue.
+6. Move the issue to "In Progress" on the project board (project "Betti
+   Coaching Website", owner `gerencserjani`, project id
+   `PVT_kwHOA_QCFM4Bjcit`, Status field id `PVTSSF_lAHOA_QCFM4BjcitzhiQzRE`,
+   "In Progress" option id `47fc9ee4`):
+   - Find this issue's project item id: run
+     `gh project item-list 1 --owner gerencserjani --format json` and read
+     the `id` of the entry whose `content.number` equals the issue number.
+   - Run:
+     `gh project item-edit --id <item-id> --field-id PVTSSF_lAHOA_QCFM4BjcitzhiQzRE --project-id PVT_kwHOA_QCFM4Bjcit --single-select-option-id 47fc9ee4`
+   - If the IDs above no longer work (project recreated, field renamed) or
+     the issue isn't on this board, look them up fresh with
+     `gh project field-list 1 --owner gerencserjani --format json` and don't
+     let a failure here block branch creation — just note it in the final
+     report.
+
+7. At the end, clearly report: which issue we're working on, which branch
+   we're now on, a short description of the issue, and whether the board
+   status update succeeded.
