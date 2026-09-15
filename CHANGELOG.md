@@ -1,3 +1,9 @@
+# [1.18.0](https://github.com/gerencserjani/betti-coaching/compare/v1.17.1...v1.18.0) (2026-09-15)
+
+### Features
+
+- add footer component with dynamic copyright year (refs [#15](https://github.com/gerencserjani/betti-coaching/issues/15)) ([9d3e3a5](https://github.com/gerencserjani/betti-coaching/commit/9d3e3a59fd5a7e08131ecfff6f530b7fef8a391a))
+
 ## [1.17.1](https://github.com/gerencserjani/betti-coaching/compare/v1.17.0...v1.17.1) (2026-09-15)
 
 ### Bug Fixes
