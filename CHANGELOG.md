@@ -1,3 +1,9 @@
+## [1.18.2](https://github.com/gerencserjani/betti-coaching/compare/v1.18.1...v1.18.2) (2026-09-15)
+
+### Bug Fixes
+
+- centralize site name into shared content file (refs [#20](https://github.com/gerencserjani/betti-coaching/issues/20)) ([4e34031](https://github.com/gerencserjani/betti-coaching/commit/4e3403135e0f1070596203b474349136f230bc4d))
+
 ## [1.18.1](https://github.com/gerencserjani/betti-coaching/compare/v1.18.0...v1.18.1) (2026-09-15)
 
 ### Bug Fixes
