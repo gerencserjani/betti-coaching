@@ -10,5 +10,15 @@
       "booking": "Book a session",
       "contact": "Contact"
     }
+  },
+  "hero": {
+    "kicker": "Family & couples communication coach",
+    "headline": "About communication.<br/>About connection.<br/>About you.",
+    "role": "I help you find the words when it's hard to say what's on your mind in your relationships — in a way that brings you closer, not further apart.",
+    "topics": {
+      "partnership": "Relationships",
+      "communication": "Assertive communication",
+      "parenting": "Parenting atmosphere"
+    }
   }
 }
