@@ -1,3 +1,9 @@
+## [1.17.1](https://github.com/gerencserjani/betti-coaching/compare/v1.17.0...v1.17.1) (2026-09-15)
+
+### Bug Fixes
+
+- enable smooth scrolling for anchor navigation ([07e9f64](https://github.com/gerencserjani/betti-coaching/commit/07e9f64b9fb7ef6c1fa5e9bc0ef998e21001e536)), closes [#anchor](https://github.com/gerencserjani/betti-coaching/issues/anchor)
+
 # [1.17.0](https://github.com/gerencserjani/betti-coaching/compare/v1.16.0...v1.17.0) (2026-09-15)
 
 ### Features
