@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Header from "./components/Header.tsx";
 import Hero from "./sections/Hero.tsx";
 import QuoteBlock from "./components/QuoteBlock.tsx";
+import Services from "./sections/Services.tsx";
 
 function App() {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ function App() {
         quote={t("quoteBlock.quote")}
         leadIn={t("quoteBlock.leadIn")}
       />
+      <Services />
     </>
   );
 }
