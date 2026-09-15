@@ -1,3 +1,9 @@
+# [1.7.0](https://github.com/gerencserjani/betti-coaching/compare/v1.6.0...v1.7.0) (2026-09-15)
+
+### Features
+
+- add layout primitives and custom Tailwind breakpoints ([3d12762](https://github.com/gerencserjani/betti-coaching/commit/3d12762fda41261322e28ab2da4a2ff8d4104a70)), closes [#5](https://github.com/gerencserjani/betti-coaching/issues/5)
+
 # [1.6.0](https://github.com/gerencserjani/betti-coaching/compare/v1.5.0...v1.6.0) (2026-09-15)
 
 ### Features
