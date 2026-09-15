@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+h1,
+h2,
+h3,
+.serif {
+  font-family: "Fraunces", serif;
+  font-weight: 480;
+  letter-spacing: -0.01em;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+blockquote {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 420;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
