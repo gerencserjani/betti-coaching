@@ -1,3 +1,9 @@
+# [1.12.0](https://github.com/gerencserjani/betti-coaching/compare/v1.11.0...v1.12.0) (2026-09-15)
+
+### Features
+
+- build Hero section component ([95c03a5](https://github.com/gerencserjani/betti-coaching/commit/95c03a5c44f2f65367ccc9da7c9bfd68901d40a1)), closes [#5](https://github.com/gerencserjani/betti-coaching/issues/5) [#21](https://github.com/gerencserjani/betti-coaching/issues/21) [#9](https://github.com/gerencserjani/betti-coaching/issues/9)
+
 # [1.11.0](https://github.com/gerencserjani/betti-coaching/compare/v1.10.0...v1.11.0) (2026-09-15)
 
 ### Features
