@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --color-bg: var(--bg);
+  --color-bg-panel: var(--bg-panel);
+  --color-bg-card: var(--bg-card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--line);
+  --color-brown: var(--brown);
+}
+
+:root,
+[data-theme="light"] {
+  --bg: #fbf0f0;
+  --bg-panel: #f0dada;
+  --bg-card: #fef7f7;
+  --ink: #2a1717;
+  --ink-soft: #8a6363;
+  --accent: #a15c6b;
+  --accent-soft: #c99aa0;
+  --line: #e9cdcd;
+  --brown: #8b6b45;
+  --shadow: rgba(42, 23, 23, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #241717;
+    --bg-panel: #2e1c1c;
+    --bg-card: #331f1f;
+    --ink: #f5e1e1;
+    --ink-soft: #c99898;
+    --accent: #d98ca0;
+    --accent-soft: #a15c6b;
+    --line: #4a2c2c;
+    --brown: #c9a171;
+    --shadow: rgba(0, 0, 0, 0.35);
+  }
+}
+
+[data-theme="dark"] {
+  --bg: #241717;
+  --bg-panel: #2e1c1c;
+  --bg-card: #331f1f;
+  --ink: #f5e1e1;
+  --ink-soft: #c99898;
+  --accent: #d98ca0;
+  --accent-soft: #a15c6b;
+  --line: #4a2c2c;
+  --brown: #c9a171;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
