@@ -1,3 +1,9 @@
+# [1.9.0](https://github.com/gerencserjani/betti-coaching/compare/v1.8.0...v1.9.0) (2026-09-15)
+
+### Features
+
+- build Header/Nav component ([bc192c4](https://github.com/gerencserjani/betti-coaching/commit/bc192c4add96b8c5172c3ed9f2985800cff89f15)), closes [#7](https://github.com/gerencserjani/betti-coaching/issues/7) [#6](https://github.com/gerencserjani/betti-coaching/issues/6)
+
 # [1.8.0](https://github.com/gerencserjani/betti-coaching/compare/v1.7.0...v1.8.0) (2026-09-15)
 
 ### Features
