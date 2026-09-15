@@ -1,3 +1,9 @@
+# [1.13.0](https://github.com/gerencserjani/betti-coaching/compare/v1.12.1...v1.13.0) (2026-09-15)
+
+### Features
+
+- build Quote block component ([149b700](https://github.com/gerencserjani/betti-coaching/commit/149b700b53795634b6131a4b88503ab1dfac6067)), closes [#8](https://github.com/gerencserjani/betti-coaching/issues/8) [#10](https://github.com/gerencserjani/betti-coaching/issues/10)
+
 ## [1.12.1](https://github.com/gerencserjani/betti-coaching/compare/v1.12.0...v1.12.1) (2026-09-15)
 
 ### Bug Fixes
