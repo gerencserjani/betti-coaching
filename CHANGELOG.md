@@ -1,3 +1,9 @@
+# [1.3.0](https://github.com/gerencserjani/betti-coaching/compare/v1.2.0...v1.3.0) (2026-09-15)
+
+### Features
+
+- **claude:** sync issue status on the project board from start/end-issue ([a976fd9](https://github.com/gerencserjani/betti-coaching/commit/a976fd910a6b1b546bef1bfd2bf90336beab0f25))
+
 # [1.2.0](https://github.com/gerencserjani/betti-coaching/compare/v1.1.0...v1.2.0) (2026-09-15)
 
 ### Features
