@@ -90,5 +90,8 @@
       "email": "E-mail cím"
     },
     "mapLink": "Megnyitás Google Térképen ↗"
+  },
+  "footer": {
+    "tagline": "Családi és párkapcsolati coach"
   }
 }

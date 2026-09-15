@@ -7,6 +7,7 @@ import Services from "./sections/Services.tsx";
 import Community from "./sections/Community.tsx";
 import Pricing from "./sections/Pricing.tsx";
 import Contact from "./sections/Contact.tsx";
+import Footer from "./components/Footer.tsx";
 
 function App() {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ function App() {
       <Community />
       <Pricing />
       <Contact />
+      <Footer />
     </>
   );
 }

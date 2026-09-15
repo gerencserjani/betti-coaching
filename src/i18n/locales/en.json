@@ -90,5 +90,8 @@
       "email": "Email"
     },
     "mapLink": "Open in Google Maps ↗"
+  },
+  "footer": {
+    "tagline": "Family & couples communication coach"
   }
 }
