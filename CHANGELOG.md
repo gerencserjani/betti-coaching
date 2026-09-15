@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/gerencserjani/betti-coaching/compare/v1.1.0...v1.2.0) (2026-09-15)
+
+### Features
+
+- **claude:** add test-issue skill and wire it into end-issue ([6000f5f](https://github.com/gerencserjani/betti-coaching/commit/6000f5fba5255c5fb6e612c1e407c13f1e8592ed))
+
 # [1.1.0](https://github.com/gerencserjani/betti-coaching/compare/v1.0.1...v1.1.0) (2026-09-14)
 
 ### Features
