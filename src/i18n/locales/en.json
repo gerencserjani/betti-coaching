@@ -1,5 +1,14 @@
 {
   "common": {
-    "themeToggle": "Toggle dark/light mode"
+    "themeToggle": "Toggle dark/light mode",
+    "menuToggle": "Open menu",
+    "nav": {
+      "introduction": "About",
+      "help": "How I can help",
+      "community": "Community",
+      "prices": "Pricing",
+      "booking": "Book a session",
+      "contact": "Contact"
+    }
   }
 }

@@ -1,12 +1,10 @@
 import "./App.css";
-import ThemeToggle from "./components/ThemeToggle.tsx";
-import LanguageSwitcher from "./components/LanguageSwitcher.tsx";
+import Header from "./components/Header.tsx";
 
 function App() {
   return (
     <>
-      <LanguageSwitcher />
-      <ThemeToggle />
+      <Header />
     </>
   );
 }
