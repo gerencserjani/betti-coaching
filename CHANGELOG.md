@@ -1,3 +1,9 @@
+# [1.16.0](https://github.com/gerencserjani/betti-coaching/compare/v1.15.2...v1.16.0) (2026-09-15)
+
+### Features
+
+- build Pricing section component ([aace299](https://github.com/gerencserjani/betti-coaching/commit/aace299599d8b17f37c74ae8cfa73ba800bc5c88)), closes [#17](https://github.com/gerencserjani/betti-coaching/issues/17) [#13](https://github.com/gerencserjani/betti-coaching/issues/13)
+
 ## [1.15.2](https://github.com/gerencserjani/betti-coaching/compare/v1.15.1...v1.15.2) (2026-09-15)
 
 ### Bug Fixes
