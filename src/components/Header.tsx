@@ -5,10 +5,10 @@ import LanguageSwitcher from "./LanguageSwitcher.tsx";
 import ThemeToggle from "./ThemeToggle.tsx";
 import MenuIcon from "./MenuIcon.tsx";
 import { navLinks, contactLink } from "../content/navLinks";
+import { useActiveSection } from "../hooks/useActiveSection";
 
-interface HeaderProps {
-  activeId?: string;
-}
+const allLinks = [...navLinks, contactLink];
+const sectionIds = allLinks.map((link) => link.id);
 
 const desktopLinkClasses =
   "relative pb-[3px] no-underline transition-colors duration-200 hover:text-accent after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300";
@@ -16,9 +16,10 @@ const desktopLinkClasses =
 const mobileLinkClasses =
   "border-b border-line py-3.5 text-base text-ink no-underline last:border-b-0";
 
-export default function Header({ activeId }: HeaderProps): ReactElement {
+export default function Header(): ReactElement {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const activeId = useActiveSection(sectionIds);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -72,7 +73,7 @@ export default function Header({ activeId }: HeaderProps): ReactElement {
 
       {menuOpen && (
         <nav className="flex flex-col border-b border-line bg-bg px-6 pt-2 pb-6 sm:hidden">
-          {[...navLinks, contactLink].map((link) => (
+          {allLinks.map((link) => (
             <a
               key={link.id}
               href={`#${link.id}`}
