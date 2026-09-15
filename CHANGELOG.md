@@ -1,3 +1,9 @@
+# [1.10.0](https://github.com/gerencserjani/betti-coaching/compare/v1.9.0...v1.10.0) (2026-09-15)
+
+### Features
+
+- add scroll-reveal-on-scroll animation hook ([dcd36ee](https://github.com/gerencserjani/betti-coaching/commit/dcd36ee0c5be7d06a9e03841fe7f42edcc01399f)), closes [#8](https://github.com/gerencserjani/betti-coaching/issues/8)
+
 # [1.9.0](https://github.com/gerencserjani/betti-coaching/compare/v1.8.0...v1.9.0) (2026-09-15)
 
 ### Features
