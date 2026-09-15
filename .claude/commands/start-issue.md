@@ -20,7 +20,6 @@ Do the following steps:
    If there are, stop and ask what to do with them (stash / commit / cancel).
 
 5. If the working tree is clean:
-   - `git checkout main`
    - `git pull`
    - `git checkout -b <branch-name>`
 
