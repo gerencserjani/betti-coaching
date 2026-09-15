@@ -1,3 +1,9 @@
+## [1.15.2](https://github.com/gerencserjani/betti-coaching/compare/v1.15.1...v1.15.2) (2026-09-15)
+
+### Bug Fixes
+
+- replace scroll-spy IntersectionObserver with position-based check ([37415f4](https://github.com/gerencserjani/betti-coaching/commit/37415f4ec08b3cfe5556086770c2ad36813bd1e5))
+
 ## [1.15.1](https://github.com/gerencserjani/betti-coaching/compare/v1.15.0...v1.15.1) (2026-09-15)
 
 ### Bug Fixes
