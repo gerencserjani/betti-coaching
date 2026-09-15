@@ -26,9 +26,12 @@ void i18n
     interpolation: { escapeValue: false },
   });
 
-document.documentElement.lang = i18n.language;
-i18n.on("languageChanged", (lng) => {
+function syncDocumentMeta(lng: string) {
   document.documentElement.lang = lng;
-});
+  document.title = i18n.t("common.siteTitle");
+}
+
+syncDocumentMeta(i18n.language);
+i18n.on("languageChanged", syncDocumentMeta);
 
 export default i18n;
