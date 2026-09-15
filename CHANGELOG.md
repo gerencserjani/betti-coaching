@@ -1,3 +1,9 @@
+# [1.8.0](https://github.com/gerencserjani/betti-coaching/compare/v1.7.0...v1.8.0) (2026-09-15)
+
+### Features
+
+- set up i18n infrastructure (HU/EN) with language switcher ([3d15100](https://github.com/gerencserjani/betti-coaching/commit/3d151005ad37191fa80ac9be67e7f20a5f536d19)), closes [#6](https://github.com/gerencserjani/betti-coaching/issues/6) [#28](https://github.com/gerencserjani/betti-coaching/issues/28)
+
 # [1.7.0](https://github.com/gerencserjani/betti-coaching/compare/v1.6.0...v1.7.0) (2026-09-15)
 
 ### Features
