@@ -1,3 +1,9 @@
+## [1.12.1](https://github.com/gerencserjani/betti-coaching/compare/v1.12.0...v1.12.1) (2026-09-15)
+
+### Bug Fixes
+
+- apply background/text color and remaining base styles to body ([98f7ee9](https://github.com/gerencserjani/betti-coaching/commit/98f7ee9f66f3f943211815cabc13e26258a817e0)), closes [#9](https://github.com/gerencserjani/betti-coaching/issues/9) [2/#3](https://github.com/gerencserjani/betti-coaching/issues/3)
+
 # [1.12.0](https://github.com/gerencserjani/betti-coaching/compare/v1.11.0...v1.12.0) (2026-09-15)
 
 ### Features
