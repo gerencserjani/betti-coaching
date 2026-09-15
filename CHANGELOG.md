@@ -1,3 +1,9 @@
+# [1.5.0](https://github.com/gerencserjani/betti-coaching/compare/v1.4.0...v1.5.0) (2026-09-15)
+
+### Features
+
+- add Google Fonts (Fraunces & Work Sans) and base typography ([d6fdd9b](https://github.com/gerencserjani/betti-coaching/commit/d6fdd9b11d60dc4c68a410dcbebfd364768b9ee1)), closes [#3](https://github.com/gerencserjani/betti-coaching/issues/3)
+
 # [1.4.0](https://github.com/gerencserjani/betti-coaching/compare/v1.3.0...v1.4.0) (2026-09-15)
 
 ### Features
