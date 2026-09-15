@@ -1,3 +1,9 @@
+# [1.17.0](https://github.com/gerencserjani/betti-coaching/compare/v1.16.0...v1.17.0) (2026-09-15)
+
+### Features
+
+- build Contact section component ([b0fdae7](https://github.com/gerencserjani/betti-coaching/commit/b0fdae7aaecb13f266554e11f4978e5f55c6a19e)), closes [#14](https://github.com/gerencserjani/betti-coaching/issues/14)
+
 # [1.16.0](https://github.com/gerencserjani/betti-coaching/compare/v1.15.2...v1.16.0) (2026-09-15)
 
 ### Features
