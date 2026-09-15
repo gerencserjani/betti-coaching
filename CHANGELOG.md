@@ -1,3 +1,9 @@
+# [1.14.0](https://github.com/gerencserjani/betti-coaching/compare/v1.13.0...v1.14.0) (2026-09-15)
+
+### Features
+
+- build Services section component ([df0ad97](https://github.com/gerencserjani/betti-coaching/commit/df0ad9728dd741e82c57c141c4345b453fae5ba8)), closes [#11](https://github.com/gerencserjani/betti-coaching/issues/11)
+
 # [1.13.0](https://github.com/gerencserjani/betti-coaching/compare/v1.12.1...v1.13.0) (2026-09-15)
 
 ### Features
