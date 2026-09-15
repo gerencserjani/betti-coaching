@@ -1,3 +1,9 @@
+## [1.18.1](https://github.com/gerencserjani/betti-coaching/compare/v1.18.0...v1.18.1) (2026-09-15)
+
+### Bug Fixes
+
+- switch header desktop nav to xl breakpoint to prevent overflow (refs [#16](https://github.com/gerencserjani/betti-coaching/issues/16)) ([493de13](https://github.com/gerencserjani/betti-coaching/commit/493de134bcdf026e831af815a1e7981202c55a12))
+
 # [1.18.0](https://github.com/gerencserjani/betti-coaching/compare/v1.17.1...v1.18.0) (2026-09-15)
 
 ### Features
