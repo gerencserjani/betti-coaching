@@ -70,5 +70,15 @@
     "heading": "Légy része egy ítéletmentes, kapcsolódásban gazdag, támogató közösségnek.",
     "body": "Támogatni. Kapcsolódni. Őszintén kimondani. Egy olyan hely, ahol nem kell egyedül vinni a terheket — ahol más anyák és nők értik, amit átélsz, és ahol biztonságos térben oszthatod meg a gondolataidat.",
     "cta": "Csatlakozom"
+  },
+  "pricing": {
+    "freeCall": {
+      "badge": "Első lépés",
+      "heading": "Első beszélgetés",
+      "text": "Egy rövid online vagy személyes beszélgetés, ahol megismerjük egymást, és kiderül: én vagyok-e a megfelelő ember számodra.",
+      "priceLabel": "Díjmentes"
+    },
+    "tableCaption": "Coaching alkalmak",
+    "minutesUnit": "perc"
   }
 }

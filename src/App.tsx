@@ -5,6 +5,7 @@ import Hero from "./sections/Hero.tsx";
 import QuoteBlock from "./components/QuoteBlock.tsx";
 import Services from "./sections/Services.tsx";
 import Community from "./sections/Community.tsx";
+import Pricing from "./sections/Pricing.tsx";
 
 function App() {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ function App() {
       />
       <Services />
       <Community />
+      <Pricing />
     </>
   );
 }
