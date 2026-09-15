@@ -33,7 +33,7 @@ export default function Header(): ReactElement {
           Gerencsér Bernadett
         </a>
 
-        <nav className="hidden items-center gap-9 text-[15px] text-ink-soft sm:flex">
+        <nav className="hidden items-center gap-9 text-[15px] text-ink-soft xl:flex">
           {navLinks.map((link) => (
             <a
               key={link.id}
@@ -51,7 +51,7 @@ export default function Header(): ReactElement {
         <div className="flex items-center gap-3.5">
           <a
             href={`#${contactLink.id}`}
-            className="hidden whitespace-nowrap rounded-full border border-ink px-5 py-2.5 text-sm no-underline transition-colors duration-200 hover:bg-ink hover:text-bg sm:inline-block"
+            className="hidden whitespace-nowrap rounded-full border border-ink px-5 py-2.5 text-sm no-underline transition-colors duration-200 hover:bg-ink hover:text-bg xl:inline-block"
           >
             {t(contactLink.labelKey)}
           </a>
@@ -62,7 +62,7 @@ export default function Header(): ReactElement {
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={t("common.menuToggle")}
             aria-expanded={menuOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-bg-card p-0 text-ink sm:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-bg-card p-0 text-ink xl:hidden"
           >
             <span className="h-[18px] w-[18px]">
               <MenuIcon />
@@ -72,7 +72,7 @@ export default function Header(): ReactElement {
       </Container>
 
       {menuOpen && (
-        <nav className="flex flex-col border-b border-line bg-bg px-6 pt-2 pb-6 sm:hidden">
+        <nav className="flex flex-col border-b border-line bg-bg px-6 pt-2 pb-6 xl:hidden">
           {allLinks.map((link) => (
             <a
               key={link.id}
