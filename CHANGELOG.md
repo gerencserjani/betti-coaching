@@ -1,3 +1,9 @@
+# [1.11.0](https://github.com/gerencserjani/betti-coaching/compare/v1.10.0...v1.11.0) (2026-09-15)
+
+### Features
+
+- add scroll-spy to highlight the active nav link ([12061f3](https://github.com/gerencserjani/betti-coaching/commit/12061f33a8f49b82ebbe6ff84d3910695e702978)), closes [#7](https://github.com/gerencserjani/betti-coaching/issues/7)
+
 # [1.10.0](https://github.com/gerencserjani/betti-coaching/compare/v1.9.0...v1.10.0) (2026-09-15)
 
 ### Features
