@@ -7,6 +7,7 @@ import MenuIcon from "./MenuIcon.tsx";
 import { navLinks, contactLink } from "../content/navLinks";
 import { siteName } from "../content/site";
 import { useActiveSection } from "../hooks/useActiveSection";
+import brandLogo from "../assets/brand-logo.webp";
 
 const allLinks = [...navLinks, contactLink];
 const sectionIds = allLinks.map((link) => link.id);
@@ -27,11 +28,12 @@ export default function Header(): ReactElement {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/88 backdrop-blur-[10px]">
       <Container className="flex h-[76px] items-center justify-between">
-        <a
-          href="#bemutatkozas"
-          className="serif flex items-center text-lg text-ink no-underline"
-        >
-          {siteName}
+        <a href="#bemutatkozas" className="flex items-center no-underline">
+          <img
+            src={brandLogo}
+            alt={siteName}
+            className="h-[52px] w-auto transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
+          />
         </a>
 
         <nav className="hidden items-center gap-9 text-[15px] text-ink-soft xl:flex">
