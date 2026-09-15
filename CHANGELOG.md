@@ -1,3 +1,9 @@
+# [1.4.0](https://github.com/gerencserjani/betti-coaching/compare/v1.3.0...v1.4.0) (2026-09-15)
+
+### Features
+
+- add Tailwind design tokens for light & dark theme ([7757f30](https://github.com/gerencserjani/betti-coaching/commit/7757f30f89f65e650eaf96dc99aadc539caade63)), closes [#2](https://github.com/gerencserjani/betti-coaching/issues/2)
+
 # [1.3.0](https://github.com/gerencserjani/betti-coaching/compare/v1.2.0...v1.3.0) (2026-09-15)
 
 ### Features
