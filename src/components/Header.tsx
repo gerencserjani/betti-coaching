@@ -5,6 +5,7 @@ import LanguageSwitcher from "./LanguageSwitcher.tsx";
 import ThemeToggle from "./ThemeToggle.tsx";
 import MenuIcon from "./MenuIcon.tsx";
 import { navLinks, contactLink } from "../content/navLinks";
+import { siteName } from "../content/site";
 import { useActiveSection } from "../hooks/useActiveSection";
 
 const allLinks = [...navLinks, contactLink];
@@ -30,7 +31,7 @@ export default function Header(): ReactElement {
           href="#bemutatkozas"
           className="serif flex items-center text-lg text-ink no-underline"
         >
-          Gerencsér Bernadett
+          {siteName}
         </a>
 
         <nav className="hidden items-center gap-9 text-[15px] text-ink-soft xl:flex">
