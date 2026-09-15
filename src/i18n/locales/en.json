@@ -24,5 +24,44 @@
   "quoteBlock": {
     "quote": "“Communication became especially important to me because, as a child, I experienced firsthand what it costs when two people can no longer truly talk to each other.”",
     "leadIn": "This is where my path toward coaching began — and today I do this work so others don't have to go through the same thing. [CONTENT NEEDED: professional background, training, experience]"
+  },
+  "services": {
+    "heading": "How can I help you?",
+    "intro": "Three areas, three life situations — see which one you recognize yourself in.",
+    "items": {
+      "partnership": {
+        "tag": "Relationship",
+        "title": "Relationship coaching",
+        "situation": "When it's already hard to hear each other, and conversations tend to pull you apart rather than bring you together.",
+        "blockquote": "If you'd finally like to say what's on your mind in a way that brings you closer instead of further apart — let's work on it together."
+      },
+      "communication": {
+        "tag": "Communication",
+        "title": "Assertive communication",
+        "situation": "When you want to say what's on your mind — in a way that preserves the relationship too. \"How do I say it?\"",
+        "chips": [
+          "I want to say no",
+          "I want to set a boundary",
+          "I want to say what hurts me",
+          "I don't want conflict, but I don't want to stay silent either",
+          "I'm always the one who adapts",
+          "It's hard for me to stand up for myself",
+          "I want to be honest without hurting the other person"
+        ]
+      },
+      "parenting": {
+        "tag": "Home",
+        "title": "Parental communication and family atmosphere",
+        "situation": "When you want to show up differently at home. This is for you if the following sound familiar:",
+        "chips": [
+          "\"I yelled at them again.\"",
+          "\"They don't listen to me.\"",
+          "\"How do I set boundaries without punishment?\"",
+          "\"How do I say no without it turning into a fight?\"",
+          "\"My partner and I don't agree on parenting either.\"",
+          "\"What atmosphere are we creating at home?\""
+        ]
+      }
+    }
   }
 }

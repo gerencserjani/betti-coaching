@@ -24,5 +24,44 @@
   "quoteBlock": {
     "quote": "„Azért vált számomra különösen fontossá a kommunikáció, mert gyerekként megtapasztaltam, milyen ára lehet annak, amikor két ember már nem tud igazán beszélni egymással.”",
     "leadIn": "Innen indult az utam a coaching felé — és ma azért dolgozom, hogy másoknak ne kelljen ugyanezt átélniük. [TARTALOM SZÜKSÉGES: szakmai út, képzések, tapasztalat]"
+  },
+  "services": {
+    "heading": "Miben lehetek a segítségedre?",
+    "intro": "Három terület, három élethelyzet — nézd meg, melyikben ismersz magadra.",
+    "items": {
+      "partnership": {
+        "tag": "Párkapcsolat",
+        "title": "Párkapcsolati coaching",
+        "situation": "Amikor már nehéz egymást meghallani, és a beszélgetések inkább eltávolítanak, mint összekötnek.",
+        "blockquote": "Ha szeretnéd végre úgy elmondani, ami benned van, hogy közben ne távolodjatok, hanem közelebb kerüljetek egymáshoz — dolgozzunk rajta együtt."
+      },
+      "communication": {
+        "tag": "Kommunikáció",
+        "title": "Asszertív kommunikáció",
+        "situation": "Amikor szeretnéd kimondani, ami benned van — úgy, hogy közben a kapcsolat is megmaradjon. „Hogyan mondjam el?”",
+        "chips": [
+          "nemet szeretnék mondani",
+          "határt szeretnék húzni",
+          "el szeretném mondani, ami bánt",
+          "nem akarok konfliktust, de nem akarok tovább hallgatni",
+          "mindig én alkalmazkodom",
+          "nehéz kiállnom magamért",
+          "őszinte szeretnék lenni, anélkül hogy megbántanám a másikat"
+        ]
+      },
+      "parenting": {
+        "tag": "Otthon",
+        "title": "Szülői kommunikáció és családi légkör",
+        "situation": "Amikor szeretnél másképp jelen lenni otthon. Neked szól, ha ismerősen csengenek az alábbiak:",
+        "chips": [
+          "„Már megint kiabáltam vele.”",
+          "„Nem hallgat rám.”",
+          "„Hogyan szabjak határt büntetés nélkül?”",
+          "„Hogyan mondjak nemet úgy, hogy ne legyen belőle harc?”",
+          "„A párommal sem értünk egyet a gyereknevelésben.”",
+          "„Milyen légkört teremtünk otthon?”"
+        ]
+      }
+    }
   }
 }
