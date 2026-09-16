@@ -89,6 +89,11 @@
     "tableCaption": "Coaching sessions",
     "minutesUnit": "min"
   },
+  "booking": {
+    "heading": "Book a session",
+    "badge": "Coming soon",
+    "placeholder": "This section is still under development — soon you'll be able to book a session online right here. Until then, feel free to write or call using the details below."
+  },
   "contact": {
     "heading": "Let's start the conversation",
     "intro": "Feel free to write or call — the first, 30-minute conversation is free, with no obligation.",

@@ -38,8 +38,7 @@ export default function Contact(): ReactElement {
               <div className="mb-1.5 text-[13.5px] text-ink-soft">
                 {t("contact.labels.address")}
               </div>
-              <div className="serif text-[19px]">{contactInfo.address}</div>
-              <div className="mt-2 flex items-center gap-[18px] rounded-2xl border border-line bg-bg-card p-[22px]">
+              <div className="flex items-center gap-[18px] rounded-2xl border border-line bg-bg-card p-[22px]">
                 <PinIcon size={46} className="shrink-0 text-accent" />
                 <div className="flex-1">
                   <div className="serif mb-1 text-[16.5px] text-ink">

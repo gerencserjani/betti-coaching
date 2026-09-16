@@ -89,6 +89,11 @@
     "tableCaption": "Coaching alkalmak",
     "minutesUnit": "perc"
   },
+  "booking": {
+    "heading": "Foglalj időpontot",
+    "badge": "Hamarosan",
+    "placeholder": "Ez a rész még fejlesztés alatt áll — hamarosan itt tudsz majd egyszerűen, online időpontot foglalni. Addig is írj vagy hívj nyugodtan az alábbi elérhetőségeken."
+  },
   "contact": {
     "heading": "Kezdjük el a beszélgetést",
     "intro": "Írj vagy hívj nyugodtan — az első, 30 perces beszélgetés díjmentes, és semmi kötelezettséggel nem jár.",
