@@ -23,7 +23,7 @@ export default function AdminLayout(): ReactElement {
         <img
           src={brandLogo}
           alt={siteName}
-          className="mb-5 h-9 w-auto transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
+          className="mb-5 h-14 w-14 transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
         />
         <div className="mb-6">
           <div className="text-sm font-semibold">{coach?.name}</div>
