@@ -1,3 +1,9 @@
+## [1.21.1](https://github.com/gerencserjani/betti-coaching/compare/v1.21.0...v1.21.1) (2026-09-16)
+
+### Bug Fixes
+
+- clean up Contact section and add booking placeholder section ([8c244e9](https://github.com/gerencserjani/betti-coaching/commit/8c244e94d068fbf7fc761460e34b683f8036b62d))
+
 # [1.21.0](https://github.com/gerencserjani/betti-coaching/compare/v1.20.1...v1.21.0) (2026-09-16)
 
 ### Features
