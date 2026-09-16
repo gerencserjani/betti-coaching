@@ -20,6 +20,7 @@ export default function Pricing(): ReactElement {
       className="border-y border-line bg-bg-panel pt-14 pb-16 xs:pt-20 xs:pb-[90px] xl:pt-[92px] xl:pb-[104px] 2xl:pt-[110px] 2xl:pb-[130px]"
     >
       <Container>
+        <h2 className="sr-only">{t("pricing.heading")}</h2>
         <div
           ref={ref}
           className={[

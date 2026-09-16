@@ -1,8 +1,14 @@
 {
   "common": {
     "siteTitle": "Gerencsér Bernadett — Family & Couples Communication Coach",
-    "themeToggle": "Toggle dark/light mode",
-    "menuToggle": "Open menu",
+    "themeToggle": {
+      "toDark": "Switch to dark mode",
+      "toLight": "Switch to light mode"
+    },
+    "menuToggle": {
+      "open": "Open menu",
+      "close": "Close menu"
+    },
     "nav": {
       "introduction": "About",
       "help": "How I can help",
@@ -72,6 +78,7 @@
     "cta": "Join us"
   },
   "pricing": {
+    "heading": "Pricing",
     "freeCall": {
       "badge": "First step",
       "heading": "Free introductory call",

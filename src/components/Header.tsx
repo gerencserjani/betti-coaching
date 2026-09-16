@@ -63,8 +63,11 @@ export default function Header(): ReactElement {
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
-            aria-label={t("common.menuToggle")}
+            aria-label={t(
+              menuOpen ? "common.menuToggle.close" : "common.menuToggle.open",
+            )}
             aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-bg-card p-0 text-ink xl:hidden"
           >
             <MenuIcon size={18} />
@@ -73,7 +76,10 @@ export default function Header(): ReactElement {
       </Container>
 
       {menuOpen && (
-        <nav className="flex flex-col border-b border-line bg-bg px-6 pt-2 pb-6 xl:hidden">
+        <nav
+          id="mobile-nav"
+          className="flex flex-col border-b border-line bg-bg px-6 pt-2 pb-6 xl:hidden"
+        >
           {allLinks.map((link) => (
             <a
               key={link.id}

@@ -15,15 +15,17 @@ function App() {
   return (
     <>
       <Header />
-      <Hero />
-      <QuoteBlock
-        quote={t("quoteBlock.quote")}
-        leadIn={t("quoteBlock.leadIn")}
-      />
-      <Services />
-      <Community />
-      <Pricing />
-      <Contact />
+      <main>
+        <Hero />
+        <QuoteBlock
+          quote={t("quoteBlock.quote")}
+          leadIn={t("quoteBlock.leadIn")}
+        />
+        <Services />
+        <Community />
+        <Pricing />
+        <Contact />
+      </main>
       <Footer />
     </>
   );
