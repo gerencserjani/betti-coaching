@@ -6,6 +6,7 @@ import QuoteBlock from "./components/QuoteBlock.tsx";
 import Services from "./sections/Services.tsx";
 import Community from "./sections/Community.tsx";
 import Pricing from "./sections/Pricing.tsx";
+import Booking from "./sections/Booking.tsx";
 import Contact from "./sections/Contact.tsx";
 import Footer from "./components/Footer.tsx";
 
@@ -24,6 +25,7 @@ function App() {
         <Services />
         <Community />
         <Pricing />
+        <Booking />
         <Contact />
       </main>
       <Footer />
