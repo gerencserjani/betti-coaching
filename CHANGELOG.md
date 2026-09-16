@@ -1,3 +1,9 @@
+# [1.21.0](https://github.com/gerencserjani/betti-coaching/compare/v1.20.1...v1.21.0) (2026-09-16)
+
+### Features
+
+- SEO basics -- meta tags, OG/Twitter cards, hreflang, sitemap (refs [#24](https://github.com/gerencserjani/betti-coaching/issues/24)) ([cf003c8](https://github.com/gerencserjani/betti-coaching/commit/cf003c8177f27d940fabe4a2ba4a87b386d0fb58))
+
 ## [1.20.1](https://github.com/gerencserjani/betti-coaching/compare/v1.20.0...v1.20.1) (2026-09-16)
 
 ### Bug Fixes
