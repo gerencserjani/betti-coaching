@@ -1,8 +1,14 @@
 {
   "common": {
     "siteTitle": "Gerencsér Bernadett — Családi és párkapcsolati coach",
-    "themeToggle": "Sötét/világos mód váltása",
-    "menuToggle": "Menü megnyitása",
+    "themeToggle": {
+      "toDark": "Váltás sötét módra",
+      "toLight": "Váltás világos módra"
+    },
+    "menuToggle": {
+      "open": "Menü megnyitása",
+      "close": "Menü bezárása"
+    },
     "nav": {
       "introduction": "Bemutatkozás",
       "help": "Miben segíthetek",
@@ -72,6 +78,7 @@
     "cta": "Csatlakozom"
   },
   "pricing": {
+    "heading": "Árak",
     "freeCall": {
       "badge": "Első lépés",
       "heading": "Első beszélgetés",

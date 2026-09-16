@@ -63,8 +63,12 @@ blockquote {
   --bg-panel: #f0dada;
   --bg-card: #fef7f7;
   --ink: #2a1717;
-  --ink-soft: #8a6363;
-  --accent: #a15c6b;
+  /* Darkened slightly from the prototype's #8a6363 -- WCAG AA needs 4.5:1
+     for normal text and the original only reached 3.89:1 on --bg-panel. */
+  --ink-soft: #7c5959;
+  /* Darkened slightly from the prototype's #a15c6b -- reached 4.42:1 on
+     --bg, just under the 4.5:1 WCAG AA threshold for normal text. */
+  --accent: #9e5a69;
   --accent-soft: #c99aa0;
   --line: #e9cdcd;
   --brown: #8b6b45;
