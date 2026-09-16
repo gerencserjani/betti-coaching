@@ -33,33 +33,35 @@ export default function CoachesPage(): ReactElement {
 
   return (
     <div>
-      <h1 className="mb-4 text-lg font-semibold">Coach fiókok</h1>
+      <h1 className="mb-4 text-xl text-ink">Coach fiókok</h1>
 
       <form
         onSubmit={handleSubmit}
-        className="mb-6 flex flex-wrap items-end gap-2 rounded border border-gray-200 bg-white p-4"
+        className="mb-6 flex flex-wrap items-end gap-2 rounded-xl border border-line bg-bg-card p-4"
       >
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">Név</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">Név</span>
           <input
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
           />
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">Email</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Email
+          </span>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
           />
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
             Jelszó (min. 8 karakter)
           </span>
           <input
@@ -68,33 +70,35 @@ export default function CoachesPage(): ReactElement {
             minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
           />
         </label>
         <button
           type="submit"
           disabled={createMutation.isPending}
-          className="rounded bg-gray-900 px-3 py-1.5 text-sm text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Fiók létrehozása
         </button>
       </form>
 
-      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
       {isLoading ? (
-        <p className="text-sm text-gray-500">Betöltés…</p>
+        <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
         <ul className="flex flex-col gap-1">
           {coaches?.map((c) => (
             <li
               key={c.id}
-              className="flex items-center justify-between rounded border border-gray-200 bg-white px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-lg border border-line bg-bg-card px-3 py-2 text-sm"
             >
               <span>
                 {c.name} · {c.email}
               </span>
-              <span className="text-xs text-gray-400">{c.role}</span>
+              <span className="text-xs text-ink-soft">{c.role}</span>
             </li>
           ))}
         </ul>

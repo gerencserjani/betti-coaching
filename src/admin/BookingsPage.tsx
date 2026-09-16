@@ -32,11 +32,11 @@ export default function BookingsPage(): ReactElement {
     return bookings.filter((b) => b.status === statusFilter);
   }, [bookings, statusFilter]);
 
-  if (isLoading) return <p className="text-sm text-gray-500">Betöltés…</p>;
+  if (isLoading) return <p className="text-sm text-ink-soft">Betöltés…</p>;
 
   return (
     <div>
-      <h1 className="mb-4 text-lg font-semibold">Foglalások</h1>
+      <h1 className="mb-4 text-xl text-ink">Foglalások</h1>
 
       <div className="mb-4 flex gap-2">
         {(["CONFIRMED", "CANCELLED", "ALL"] as StatusFilter[]).map((s) => (
@@ -45,10 +45,10 @@ export default function BookingsPage(): ReactElement {
             type="button"
             onClick={() => setStatusFilter(s)}
             className={[
-              "rounded border px-3 py-1.5 text-sm",
+              "rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-200",
               statusFilter === s
-                ? "border-gray-900 bg-gray-900 text-white"
-                : "border-gray-300 text-gray-700 hover:bg-gray-100",
+                ? "border-ink bg-ink text-bg"
+                : "border-line text-ink-soft hover:border-accent hover:text-accent",
             ].join(" ")}
           >
             {s === "ALL" ? "Mind" : STATUS_LABELS[s]}
@@ -56,11 +56,13 @@ export default function BookingsPage(): ReactElement {
         ))}
       </div>
 
-      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
-      <div className="overflow-x-auto rounded border border-gray-200 bg-white">
+      <div className="overflow-x-auto rounded-xl border border-line bg-bg-card">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-gray-200 text-gray-500">
+          <thead className="border-b border-line text-ink-soft">
             <tr>
               <th className="px-3 py-2">Időpont</th>
               <th className="px-3 py-2">Szolgáltatás</th>
@@ -72,12 +74,12 @@ export default function BookingsPage(): ReactElement {
           </thead>
           <tbody>
             {filtered.map((booking) => (
-              <tr key={booking.id} className="border-b border-gray-100">
+              <tr key={booking.id} className="border-b border-line">
                 <td className="px-3 py-2">{formatDateTime(booking.startAt)}</td>
                 <td className="px-3 py-2">{booking.eventType.title}</td>
                 <td className="px-3 py-2">
                   <div>{booking.clientName}</div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-ink-soft">
                     {booking.clientEmail} · {booking.clientPhone}
                   </div>
                 </td>
@@ -99,7 +101,7 @@ export default function BookingsPage(): ReactElement {
                       <button
                         type="button"
                         onClick={() => setCancelingId(booking.id)}
-                        className="text-sm text-red-600 hover:underline"
+                        className="text-sm text-red-600 hover:underline dark:text-red-400"
                       >
                         Lemondás
                       </button>
@@ -109,7 +111,7 @@ export default function BookingsPage(): ReactElement {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-3 py-6 text-center text-gray-400">
+                <td colSpan={6} className="px-3 py-6 text-center text-ink-soft">
                   Nincs ide tartozó foglalás.
                 </td>
               </tr>
@@ -139,20 +141,20 @@ function CancelForm({
         value={reason}
         onChange={(e) => setReason(e.target.value)}
         placeholder="Indoklás"
-        className="w-40 rounded border border-gray-300 px-2 py-1 text-sm"
+        className="w-40 rounded-lg border border-line bg-bg px-2 py-1 text-sm text-ink"
       />
       <button
         type="button"
         disabled={!reason || isPending}
         onClick={() => onSubmit(reason)}
-        className="text-sm text-red-600 hover:underline disabled:opacity-40"
+        className="text-sm text-red-600 hover:underline disabled:opacity-40 dark:text-red-400"
       >
         Megerősít
       </button>
       <button
         type="button"
         onClick={onCancel}
-        className="text-sm text-gray-500 hover:underline"
+        className="text-sm text-ink-soft hover:underline"
       >
         Mégse
       </button>

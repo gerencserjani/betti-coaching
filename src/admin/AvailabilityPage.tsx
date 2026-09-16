@@ -12,7 +12,7 @@ import {
 export default function AvailabilityPage(): ReactElement {
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-lg font-semibold">Elérhetőség</h1>
+      <h1 className="text-xl text-ink">Elérhetőség</h1>
       <WeeklySection />
       <OverridesSection />
     </div>
@@ -61,22 +61,24 @@ function WeeklySection(): ReactElement {
 
   return (
     <section>
-      <h2 className="mb-3 text-sm font-semibold text-gray-700">
+      <h2 className="mb-3 text-[15px] font-medium text-ink">
         Heti visszatérő órarend
       </h2>
 
-      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
       <form
         onSubmit={handleSubmit}
         className="mb-4 flex flex-wrap items-end gap-2"
       >
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">Nap</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">Nap</span>
           <select
             value={weekday}
             onChange={(e) => setWeekday(Number(e.target.value))}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
           >
             {Object.entries(WEEKDAY_LABELS).map(([value, label]) => (
               <option key={value} value={value}>
@@ -86,34 +88,36 @@ function WeeklySection(): ReactElement {
           </select>
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">Kezdés</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Kezdés
+          </span>
           <input
             type="time"
             value={start}
             onChange={(e) => setStart(e.target.value)}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
           />
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">Vége</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">Vége</span>
           <input
             type="time"
             value={end}
             onChange={(e) => setEnd(e.target.value)}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
           />
         </label>
         <button
           type="submit"
           disabled={createMutation.isPending}
-          className="rounded bg-gray-900 px-3 py-1.5 text-sm text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Hozzáadás
         </button>
       </form>
 
       {isLoading ? (
-        <p className="text-sm text-gray-500">Betöltés…</p>
+        <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
         <ul className="flex flex-col gap-1">
           {rows
@@ -124,7 +128,7 @@ function WeeklySection(): ReactElement {
             .map((row) => (
               <li
                 key={row.id}
-                className="flex items-center justify-between rounded border border-gray-200 bg-white px-3 py-2 text-sm"
+                className="flex items-center justify-between rounded-lg border border-line bg-bg-card px-3 py-2 text-sm"
               >
                 <span>
                   {WEEKDAY_LABELS[row.weekday]}:{" "}
@@ -135,14 +139,14 @@ function WeeklySection(): ReactElement {
                 <button
                   type="button"
                   onClick={() => removeMutation.mutate(row.id)}
-                  className="text-red-600 hover:underline"
+                  className="text-red-600 hover:underline dark:text-red-400"
                 >
                   Törlés
                 </button>
               </li>
             ))}
           {rows?.length === 0 && (
-            <li className="text-sm text-gray-400">Nincs megadva órarend.</li>
+            <li className="text-sm text-ink-soft">Nincs megadva órarend.</li>
           )}
         </ul>
       )}
@@ -196,27 +200,31 @@ function OverridesSection(): ReactElement {
 
   return (
     <section>
-      <h2 className="mb-3 text-sm font-semibold text-gray-700">
+      <h2 className="mb-3 text-[15px] font-medium text-ink">
         Dátum-kivételek (szabadnap / eltérő órarend)
       </h2>
 
-      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
       <form
         onSubmit={handleSubmit}
         className="mb-4 flex flex-wrap items-end gap-2"
       >
         <label className="text-sm">
-          <span className="mb-1 block text-gray-600">Dátum</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Dátum
+          </span>
           <input
             type="date"
             required
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="rounded border border-gray-300 px-2 py-1.5"
+            className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
           />
         </label>
-        <label className="flex items-center gap-1.5 text-sm">
+        <label className="flex items-center gap-1.5 text-sm text-ink-soft">
           <input
             type="checkbox"
             checked={isUnavailable}
@@ -227,21 +235,25 @@ function OverridesSection(): ReactElement {
         {!isUnavailable && (
           <>
             <label className="text-sm">
-              <span className="mb-1 block text-gray-600">Kezdés</span>
+              <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+                Kezdés
+              </span>
               <input
                 type="time"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
-                className="rounded border border-gray-300 px-2 py-1.5"
+                className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
               />
             </label>
             <label className="text-sm">
-              <span className="mb-1 block text-gray-600">Vége</span>
+              <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+                Vége
+              </span>
               <input
                 type="time"
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
-                className="rounded border border-gray-300 px-2 py-1.5"
+                className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
               />
             </label>
           </>
@@ -249,20 +261,20 @@ function OverridesSection(): ReactElement {
         <button
           type="submit"
           disabled={createMutation.isPending || !date}
-          className="rounded bg-gray-900 px-3 py-1.5 text-sm text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Hozzáadás
         </button>
       </form>
 
       {isLoading ? (
-        <p className="text-sm text-gray-500">Betöltés…</p>
+        <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
         <ul className="flex flex-col gap-1">
           {rows?.map((row) => (
             <li
               key={row.id}
-              className="flex items-center justify-between rounded border border-gray-200 bg-white px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-lg border border-line bg-bg-card px-3 py-2 text-sm"
             >
               <span>
                 {formatDate(row.date)}:{" "}
@@ -273,14 +285,14 @@ function OverridesSection(): ReactElement {
               <button
                 type="button"
                 onClick={() => removeMutation.mutate(row.id)}
-                className="text-red-600 hover:underline"
+                className="text-red-600 hover:underline dark:text-red-400"
               >
                 Törlés
               </button>
             </li>
           ))}
           {rows?.length === 0 && (
-            <li className="text-sm text-gray-400">Nincs megadva kivétel.</li>
+            <li className="text-sm text-ink-soft">Nincs megadva kivétel.</li>
           )}
         </ul>
       )}

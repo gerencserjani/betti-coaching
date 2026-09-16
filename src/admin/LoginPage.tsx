@@ -28,43 +28,47 @@ export default function LoginPage(): ReactElement {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+    <div className="flex min-h-screen items-center justify-center bg-bg">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded border border-gray-200 bg-white p-6"
+        className="w-full max-w-sm rounded-xl border border-line bg-bg-card p-6"
       >
-        <h1 className="mb-4 text-lg font-semibold text-gray-900">
-          Bejelentkezés
-        </h1>
+        <h1 className="mb-4 text-xl text-ink">Bejelentkezés</h1>
 
         <label className="mb-3 block text-sm">
-          <span className="mb-1 block text-gray-600">Email</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Email
+          </span>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-line bg-bg px-4 py-2.5 text-sm text-ink"
           />
         </label>
 
         <label className="mb-4 block text-sm">
-          <span className="mb-1 block text-gray-600">Jelszó</span>
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Jelszó
+          </span>
           <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-xl border border-line bg-bg px-4 py-2.5 text-sm text-ink"
           />
         </label>
 
-        {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+        {error && (
+          <p className="mb-4 text-sm text-red-600 dark:text-red-400">{error}</p>
+        )}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded bg-gray-900 px-3 py-2 text-sm text-white hover:bg-gray-800 disabled:opacity-50"
+          className="w-full rounded-full bg-ink px-4 py-2.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           {isSubmitting ? "Bejelentkezés…" : "Bejelentkezés"}
         </button>

@@ -34,17 +34,19 @@ export default function EventTypesPage(): ReactElement {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-lg font-semibold">Szolgáltatások</h1>
+        <h1 className="text-xl text-ink">Szolgáltatások</h1>
         <button
           type="button"
           onClick={() => setEditing("new")}
-          className="rounded bg-gray-900 px-3 py-1.5 text-sm text-white hover:bg-gray-800"
+          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85"
         >
           Új szolgáltatás
         </button>
       </div>
 
-      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
       {editing && (
         <EventTypeForm
@@ -54,22 +56,22 @@ export default function EventTypesPage(): ReactElement {
       )}
 
       {isLoading ? (
-        <p className="text-sm text-gray-500">Betöltés…</p>
+        <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {eventTypes?.map((et) => (
             <li
               key={et.id}
-              className="flex items-center justify-between rounded border border-gray-200 bg-white px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-lg border border-line bg-bg-card px-3 py-2 text-sm"
             >
               <div>
-                <div className="font-medium">
+                <div className="font-medium text-ink">
                   {et.title}{" "}
                   {!et.isActive && (
-                    <span className="text-xs text-gray-400">(archiválva)</span>
+                    <span className="text-xs text-ink-soft">(archiválva)</span>
                   )}
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-ink-soft">
                   {et.durationMinutes} perc ·{" "}
                   {et.locations.map((l) => LOCATION_LABELS[l]).join(", ")}
                 </div>
@@ -78,7 +80,7 @@ export default function EventTypesPage(): ReactElement {
                 <button
                   type="button"
                   onClick={() => setEditing(et)}
-                  className="text-gray-600 hover:underline"
+                  className="text-ink-soft hover:text-accent hover:underline"
                 >
                   Szerkesztés
                 </button>
@@ -86,7 +88,7 @@ export default function EventTypesPage(): ReactElement {
                   <button
                     type="button"
                     onClick={() => archiveMutation.mutate(et.id)}
-                    className="text-red-600 hover:underline"
+                    className="text-red-600 hover:underline dark:text-red-400"
                   >
                     Archiválás
                   </button>
@@ -94,7 +96,7 @@ export default function EventTypesPage(): ReactElement {
                   <button
                     type="button"
                     onClick={() => reactivateMutation.mutate(et.id)}
-                    className="text-green-700 hover:underline"
+                    className="text-emerald-700 hover:underline dark:text-emerald-400"
                   >
                     Visszaállítás
                   </button>
@@ -103,7 +105,7 @@ export default function EventTypesPage(): ReactElement {
             </li>
           ))}
           {eventTypes?.length === 0 && (
-            <li className="text-sm text-gray-400">Nincs még szolgáltatás.</li>
+            <li className="text-sm text-ink-soft">Nincs még szolgáltatás.</li>
           )}
         </ul>
       )}
@@ -165,27 +167,29 @@ function EventTypeForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 flex flex-col gap-3 rounded border border-gray-200 bg-white p-4"
+      className="mb-6 flex flex-col gap-3 rounded-xl border border-line bg-bg-card p-4"
     >
       <label className="text-sm">
-        <span className="mb-1 block text-gray-600">Cím</span>
+        <span className="mb-1.5 block text-[13.5px] text-ink-soft">Cím</span>
         <input
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full rounded border border-gray-300 px-2 py-1.5"
+          className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
         />
       </label>
       <label className="text-sm">
-        <span className="mb-1 block text-gray-600">Leírás</span>
+        <span className="mb-1.5 block text-[13.5px] text-ink-soft">Leírás</span>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full rounded border border-gray-300 px-2 py-1.5"
+          className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
         />
       </label>
       <label className="text-sm">
-        <span className="mb-1 block text-gray-600">Időtartam (perc)</span>
+        <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+          Időtartam (perc)
+        </span>
         <input
           type="number"
           min={5}
@@ -193,12 +197,12 @@ function EventTypeForm({
           required
           value={durationMinutes}
           onChange={(e) => setDurationMinutes(Number(e.target.value))}
-          className="w-32 rounded border border-gray-300 px-2 py-1.5"
+          className="w-32 rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
         />
       </label>
       <fieldset className="text-sm">
-        <legend className="mb-1 text-gray-600">Helyszínek</legend>
-        <div className="flex gap-4">
+        <legend className="mb-1 text-ink-soft">Helyszínek</legend>
+        <div className="flex gap-4 text-ink-soft">
           {ALL_LOCATIONS.map((loc) => (
             <label key={loc} className="flex items-center gap-1.5">
               <input
@@ -212,20 +216,22 @@ function EventTypeForm({
         </div>
       </fieldset>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={mutation.isPending || locations.length === 0}
-          className="rounded bg-gray-900 px-3 py-1.5 text-sm text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Mentés
         </button>
         <button
           type="button"
           onClick={onClose}
-          className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100"
+          className="rounded-full border border-line px-4 py-1.5 text-sm text-ink-soft hover:border-accent hover:text-accent"
         >
           Mégse
         </button>

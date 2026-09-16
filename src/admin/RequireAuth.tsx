@@ -6,7 +6,7 @@ export function RequireAuth(): ReactElement {
   const { coach, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div className="p-8 text-sm text-gray-500">Betöltés…</div>;
+    return <div className="p-8 text-sm text-ink-soft">Betöltés…</div>;
   }
 
   if (!coach) {
@@ -20,7 +20,7 @@ export function RequireAdmin(): ReactElement {
   const { coach, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div className="p-8 text-sm text-gray-500">Betöltés…</div>;
+    return <div className="p-8 text-sm text-ink-soft">Betöltés…</div>;
   }
 
   if (!coach) {
@@ -29,7 +29,7 @@ export function RequireAdmin(): ReactElement {
 
   if (coach.role !== "ADMIN") {
     return (
-      <div className="p-8 text-sm text-red-600">
+      <div className="p-8 text-sm text-red-600 dark:text-red-400">
         Ehhez az oldalhoz adminisztrátori jogosultság szükséges.
       </div>
     );
