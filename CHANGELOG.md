@@ -1,3 +1,9 @@
+## [1.20.1](https://github.com/gerencserjani/betti-coaching/compare/v1.20.0...v1.20.1) (2026-09-16)
+
+### Bug Fixes
+
+- accessibility pass -- landmarks, ARIA states, contrast, headings (refs [#23](https://github.com/gerencserjani/betti-coaching/issues/23)) ([be0998b](https://github.com/gerencserjani/betti-coaching/commit/be0998b755fe661ba7e181ff8af117c27b96b05e)), closes [#7c5959](https://github.com/gerencserjani/betti-coaching/issues/7c5959) [#9e5a69](https://github.com/gerencserjani/betti-coaching/issues/9e5a69)
+
 # [1.20.0](https://github.com/gerencserjani/betti-coaching/compare/v1.19.0...v1.20.0) (2026-09-16)
 
 ### Features
