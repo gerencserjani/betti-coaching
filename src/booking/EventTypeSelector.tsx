@@ -1,25 +1,15 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import type { PublicEventType } from "../api/models";
-import { useEventTypes } from "./hooks";
 
 export default function EventTypeSelector({
+  eventTypes,
   onSelect,
 }: {
+  eventTypes: PublicEventType[];
   onSelect: (eventType: PublicEventType) => void;
 }): ReactElement {
   const { t } = useTranslation();
-  const { data: eventTypes, isLoading } = useEventTypes();
-
-  if (isLoading) {
-    return (
-      <p className="text-sm text-ink-soft">{t("booking.loadingEventTypes")}</p>
-    );
-  }
-
-  if (!eventTypes || eventTypes.length === 0) {
-    return <p className="text-sm text-ink-soft">{t("booking.noEventTypes")}</p>;
-  }
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

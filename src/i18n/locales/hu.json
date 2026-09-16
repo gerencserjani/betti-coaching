@@ -94,12 +94,9 @@
     "intro": "Válaszd ki a szolgáltatást, majd egy szabad időpontot.",
     "loadingEventTypes": "Szolgáltatások betöltése…",
     "noEventTypes": "Jelenleg nincs elérhető szolgáltatás.",
-    "step": {
-      "eventType": "1. Válassz szolgáltatást",
-      "location": "2. Válassz helyszínt",
-      "slot": "3. Válassz időpontot",
-      "details": "4. Add meg az adataidat"
-    },
+    "pickService": "Válassz szolgáltatást",
+    "change": "Módosítás",
+    "detailsHeading": "Add meg az adataidat",
     "location": {
       "IN_PERSON": "Személyesen",
       "GOOGLE_MEET": "Google Meet",
@@ -111,7 +108,8 @@
       "loading": "Időpontok betöltése…",
       "noSlotsThisMonth": "Ebben a hónapban nincs szabad időpont.",
       "noSlotsThisDay": "Erre a napra nincs szabad időpont.",
-      "selectDay": "Válassz egy kiemelt napot az elérhető időpontokért."
+      "selectDay": "Válassz egy kiemelt napot az elérhető időpontokért.",
+      "selectLocationFirst": "Válassz helyszínt a szabad időpontok megtekintéséhez."
     },
     "form": {
       "name": "Név",

@@ -15,27 +15,36 @@ import MonthCalendar from "./MonthCalendar.tsx";
 import TimeSlotList from "./TimeSlotList.tsx";
 import BookingForm, { type BookingFormValues } from "./BookingForm.tsx";
 import BookingConfirmation from "./BookingConfirmation.tsx";
-import { useMonthSlots } from "./hooks";
+import { useEventTypes, useMonthSlots } from "./hooks";
 import { groupSlotsByDay, toDateKey } from "./dateUtils";
-
-type WizardStep = "eventType" | "location" | "slot" | "details";
 
 export default function BookingWizard(): ReactElement {
   const { t, i18n } = useTranslation();
   const today = useMemo(() => new Date(), []);
+  const { data: eventTypes, isLoading: eventTypesLoading } = useEventTypes();
 
-  const [step, setStep] = useState<WizardStep>("eventType");
   const [eventType, setEventType] = useState<PublicEventType | null>(null);
   const [location, setLocation] = useState<LocationType | null>(null);
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+  const [showDetails, setShowDetails] = useState(false);
   const [confirmedBooking, setConfirmedBooking] =
     useState<BookingWithRelations | null>(null);
 
+  // Skip the "pick a service" screen entirely when there's only one --
+  // clicking through a choice that isn't really a choice isn't good UX.
+  const effectiveEventType =
+    eventType ?? (eventTypes?.length === 1 ? eventTypes[0] : null);
+  const effectiveLocation =
+    location ??
+    (effectiveEventType?.locations.length === 1
+      ? effectiveEventType.locations[0]
+      : null);
+
   const { data: slots, isLoading: slotsLoading } = useMonthSlots(
-    eventType?.id ?? null,
+    effectiveEventType?.id ?? null,
     viewYear,
     viewMonth,
   );
@@ -54,17 +63,17 @@ export default function BookingWizard(): ReactElement {
 
   const handleSelectEventType = (et: PublicEventType) => {
     setEventType(et);
-    if (et.locations.length === 1) {
-      setLocation(et.locations[0]);
-      setStep("slot");
-    } else {
-      setStep("location");
-    }
+    setLocation(et.locations.length === 1 ? et.locations[0] : null);
+    setSelectedDate(null);
+    setSelectedSlot(null);
   };
 
-  const handleSelectLocation = (loc: LocationType) => {
-    setLocation(loc);
-    setStep("slot");
+  const handleChangeEventType = () => {
+    setEventType(null);
+    setLocation(null);
+    setSelectedDate(null);
+    setSelectedSlot(null);
+    setShowDetails(false);
   };
 
   const handleSelectDate = (date: Date) => {
@@ -74,15 +83,15 @@ export default function BookingWizard(): ReactElement {
 
   const handleSelectSlot = (slot: Slot) => {
     setSelectedSlot(slot);
-    setStep("details");
+    setShowDetails(true);
   };
 
   const handleSubmitForm = (values: BookingFormValues) => {
-    if (!eventType || !location || !selectedSlot) return;
+    if (!effectiveEventType || !effectiveLocation || !selectedSlot) return;
     createBooking.mutate({
-      eventTypeId: eventType.id,
+      eventTypeId: effectiveEventType.id,
       startAt: selectedSlot.startAt,
-      location,
+      location: effectiveLocation,
       clientName: values.clientName,
       clientEmail: values.clientEmail,
       clientPhone: values.clientPhone,
@@ -92,11 +101,11 @@ export default function BookingWizard(): ReactElement {
   };
 
   const resetWizard = () => {
-    setStep("eventType");
     setEventType(null);
     setLocation(null);
     setSelectedDate(null);
     setSelectedSlot(null);
+    setShowDetails(false);
     setConfirmedBooking(null);
     createBooking.reset();
   };
@@ -110,138 +119,179 @@ export default function BookingWizard(): ReactElement {
     );
   }
 
-  return (
-    <div className="flex flex-col gap-6">
+  if (eventTypesLoading) {
+    return (
+      <p className="text-sm text-ink-soft">{t("booking.loadingEventTypes")}</p>
+    );
+  }
+
+  if (!eventTypes || eventTypes.length === 0) {
+    return <p className="text-sm text-ink-soft">{t("booking.noEventTypes")}</p>;
+  }
+
+  if (!effectiveEventType) {
+    return (
       <div>
         <h3 className="mb-3 text-[15px] font-medium text-ink">
-          {t("booking.step.eventType")}
+          {t("booking.pickService")}
         </h3>
-        {step === "eventType" ? (
-          <EventTypeSelector onSelect={handleSelectEventType} />
-        ) : (
-          eventType && (
-            <SelectedSummary
-              label={eventType.title}
-              onChange={() => setStep("eventType")}
+        <EventTypeSelector
+          eventTypes={eventTypes}
+          onSelect={handleSelectEventType}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-[260px_1fr]">
+      <BookingSummary
+        eventType={effectiveEventType}
+        canChangeEventType={eventTypes.length > 1}
+        onChangeEventType={handleChangeEventType}
+        location={effectiveLocation}
+        onSelectLocation={setLocation}
+        selectedSlot={selectedSlot}
+        onChangeSlot={showDetails ? () => setShowDetails(false) : undefined}
+      />
+
+      <div>
+        {showDetails ? (
+          <>
+            <h3 className="mb-3 text-[15px] font-medium text-ink">
+              {t("booking.detailsHeading")}
+            </h3>
+            <BookingForm
+              onSubmit={handleSubmitForm}
+              onBack={() => setShowDetails(false)}
+              isSubmitting={createBooking.isPending}
+              error={
+                createBooking.isError
+                  ? getErrorMessage(
+                      createBooking.error,
+                      t("booking.errors.generic"),
+                    )
+                  : null
+              }
             />
-          )
+          </>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-[1fr_1fr]">
+            <MonthCalendar
+              viewYear={viewYear}
+              viewMonth={viewMonth}
+              slotsByDay={slotsByDay}
+              isLoading={slotsLoading}
+              selectedDate={selectedDate}
+              onSelectDate={handleSelectDate}
+              onPrevMonth={() => {
+                const prev = new Date(viewYear, viewMonth - 1, 1);
+                setViewYear(prev.getFullYear());
+                setViewMonth(prev.getMonth());
+              }}
+              onNextMonth={() => {
+                const next = new Date(viewYear, viewMonth + 1, 1);
+                setViewYear(next.getFullYear());
+                setViewMonth(next.getMonth());
+              }}
+            />
+            <div>
+              {!effectiveLocation ? (
+                <p className="text-sm text-ink-soft">
+                  {t("booking.calendar.selectLocationFirst")}
+                </p>
+              ) : selectedDate ? (
+                <TimeSlotList
+                  slots={daySlots}
+                  selectedSlot={selectedSlot}
+                  onSelect={handleSelectSlot}
+                  disabled={!effectiveLocation}
+                />
+              ) : (
+                <p className="text-sm text-ink-soft">
+                  {t("booking.calendar.selectDay")}
+                </p>
+              )}
+            </div>
+          </div>
         )}
       </div>
-
-      {eventType && eventType.locations.length > 1 && (
-        <div>
-          <h3 className="mb-3 text-[15px] font-medium text-ink">
-            {t("booking.step.location")}
-          </h3>
-          {step === "location" ? (
-            <LocationSelector
-              locations={eventType.locations}
-              onSelect={handleSelectLocation}
-            />
-          ) : (
-            location && (
-              <SelectedSummary
-                label={t(`booking.location.${location}`)}
-                onChange={() => setStep("location")}
-              />
-            )
-          )}
-        </div>
-      )}
-
-      {(step === "slot" || step === "details") && eventType && location && (
-        <div>
-          <h3 className="mb-3 text-[15px] font-medium text-ink">
-            {t("booking.step.slot")}
-          </h3>
-          {step === "details" && selectedSlot ? (
-            <SelectedSummary
-              label={new Date(selectedSlot.startAt).toLocaleString(
-                i18n.language.startsWith("hu") ? "hu-HU" : "en-US",
-                { dateStyle: "medium", timeStyle: "short" },
-              )}
-              onChange={() => setStep("slot")}
-            />
-          ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-[1fr_1fr]">
-              <MonthCalendar
-                viewYear={viewYear}
-                viewMonth={viewMonth}
-                slotsByDay={slotsByDay}
-                isLoading={slotsLoading}
-                selectedDate={selectedDate}
-                onSelectDate={handleSelectDate}
-                onPrevMonth={() => {
-                  const prev = new Date(viewYear, viewMonth - 1, 1);
-                  setViewYear(prev.getFullYear());
-                  setViewMonth(prev.getMonth());
-                }}
-                onNextMonth={() => {
-                  const next = new Date(viewYear, viewMonth + 1, 1);
-                  setViewYear(next.getFullYear());
-                  setViewMonth(next.getMonth());
-                }}
-              />
-              <div>
-                {selectedDate ? (
-                  <TimeSlotList
-                    slots={daySlots}
-                    selectedSlot={selectedSlot}
-                    onSelect={handleSelectSlot}
-                  />
-                ) : (
-                  <p className="text-sm text-ink-soft">
-                    {t("booking.calendar.selectDay")}
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {step === "details" && (
-        <div>
-          <h3 className="mb-3 text-[15px] font-medium text-ink">
-            {t("booking.step.details")}
-          </h3>
-          <BookingForm
-            onSubmit={handleSubmitForm}
-            onBack={() => setStep("slot")}
-            isSubmitting={createBooking.isPending}
-            error={
-              createBooking.isError
-                ? getErrorMessage(
-                    createBooking.error,
-                    t("booking.errors.generic"),
-                  )
-                : null
-            }
-          />
-        </div>
-      )}
     </div>
   );
 }
 
-function SelectedSummary({
-  label,
-  onChange,
+function BookingSummary({
+  eventType,
+  canChangeEventType,
+  onChangeEventType,
+  location,
+  onSelectLocation,
+  selectedSlot,
+  onChangeSlot,
 }: {
-  label: string;
-  onChange: () => void;
+  eventType: PublicEventType;
+  canChangeEventType: boolean;
+  onChangeEventType: () => void;
+  location: LocationType | null;
+  onSelectLocation: (location: LocationType) => void;
+  selectedSlot: Slot | null;
+  onChangeSlot: (() => void) | undefined;
 }): ReactElement {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   return (
-    <div className="flex items-center justify-between rounded-xl border border-line bg-bg-card px-4 py-3">
-      <span className="text-sm text-ink">{label}</span>
-      <button
-        type="button"
-        onClick={onChange}
-        className="text-sm text-accent hover:underline"
-      >
-        {t("booking.form.back")}
-      </button>
+    <div className="flex flex-col gap-4 rounded-2xl border border-line bg-bg-card p-5 sm:sticky sm:top-24 sm:self-start">
+      <div>
+        <div className="mb-1 flex items-start justify-between gap-2">
+          <div className="serif text-[18px] text-ink">{eventType.title}</div>
+          {canChangeEventType && (
+            <button
+              type="button"
+              onClick={onChangeEventType}
+              className="shrink-0 text-xs text-accent hover:underline"
+            >
+              {t("booking.change")}
+            </button>
+          )}
+        </div>
+        <div className="text-sm text-ink-soft">
+          {eventType.durationMinutes} {t("pricing.minutesUnit")}
+        </div>
+      </div>
+
+      {eventType.locations.length > 1 ? (
+        <div>
+          <LocationSelector
+            locations={eventType.locations}
+            selected={location}
+            onSelect={onSelectLocation}
+          />
+        </div>
+      ) : (
+        <div className="text-sm text-ink-soft">
+          {t(`booking.location.${eventType.locations[0]}`)}
+        </div>
+      )}
+
+      {selectedSlot && (
+        <div className="flex items-start justify-between gap-2 border-t border-line pt-4">
+          <div className="serif text-[15px] text-ink">
+            {new Date(selectedSlot.startAt).toLocaleString(
+              i18n.language.startsWith("hu") ? "hu-HU" : "en-US",
+              { dateStyle: "medium", timeStyle: "short" },
+            )}
+          </div>
+          {onChangeSlot && (
+            <button
+              type="button"
+              onClick={onChangeSlot}
+              className="shrink-0 text-xs text-accent hover:underline"
+            >
+              {t("booking.change")}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -94,12 +94,9 @@
     "intro": "Pick a service, then an available time.",
     "loadingEventTypes": "Loading services…",
     "noEventTypes": "No services are available right now.",
-    "step": {
-      "eventType": "1. Pick a service",
-      "location": "2. Pick a location",
-      "slot": "3. Pick a time",
-      "details": "4. Your details"
-    },
+    "pickService": "Choose a service",
+    "change": "Change",
+    "detailsHeading": "Enter your details",
     "location": {
       "IN_PERSON": "In person",
       "GOOGLE_MEET": "Google Meet",
@@ -111,7 +108,8 @@
       "loading": "Loading available times…",
       "noSlotsThisMonth": "No available times this month.",
       "noSlotsThisDay": "No available times on this day.",
-      "selectDay": "Select a highlighted day to see available times."
+      "selectDay": "Select a highlighted day to see available times.",
+      "selectLocationFirst": "Pick a location to see available times."
     },
     "form": {
       "name": "Name",

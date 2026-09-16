@@ -6,10 +6,12 @@ export default function TimeSlotList({
   slots,
   selectedSlot,
   onSelect,
+  disabled = false,
 }: {
   slots: Slot[];
   selectedSlot: Slot | null;
   onSelect: (slot: Slot) => void;
+  disabled?: boolean;
 }): ReactElement {
   const { t, i18n } = useTranslation();
 
@@ -35,12 +37,15 @@ export default function TimeSlotList({
           <button
             key={slot.startAt}
             type="button"
+            disabled={disabled}
             onClick={() => onSelect(slot)}
             className={[
               "serif rounded-full border px-4 py-2 text-[15px] transition-colors duration-150",
               isSelected
                 ? "border-accent bg-accent text-bg-card"
-                : "border-line text-ink hover:border-accent-soft",
+                : disabled
+                  ? "border-line text-ink-soft opacity-50"
+                  : "border-line text-ink hover:border-accent-soft",
             ].join(" ")}
           >
             {formatTime(slot.startAt)}
