@@ -12,22 +12,24 @@ export default function EventTypeSelector({
   const { t } = useTranslation();
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <div className="flex flex-col gap-2.5">
       {eventTypes.map((eventType) => (
         <button
           key={eventType.id}
           type="button"
           onClick={() => onSelect(eventType)}
-          className="rounded-2xl border border-line bg-bg-card p-5 text-left transition-colors duration-200 hover:border-accent-soft"
+          className="rounded-xl border border-line bg-bg-card px-5 py-4 text-left transition-colors duration-200 hover:border-accent-soft"
         >
-          <div className="serif mb-1 text-[19px] text-ink">
-            {eventType.title}
-          </div>
-          <div className="mb-2 text-sm text-ink-soft">
-            {eventType.durationMinutes} {t("pricing.minutesUnit")}
+          <div className="flex items-baseline justify-between gap-3">
+            <div className="serif text-[17px] text-ink">{eventType.title}</div>
+            <div className="shrink-0 text-sm whitespace-nowrap text-ink-soft">
+              {eventType.durationMinutes} {t("pricing.minutesUnit")}
+            </div>
           </div>
           {eventType.description && (
-            <p className="text-sm text-ink-soft">{eventType.description}</p>
+            <p className="mt-1 text-sm text-ink-soft">
+              {eventType.description}
+            </p>
           )}
         </button>
       ))}
