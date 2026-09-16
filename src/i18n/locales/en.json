@@ -91,8 +91,60 @@
   },
   "booking": {
     "heading": "Book a session",
-    "badge": "Coming soon",
-    "placeholder": "This section is still under development — soon you'll be able to book a session online right here. Until then, feel free to write or call using the details below."
+    "intro": "Pick a service, then an available time.",
+    "loadingEventTypes": "Loading services…",
+    "noEventTypes": "No services are available right now.",
+    "step": {
+      "eventType": "1. Pick a service",
+      "location": "2. Pick a location",
+      "slot": "3. Pick a time",
+      "details": "4. Your details"
+    },
+    "location": {
+      "IN_PERSON": "In person",
+      "GOOGLE_MEET": "Google Meet",
+      "PHONE": "Phone"
+    },
+    "calendar": {
+      "prevMonth": "Previous month",
+      "nextMonth": "Next month",
+      "loading": "Loading available times…",
+      "noSlotsThisMonth": "No available times this month.",
+      "noSlotsThisDay": "No available times on this day.",
+      "selectDay": "Select a highlighted day to see available times."
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "note": "Note (optional)",
+      "phoneInvalid": "Enter a valid phone number.",
+      "submit": "Confirm booking",
+      "submitting": "Booking…",
+      "back": "Back"
+    },
+    "confirmation": {
+      "heading": "Booking confirmed!",
+      "body": "You'll get a confirmation email shortly with the details and a calendar attachment.",
+      "newBooking": "Book another session"
+    },
+    "manage": {
+      "heading": "Your booking",
+      "loading": "Loading…",
+      "notFound": "No booking found for this link.",
+      "cancelledLabel": "This booking has been cancelled.",
+      "cancel": "Cancel",
+      "cancelReasonLabel": "Reason (optional)",
+      "cancelConfirm": "Confirm cancellation",
+      "cancelled": "Booking cancelled.",
+      "reschedule": "Reschedule",
+      "rescheduleIntro": "Pick a new time.",
+      "rescheduled": "Booking rescheduled.",
+      "back": "Back"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again."
+    }
   },
   "contact": {
     "heading": "Let's start the conversation",

@@ -9,15 +9,20 @@
     "postbuild": "node scripts/generate-seo-files.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
+    "generate:api-types": "openapi-typescript http://localhost:3000/docs-json -o src/api/types.generated.ts",
     "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/react-query": "^5.103.0",
     "i18next": "^26.4.2",
     "i18next-browser-languagedetector": "^8.2.1",
+    "openapi-fetch": "^0.17.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.14",
+    "react-phone-number-input": "^3.4.18",
+    "react-router-dom": "^7.18.4",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
@@ -36,6 +41,7 @@
     "globals": "^17.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
+    "openapi-typescript": "^7.13.0",
     "prettier": "^3.9.6",
     "semantic-release": "^25.0.9",
     "typescript": "~6.0.2",
