@@ -1,3 +1,9 @@
+# [1.20.0](https://github.com/gerencserjani/betti-coaching/compare/v1.19.0...v1.20.0) (2026-09-16)
+
+### Features
+
+- extract SVG icons into reusable typed components (refs [#22](https://github.com/gerencserjani/betti-coaching/issues/22)) ([b5acdb0](https://github.com/gerencserjani/betti-coaching/commit/b5acdb05843745b1cbe9ac903a665f3fcdc3b2a3))
+
 # [1.19.0](https://github.com/gerencserjani/betti-coaching/compare/v1.18.2...v1.19.0) (2026-09-15)
 
 ### Features
