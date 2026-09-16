@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Container from "./Container.tsx";
 import LanguageSwitcher from "./LanguageSwitcher.tsx";
 import ThemeToggle from "./ThemeToggle.tsx";
-import MenuIcon from "./MenuIcon.tsx";
+import MenuIcon from "./icons/MenuIcon";
 import { navLinks, contactLink } from "../content/navLinks";
 import { siteName } from "../content/site";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -67,9 +67,7 @@ export default function Header(): ReactElement {
             aria-expanded={menuOpen}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-bg-card p-0 text-ink xl:hidden"
           >
-            <span className="h-[18px] w-[18px]">
-              <MenuIcon />
-            </span>
+            <MenuIcon size={18} />
           </button>
         </div>
       </Container>
