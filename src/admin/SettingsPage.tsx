@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { adminApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
 import type { Settings } from "../api/models";
+import AddressAutocomplete from "./AddressAutocomplete.tsx";
 
 // A free-text timezone field lets a typo (e.g. "Europe/Budapset") reach the
 // backend's @IsTimeZone() validator as a cryptic save error. A fixed list of
@@ -74,14 +75,16 @@ function SettingsForm({ settings }: { settings: Settings }): ReactElement {
     >
       <label className="text-sm">
         <span className="mb-1.5 block text-[13.5px] text-ink-soft">Cím</span>
-        <input
+        <AddressAutocomplete
           value={businessAddress}
-          onChange={(e) => setBusinessAddress(e.target.value)}
+          onChange={setBusinessAddress}
           className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
         />
         <span className="mt-1 block text-xs text-ink-soft">
           Ez jelenik meg a helyszínen tartott foglalások visszaigazoló
-          emailjében és naptármeghívójában.
+          emailjében és naptármeghívójában. Gépelés közben válassz a felajánlott
+          címek közül, hogy a Google Naptár biztosan helyesen jelenítse meg a
+          helyszínt.
         </span>
       </label>
       <label className="text-sm">
