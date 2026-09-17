@@ -1,3 +1,9 @@
+## [1.22.1](https://github.com/gerencserjani/betti-coaching/compare/v1.22.0...v1.22.1) (2026-09-17)
+
+### Bug Fixes
+
+- add SPA rewrite so Vercel serves deep links like /admin/login ([0356150](https://github.com/gerencserjani/betti-coaching/commit/0356150be0aabde373c955a770b5673ea856f5f7))
+
 # [1.22.0](https://github.com/gerencserjani/betti-coaching/compare/v1.21.1...v1.22.0) (2026-09-17)
 
 ### Bug Fixes
