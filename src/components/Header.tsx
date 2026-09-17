@@ -32,6 +32,8 @@ export default function Header(): ReactElement {
           <img
             src={brandLogo}
             alt={siteName}
+            width={160}
+            height={160}
             className="h-[52px] w-auto transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
           />
         </a>

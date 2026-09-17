@@ -30,6 +30,10 @@ export default function Community(): ReactElement {
             src={communityArt}
             alt=""
             aria-hidden="true"
+            width={700}
+            height={700}
+            loading="lazy"
+            decoding="async"
             className="order-first mx-auto w-full max-w-[260px] transition-[filter] duration-200 lg:order-none lg:max-w-[420px] dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
           />
 
