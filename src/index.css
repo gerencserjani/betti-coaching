@@ -36,6 +36,28 @@ blockquote {
   font-weight: 420;
 }
 
+.brand-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-soft) transparent;
+}
+
+.brand-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--accent-soft);
+  border-radius: 9999px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {

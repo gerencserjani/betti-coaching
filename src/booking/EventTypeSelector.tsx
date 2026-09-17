@@ -18,7 +18,7 @@ export default function EventTypeSelector({
       <div
         className={[
           "flex flex-col gap-2",
-          isScrollable ? "max-h-96 overflow-y-auto pr-1" : "",
+          isScrollable ? "brand-scrollbar max-h-96 overflow-y-auto pr-1" : "",
         ].join(" ")}
       >
         {eventTypes.map((eventType) => (
