@@ -115,6 +115,13 @@ export const adminApi = {
       apiClient.DELETE("/event-types/{id}", { params: { path: { id } } }),
     ),
 
+  deleteEventType: (id: string) =>
+    unwrap<void>(
+      apiClient.DELETE("/event-types/{id}/permanent", {
+        params: { path: { id } },
+      }),
+    ),
+
   weeklyAvailability: () =>
     unwrap<WeeklyAvailability[]>(apiClient.GET("/availability/weekly")),
 

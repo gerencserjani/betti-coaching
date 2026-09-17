@@ -132,6 +132,22 @@ export interface paths {
     patch: operations["EventTypesController_update"];
     trace?: never;
   };
+  "/event-types/{id}/permanent": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete: operations["EventTypesController_remove"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/availability/weekly": {
     parameters: {
       query?: never;
@@ -664,6 +680,25 @@ export interface operations {
         "application/json": components["schemas"]["UpdateEventTypeDto"];
       };
     };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  EventTypesController_remove: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       200: {
         headers: {

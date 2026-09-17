@@ -24,6 +24,7 @@ export default function EventTypesPage(): ReactElement {
   const [error, setError] = useState<string | null>(null);
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [overId, setOverId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const archiveMutation = useMutation({
     mutationFn: adminApi.archiveEventType,
@@ -37,6 +38,15 @@ export default function EventTypesPage(): ReactElement {
       adminApi.updateEventType(id, { isActive: true }),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["admin", "event-types"] }),
+    onError: (err) => setError(getErrorMessage(err)),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: adminApi.deleteEventType,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "event-types"] });
+      setDeletingId(null);
+    },
     onError: (err) => setError(getErrorMessage(err)),
   });
 
@@ -143,32 +153,62 @@ export default function EventTypesPage(): ReactElement {
                   </div>
                 </div>
               </div>
-              <div className="flex shrink-0 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setEditing(et)}
-                  className="text-ink-soft hover:text-accent hover:underline"
-                >
-                  Szerkesztés
-                </button>
-                {et.isActive ? (
+              {deletingId === et.id ? (
+                <div className="flex shrink-0 items-center gap-2">
+                  <span className="text-xs text-ink-soft">
+                    Biztos? Nem vonható vissza.
+                  </span>
                   <button
                     type="button"
-                    onClick={() => archiveMutation.mutate(et.id)}
+                    disabled={deleteMutation.isPending}
+                    onClick={() => deleteMutation.mutate(et.id)}
+                    className="text-red-600 hover:underline disabled:opacity-40 dark:text-red-400"
+                  >
+                    Igen, törlöm
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDeletingId(null)}
+                    className="text-ink-soft hover:underline"
+                  >
+                    Mégse
+                  </button>
+                </div>
+              ) : (
+                <div className="flex shrink-0 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setEditing(et)}
+                    className="text-ink-soft hover:text-accent hover:underline"
+                  >
+                    Szerkesztés
+                  </button>
+                  {et.isActive ? (
+                    <button
+                      type="button"
+                      onClick={() => archiveMutation.mutate(et.id)}
+                      className="text-red-600 hover:underline dark:text-red-400"
+                    >
+                      Archiválás
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => reactivateMutation.mutate(et.id)}
+                      className="text-emerald-700 hover:underline dark:text-emerald-400"
+                    >
+                      Visszaállítás
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setDeletingId(et.id)}
                     className="text-red-600 hover:underline dark:text-red-400"
                   >
-                    Archiválás
+                    Törlés
                   </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => reactivateMutation.mutate(et.id)}
-                    className="text-emerald-700 hover:underline dark:text-emerald-400"
-                  >
-                    Visszaállítás
-                  </button>
-                )}
-              </div>
+                </div>
+              )}
             </li>
           ))}
           {displayedList.length === 0 && (
