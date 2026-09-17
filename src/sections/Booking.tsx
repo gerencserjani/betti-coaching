@@ -1,36 +1,42 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
+import BookingWizard from "../booking/BookingWizard.tsx";
+import ManageBooking from "../booking/ManageBooking.tsx";
 
 export default function Booking(): ReactElement {
   const { t } = useTranslation();
   const { ref, className } = useRevealOnScroll<HTMLDivElement>();
+  const [searchParams] = useSearchParams();
+  const manageToken = searchParams.get("manage");
 
   return (
     <Section
       id="idopontfoglalas"
-      className="py-14 xs:py-20 xl:py-[92px] 2xl:py-[120px]"
+      className="border-y border-line bg-bg-panel pt-14 pb-16 xs:pt-20 xs:pb-[90px] xl:pt-[92px] xl:pb-[104px] 2xl:pt-[110px] 2xl:pb-[130px]"
     >
       <Container>
         <div
           ref={ref}
           className={[
-            "rounded-[18px] border border-dashed border-line bg-bg-card px-[22px] py-10 text-center xs:px-9 xs:py-14",
+            "mb-9 max-w-[620px] xs:mb-12 xl:mb-[72px]",
             className,
           ].join(" ")}
         >
-          <span className="mb-[18px] inline-block rounded-full border border-accent-soft px-3.5 py-[5px] text-[13px] text-accent">
-            {t("booking.badge")}
-          </span>
-          <h2 className="mb-4 text-[clamp(28px,3.6vw,40px)]">
+          <h2 className="mb-4 text-[clamp(30px,4vw,42px)]">
             {t("booking.heading")}
           </h2>
-          <p className="mx-auto max-w-[52ch] text-[17px] text-ink-soft">
-            {t("booking.placeholder")}
-          </p>
+          <p className="text-[17px] text-ink-soft">{t("booking.intro")}</p>
         </div>
+
+        {manageToken ? (
+          <ManageBooking token={manageToken} />
+        ) : (
+          <BookingWizard />
+        )}
       </Container>
     </Section>
   );

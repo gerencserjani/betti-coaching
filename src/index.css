@@ -36,6 +36,43 @@ blockquote {
   font-weight: 420;
 }
 
+/* Chrome/Edge force their own light autofill background via a UA stylesheet
+   that a plain `background` can't override. The inset box-shadow trick
+   paints over it with the site's own card color instead. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-card) inset;
+  box-shadow: 0 0 0 1000px var(--bg-card) inset;
+  -webkit-text-fill-color: var(--ink);
+  caret-color: var(--ink);
+}
+
+.brand-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-soft) transparent;
+}
+
+.brand-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--accent-soft);
+  border-radius: 9999px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
