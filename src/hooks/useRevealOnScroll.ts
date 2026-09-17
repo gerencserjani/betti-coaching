@@ -8,6 +8,7 @@ const VISIBLE_CLASSES = "opacity-100 translate-y-0";
 interface RevealOnScroll<T extends HTMLElement> {
   ref: RefObject<T | null>;
   className: string;
+  isVisible: boolean;
 }
 
 export function useRevealOnScroll<
@@ -40,5 +41,6 @@ export function useRevealOnScroll<
       BASE_CLASSES,
       isVisible ? VISIBLE_CLASSES : HIDDEN_CLASSES,
     ].join(" "),
+    isVisible,
   };
 }

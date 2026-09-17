@@ -42,6 +42,10 @@ export default function Hero(): ReactElement {
             src={heroArt}
             alt=""
             aria-hidden="true"
+            width={720}
+            height={720}
+            fetchPriority="high"
+            decoding="async"
             className="order-first mx-auto w-full max-w-[280px] transition-[filter] duration-200 lg:order-none lg:max-w-none dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
           />
         </div>
