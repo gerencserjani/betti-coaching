@@ -1,3 +1,5 @@
+import { formatPriceHuf as formatPriceHufShared } from "../format";
+
 export const WEEKDAY_LABELS: Record<number, string> = {
   1: "Hétfő",
   2: "Kedd",
@@ -39,11 +41,19 @@ export function formatDateTime(iso: string): string {
   });
 }
 
-export function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("hu-HU", { dateStyle: "medium" });
+/** For a bare "YYYY-MM-DD" date (no time component), e.g. AvailabilityOverride.date. */
+export function formatDate(isoDate: string): string {
+  // `new Date("YYYY-MM-DD")` parses as UTC midnight, which
+  // toLocaleDateString then renders back in the browser's local zone --
+  // for a negative UTC offset that shows the previous day. Building the
+  // Date from local year/month/day components instead sidesteps that.
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("hu-HU", {
+    dateStyle: "medium",
+  });
 }
 
+/** The admin UI is always Hungarian, unlike the public booking UI's formatPriceHuf. */
 export function formatPriceHuf(priceHuf: number): string {
-  if (priceHuf <= 0) return "Díjmentes";
-  return `${new Intl.NumberFormat("hu-HU").format(priceHuf)} HUF`;
+  return formatPriceHufShared(priceHuf, "hu", "Díjmentes");
 }

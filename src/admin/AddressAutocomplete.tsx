@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useId,
   useRef,
   useState,
   type KeyboardEvent,
@@ -60,6 +61,8 @@ export default function AddressAutocomplete({
   const containerRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const listboxId = useId();
+  const getOptionId = (placeId: string) => `${listboxId}-${placeId}`;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -124,6 +127,15 @@ export default function AddressAutocomplete({
   return (
     <div ref={containerRef} className="relative">
       <input
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
+        aria-activedescendant={
+          isOpen && suggestions[highlighted]
+            ? getOptionId(suggestions[highlighted].placeId)
+            : undefined
+        }
         value={value}
         onChange={(e) => handleInputChange(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -132,10 +144,17 @@ export default function AddressAutocomplete({
         autoComplete="off"
       />
       {isOpen && (
-        <ul className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-line bg-bg-card text-sm shadow-lg">
+        <ul
+          id={listboxId}
+          role="listbox"
+          className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-line bg-bg-card text-sm shadow-lg"
+        >
           {suggestions.map((s, i) => (
-            <li key={s.placeId}>
+            <li key={s.placeId} role="presentation">
               <button
+                id={getOptionId(s.placeId)}
+                role="option"
+                aria-selected={i === highlighted}
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => selectSuggestion(s)}

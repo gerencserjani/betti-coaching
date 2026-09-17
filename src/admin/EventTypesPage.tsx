@@ -51,13 +51,7 @@ export default function EventTypesPage(): ReactElement {
   });
 
   const reorderMutation = useMutation({
-    mutationFn: async (orderedIds: string[]) => {
-      await Promise.all(
-        orderedIds.map((id, index) =>
-          adminApi.updateEventType(id, { position: index }),
-        ),
-      );
-    },
+    mutationFn: adminApi.reorderEventTypes,
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["admin", "event-types"] }),
     onError: (err) => setError(getErrorMessage(err)),
@@ -78,6 +72,17 @@ export default function EventTypesPage(): ReactElement {
     }
     setDraggedId(null);
     setOverId(null);
+  };
+
+  // Keyboard-operable alternative to the HTML5 drag-and-drop above, for
+  // anyone who can't or doesn't want to drag (screen reader, keyboard-only).
+  const moveEventType = (id: string, direction: -1 | 1) => {
+    const fromIndex = baseList.findIndex((et) => et.id === id);
+    const toIndex = fromIndex + direction;
+    if (fromIndex === -1 || toIndex < 0 || toIndex >= baseList.length) return;
+    reorderMutation.mutate(
+      reorder(baseList, fromIndex, toIndex).map((et) => et.id),
+    );
   };
 
   return (
@@ -108,7 +113,7 @@ export default function EventTypesPage(): ReactElement {
         <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
         <ul className="flex flex-col gap-2">
-          {displayedList.map((et) => (
+          {displayedList.map((et, index) => (
             <li
               key={et.id}
               draggable
@@ -138,6 +143,29 @@ export default function EventTypesPage(): ReactElement {
                 >
                   ⠿
                 </span>
+                <div className="flex flex-col">
+                  <button
+                    type="button"
+                    aria-label="Mozgatás feljebb"
+                    disabled={index === 0 || reorderMutation.isPending}
+                    onClick={() => moveEventType(et.id, -1)}
+                    className="leading-none text-ink-soft hover:text-accent disabled:opacity-30"
+                  >
+                    ▲
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Mozgatás lejjebb"
+                    disabled={
+                      index === displayedList.length - 1 ||
+                      reorderMutation.isPending
+                    }
+                    onClick={() => moveEventType(et.id, 1)}
+                    className="leading-none text-ink-soft hover:text-accent disabled:opacity-30"
+                  >
+                    ▼
+                  </button>
+                </div>
                 <div>
                   <div className="font-medium text-ink">
                     {et.title}{" "}
@@ -244,14 +272,14 @@ function EventTypeForm({
       eventType
         ? adminApi.updateEventType(eventType.id, {
             title,
-            description: description || undefined,
+            description,
             durationMinutes,
             price,
             locations,
           })
         : adminApi.createEventType({
             title,
-            description: description || undefined,
+            description,
             durationMinutes,
             price,
             locations,

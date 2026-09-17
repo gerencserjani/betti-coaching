@@ -43,13 +43,27 @@ interface ApiErrorBody {
   error?: string;
 }
 
+/**
+ * Thrown by unwrap() (in endpoints.ts) specifically when the backend
+ * responded with an error body -- a marker that `.message` is safe to show
+ * the user. Any OTHER thrown value (a native fetch TypeError on a network
+ * failure, an unrelated JS exception) is NOT an ApiError, so getErrorMessage
+ * below won't mistake its raw technical message for a user-facing one.
+ */
+export class ApiError extends Error {}
+
+/** Backend error body -> a display string. Used only when building an ApiError. */
+export function extractApiErrorMessage(body: unknown): string {
+  const parsed = body as ApiErrorBody | undefined;
+  const msg = parsed?.message;
+  if (Array.isArray(msg)) return msg.join(" ");
+  if (typeof msg === "string") return msg;
+  return "Váratlan hiba történt.";
+}
+
 export function getErrorMessage(
   error: unknown,
   fallback = "Váratlan hiba történt.",
 ): string {
-  const body = error as ApiErrorBody | undefined;
-  const msg = body?.message;
-  if (Array.isArray(msg)) return msg.join(" ");
-  if (typeof msg === "string") return msg;
-  return fallback;
+  return error instanceof ApiError ? error.message : fallback;
 }
