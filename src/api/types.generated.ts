@@ -177,7 +177,7 @@ export interface paths {
     delete: operations["AvailabilityController_removeWeekly"];
     options?: never;
     head?: never;
-    patch?: never;
+    patch: operations["AvailabilityController_updateWeekly"];
     trace?: never;
   };
   "/availability/overrides": {
@@ -209,7 +209,7 @@ export interface paths {
     delete: operations["AvailabilityController_removeOverride"];
     options?: never;
     head?: never;
-    patch?: never;
+    patch: operations["AvailabilityController_updateOverride"];
     trace?: never;
   };
   "/slots": {
@@ -401,6 +401,7 @@ export interface components {
       startMinute: number;
       endMinute: number;
     };
+    UpdateWeeklyAvailabilityDto: Record<string, never>;
     CreateAvailabilityOverrideDto: {
       /** @description Calendar date, e.g. "2026-12-24" */
       date: string;
@@ -409,6 +410,7 @@ export interface components {
       startMinute?: number;
       endMinute?: number;
     };
+    UpdateAvailabilityOverrideDto: Record<string, never>;
     CreateBookingDto: {
       eventTypeId: string;
       startAt: string;
@@ -765,6 +767,29 @@ export interface operations {
       };
     };
   };
+  AvailabilityController_updateWeekly: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UpdateWeeklyAvailabilityDto"];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   AvailabilityController_findMyOverrides: {
     parameters: {
       query?: never;
@@ -813,6 +838,29 @@ export interface operations {
       cookie?: never;
     };
     requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  AvailabilityController_updateOverride: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UpdateAvailabilityOverrideDto"];
+      };
+    };
     responses: {
       200: {
         headers: {

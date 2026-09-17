@@ -21,6 +21,17 @@ type UpdateEventTypeBody = Partial<
   components["schemas"]["CreateEventTypeDto"]
 > & { isActive?: boolean };
 
+// Same PartialType-resolution gap as UpdateEventTypeBody above, for the
+// weekly availability update endpoint.
+type UpdateWeeklyAvailabilityBody = Partial<
+  components["schemas"]["CreateWeeklyAvailabilityDto"]
+>;
+
+// Same gap, for the date-override update endpoint.
+type UpdateAvailabilityOverrideBody = Partial<
+  components["schemas"]["CreateAvailabilityOverrideDto"]
+>;
+
 async function unwrap<T>(
   promise: Promise<{ data?: unknown; error?: unknown }>,
 ): Promise<T> {
@@ -132,6 +143,15 @@ export const adminApi = {
       apiClient.POST("/availability/weekly", { body }),
     ),
 
+  updateWeeklyAvailability: (id: string, body: UpdateWeeklyAvailabilityBody) =>
+    unwrap<WeeklyAvailability>(
+      apiClient.PATCH("/availability/weekly/{id}", {
+        params: { path: { id } },
+        // Cast for the same reason as UpdateEventTypeBody above.
+        body: body as components["schemas"]["UpdateWeeklyAvailabilityDto"],
+      }),
+    ),
+
   removeWeeklyAvailability: (id: string) =>
     unwrap<void>(
       apiClient.DELETE("/availability/weekly/{id}", {
@@ -147,6 +167,14 @@ export const adminApi = {
   ) =>
     unwrap<AvailabilityOverride>(
       apiClient.POST("/availability/overrides", { body }),
+    ),
+
+  updateOverride: (id: string, body: UpdateAvailabilityOverrideBody) =>
+    unwrap<AvailabilityOverride>(
+      apiClient.PATCH("/availability/overrides/{id}", {
+        params: { path: { id } },
+        body: body as components["schemas"]["UpdateAvailabilityOverrideDto"],
+      }),
     ),
 
   removeOverride: (id: string) =>
