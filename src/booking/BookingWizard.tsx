@@ -130,31 +130,31 @@ export default function BookingWizard(): ReactElement {
     return <p className="text-sm text-ink-soft">{t("booking.noEventTypes")}</p>;
   }
 
-  if (!effectiveEventType) {
-    return (
-      <div>
-        <h3 className="mb-3 text-[15px] font-medium text-ink">
-          {t("booking.pickService")}
-        </h3>
-        <EventTypeSelector
-          eventTypes={eventTypes}
-          onSelect={handleSelectEventType}
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-[260px_1fr]">
-      <BookingSummary
-        eventType={effectiveEventType}
-        canChangeEventType={eventTypes.length > 1}
-        onChangeEventType={handleChangeEventType}
-        location={effectiveLocation}
-        onSelectLocation={setLocation}
-        selectedSlot={selectedSlot}
-        onChangeSlot={showDetails ? () => setShowDetails(false) : undefined}
-      />
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-[280px_1fr]">
+      <div>
+        {effectiveEventType ? (
+          <BookingSummary
+            eventType={effectiveEventType}
+            canChangeEventType={eventTypes.length > 1}
+            onChangeEventType={handleChangeEventType}
+            location={effectiveLocation}
+            onSelectLocation={setLocation}
+            selectedSlot={selectedSlot}
+            onChangeSlot={showDetails ? () => setShowDetails(false) : undefined}
+          />
+        ) : (
+          <>
+            <h3 className="mb-3 text-[15px] font-medium text-ink">
+              {t("booking.pickService")}
+            </h3>
+            <EventTypeSelector
+              eventTypes={eventTypes}
+              onSelect={handleSelectEventType}
+            />
+          </>
+        )}
+      </div>
 
       <div>
         {showDetails ? (
@@ -195,9 +195,10 @@ export default function BookingWizard(): ReactElement {
                 setViewYear(next.getFullYear());
                 setViewMonth(next.getMonth());
               }}
+              disabled={!effectiveEventType}
             />
             <div>
-              {!effectiveLocation ? (
+              {!effectiveEventType ? null : !effectiveLocation ? (
                 <p className="text-sm text-ink-soft">
                   {t("booking.calendar.selectLocationFirst")}
                 </p>

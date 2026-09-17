@@ -15,6 +15,7 @@ export default function MonthCalendar({
   onSelectDate,
   onPrevMonth,
   onNextMonth,
+  disabled = false,
 }: {
   viewYear: number;
   viewMonth: number;
@@ -24,6 +25,7 @@ export default function MonthCalendar({
   onSelectDate: (date: Date) => void;
   onPrevMonth: () => void;
   onNextMonth: () => void;
+  disabled?: boolean;
 }): ReactElement {
   const { t, i18n } = useTranslation();
 
@@ -73,50 +75,73 @@ export default function MonthCalendar({
         </button>
       </div>
 
-      {isLoading ? (
-        <p className="text-sm text-ink-soft">{t("booking.calendar.loading")}</p>
-      ) : (
-        <>
-          <div className="mb-1.5 grid grid-cols-7 gap-1 text-center text-xs text-ink-soft">
-            {weekdayLabels.map((label, i) => (
-              <div key={i}>{label}</div>
-            ))}
-          </div>
-          <div className="grid grid-cols-7 gap-1">
-            {cells.map((date, i) => {
-              if (!date) return <div key={i} />;
-              const key = toDateKey(date);
-              const hasSlots = (slotsByDay.get(key)?.length ?? 0) > 0;
-              const disabled = !hasSlots || isPast(date);
-              const isSelected = selectedDate && isSameDay(date, selectedDate);
+      <div className="relative">
+        {isLoading ? (
+          <p className="text-sm text-ink-soft">
+            {t("booking.calendar.loading")}
+          </p>
+        ) : (
+          <>
+            <div
+              className={[
+                "mb-1.5 grid grid-cols-7 gap-1 text-center text-xs text-ink-soft",
+                disabled ? "opacity-30" : "",
+              ].join(" ")}
+            >
+              {weekdayLabels.map((label, i) => (
+                <div key={i}>{label}</div>
+              ))}
+            </div>
+            <div
+              className={[
+                "grid grid-cols-7 gap-1",
+                disabled ? "pointer-events-none opacity-30" : "",
+              ].join(" ")}
+            >
+              {cells.map((date, i) => {
+                if (!date) return <div key={i} />;
+                const key = toDateKey(date);
+                const hasSlots = (slotsByDay.get(key)?.length ?? 0) > 0;
+                const dayDisabled = !hasSlots || isPast(date);
+                const isSelected =
+                  selectedDate && isSameDay(date, selectedDate);
 
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => onSelectDate(date)}
-                  className={[
-                    "aspect-square rounded-lg text-sm transition-colors duration-150",
-                    isSelected
-                      ? "bg-accent text-bg-card"
-                      : disabled
-                        ? "text-line"
-                        : "border border-transparent text-ink hover:border-accent-soft",
-                  ].join(" ")}
-                >
-                  {date.getDate()}
-                </button>
-              );
-            })}
-          </div>
-          {slotsByDay.size === 0 && (
-            <p className="mt-3 text-sm text-ink-soft">
-              {t("booking.calendar.noSlotsThisMonth")}
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    disabled={dayDisabled}
+                    onClick={() => onSelectDate(date)}
+                    className={[
+                      "aspect-square rounded-lg text-sm transition-colors duration-150",
+                      isSelected
+                        ? "bg-accent text-bg-card"
+                        : dayDisabled
+                          ? "text-line"
+                          : "border border-transparent text-ink hover:border-accent-soft",
+                    ].join(" ")}
+                  >
+                    {date.getDate()}
+                  </button>
+                );
+              })}
+            </div>
+            {!disabled && slotsByDay.size === 0 && (
+              <p className="mt-3 text-sm text-ink-soft">
+                {t("booking.calendar.noSlotsThisMonth")}
+              </p>
+            )}
+          </>
+        )}
+
+        {disabled && !isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
+            <p className="rounded-xl border border-line bg-bg-card px-4 py-2 text-sm text-ink-soft">
+              {t("booking.calendar.selectServiceFirst")}
             </p>
-          )}
-        </>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

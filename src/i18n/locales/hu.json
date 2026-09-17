@@ -109,7 +109,8 @@
       "noSlotsThisMonth": "Ebben a hónapban nincs szabad időpont.",
       "noSlotsThisDay": "Erre a napra nincs szabad időpont.",
       "selectDay": "Válassz egy kiemelt napot az elérhető időpontokért.",
-      "selectLocationFirst": "Válassz helyszínt a szabad időpontok megtekintéséhez."
+      "selectLocationFirst": "Válassz helyszínt a szabad időpontok megtekintéséhez.",
+      "selectServiceFirst": "Válassz szolgáltatást a bal oldalon"
     },
     "form": {
       "name": "Név",

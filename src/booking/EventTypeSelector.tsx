@@ -13,7 +13,7 @@ export default function EventTypeSelector({
   const { t, i18n } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-2 sm:max-w-[280px]">
+    <div className="flex flex-col gap-2">
       {eventTypes.map((eventType) => {
         const priceHuf = getPriceHuf(eventType.durationMinutes);
         return (
