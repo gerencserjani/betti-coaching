@@ -96,6 +96,7 @@
     "noEventTypes": "No services are available right now.",
     "pickService": "Choose a service",
     "change": "Change",
+    "free": "Free",
     "detailsHeading": "Enter your details",
     "location": {
       "IN_PERSON": "In person",

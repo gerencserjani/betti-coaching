@@ -32,6 +32,10 @@ export interface EventType {
   description: string | null;
   durationMinutes: number;
   locations: LocationType[];
+  /** Whole HUF amount. 0 means "not priced" -- showing a price is optional. */
+  price: number;
+  /** Display order in the public catalog (ascending). */
+  position: number;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;

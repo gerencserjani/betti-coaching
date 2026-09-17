@@ -42,3 +42,8 @@ export function formatDateTime(iso: string): string {
 export function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("hu-HU", { dateStyle: "medium" });
 }
+
+export function formatPriceHuf(priceHuf: number): string {
+  if (priceHuf <= 0) return "Díjmentes";
+  return `${new Intl.NumberFormat("hu-HU").format(priceHuf)} HUF`;
+}

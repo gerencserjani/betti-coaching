@@ -370,6 +370,10 @@ export interface components {
       description?: string;
       durationMinutes: number;
       locations: ("IN_PERSON" | "GOOGLE_MEET" | "PHONE")[];
+      /** @description Whole HUF amount. Optional - omit or send 0 for "no price shown". */
+      price?: number;
+      /** @description Display order in the public catalog. Defaults to appended at the end. */
+      position?: number;
     };
     UpdateEventTypeDto: {
       isActive?: boolean;

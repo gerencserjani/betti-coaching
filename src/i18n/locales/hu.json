@@ -96,6 +96,7 @@
     "noEventTypes": "Jelenleg nincs elérhető szolgáltatás.",
     "pickService": "Válassz szolgáltatást",
     "change": "Módosítás",
+    "free": "Díjmentes",
     "detailsHeading": "Add meg az adataidat",
     "location": {
       "IN_PERSON": "Személyesen",
