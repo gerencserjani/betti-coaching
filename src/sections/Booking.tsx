@@ -16,7 +16,7 @@ export default function Booking(): ReactElement {
   return (
     <Section
       id="idopontfoglalas"
-      className="py-14 xs:py-20 xl:py-[92px] 2xl:py-[120px]"
+      className="border-y border-line bg-bg-panel pt-14 pb-16 xs:pt-20 xs:pb-[90px] xl:pt-[92px] xl:pb-[104px] 2xl:pt-[110px] 2xl:pb-[130px]"
     >
       <Container>
         <div

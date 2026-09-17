@@ -7,7 +7,8 @@ export const navLinks: NavLink[] = [
   { id: "bemutatkozas", labelKey: "common.nav.introduction" },
   { id: "segitseg", labelKey: "common.nav.help" },
   { id: "kozosseg", labelKey: "common.nav.community" },
-  { id: "arak", labelKey: "common.nav.prices" },
+  // "arak" temporarily removed along with the Pricing section -- see
+  // PublicSite.tsx.
   { id: "idopontfoglalas", labelKey: "common.nav.booking" },
 ];
 
