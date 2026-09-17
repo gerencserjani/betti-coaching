@@ -35,6 +35,7 @@ function TimeInput24({
   return (
     <div className="flex items-center gap-1">
       <select
+        aria-label="Óra"
         value={hh}
         onChange={(e) => onChange(`${e.target.value}:${mm}`)}
         className={selectClass}
@@ -47,6 +48,7 @@ function TimeInput24({
       </select>
       <span className="text-ink-soft">:</span>
       <select
+        aria-label="Perc"
         value={mm}
         onChange={(e) => onChange(`${hh}:${e.target.value}`)}
         className={selectClass}

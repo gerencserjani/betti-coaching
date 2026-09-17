@@ -84,6 +84,22 @@ export interface paths {
     patch: operations["CoachesController_updateMe"];
     trace?: never;
   };
+  "/coaches/{id}/revoke-sessions": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch: operations["CoachesController_revokeSessions"];
+    trace?: never;
+  };
   "/event-types": {
     parameters: {
       query?: never;
@@ -114,6 +130,22 @@ export interface paths {
     options?: never;
     head?: never;
     patch?: never;
+    trace?: never;
+  };
+  "/event-types/reorder": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch: operations["EventTypesController_reorder"];
     trace?: never;
   };
   "/event-types/{id}": {
@@ -220,6 +252,22 @@ export interface paths {
       cookie?: never;
     };
     get: operations["SlotsController_find"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/admin/google/connect-token": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["GoogleController_connectToken"];
     put?: never;
     post?: never;
     delete?: never;
@@ -390,6 +438,10 @@ export interface components {
       price?: number;
       /** @description Display order in the public catalog. Defaults to appended at the end. */
       position?: number;
+    };
+    ReorderEventTypesDto: {
+      /** @description Event type ids in the desired display order. */
+      ids: string[];
     };
     UpdateEventTypeDto: {
       isActive?: boolean;
@@ -594,6 +646,25 @@ export interface operations {
       };
     };
   };
+  CoachesController_revokeSessions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   EventTypesController_findActive: {
     parameters: {
       query?: never;
@@ -640,6 +711,27 @@ export interface operations {
       cookie?: never;
     };
     requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  EventTypesController_reorder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ReorderEventTypesDto"];
+      };
+    };
     responses: {
       200: {
         headers: {
@@ -893,9 +985,28 @@ export interface operations {
       };
     };
   };
-  GoogleController_connect: {
+  GoogleController_connectToken: {
     parameters: {
       query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  GoogleController_connect: {
+    parameters: {
+      query: {
+        state: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -914,6 +1025,7 @@ export interface operations {
     parameters: {
       query: {
         code: string;
+        state: string;
       };
       header?: never;
       path?: never;

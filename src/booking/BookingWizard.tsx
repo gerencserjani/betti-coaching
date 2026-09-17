@@ -18,7 +18,7 @@ import BookingConfirmation from "./BookingConfirmation.tsx";
 import BookingUnavailableNotice from "./BookingUnavailableNotice.tsx";
 import { useEventTypes, useMonthSlots } from "./hooks";
 import { groupSlotsByDay, toDateKey } from "./dateUtils";
-import { formatPriceHuf } from "./formatPrice";
+import { formatPriceHuf } from "../format";
 
 export default function BookingWizard(): ReactElement {
   const { t, i18n } = useTranslation();

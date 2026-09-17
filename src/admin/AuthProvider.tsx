@@ -5,6 +5,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { getAuthToken, setAuthToken } from "../api/client";
 import { authApi } from "../api/endpoints";
 import type { Coach } from "../api/models";
@@ -15,6 +16,7 @@ export default function AuthProvider({
 }: {
   children: ReactNode;
 }): ReactElement {
+  const queryClient = useQueryClient();
   const [coach, setCoach] = useState<Coach | null>(null);
   const [isLoading, setIsLoading] = useState(() => !!getAuthToken());
 
@@ -41,7 +43,11 @@ export default function AuthProvider({
   const logout = useCallback(() => {
     setAuthToken(null);
     setCoach(null);
-  }, []);
+    // Otherwise another coach logging in on the same device within the
+    // query's staleTime window could briefly see this coach's cached admin
+    // data (bookings, settings, other coaches' info) before it refetches.
+    queryClient.clear();
+  }, [queryClient]);
 
   return (
     <AuthContext.Provider value={{ coach, isLoading, login, logout }}>

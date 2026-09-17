@@ -1,4 +1,4 @@
-import { apiClient, getErrorMessage } from "./client";
+import { apiClient, ApiError, extractApiErrorMessage } from "./client";
 import type {
   PublicEventType,
   Slot,
@@ -13,30 +13,30 @@ import type {
 } from "./models";
 import type { components } from "./types.generated";
 
-// The generated UpdateEventTypeDto only captures `isActive` -- @nestjs/swagger's
-// CLI plugin doesn't fully resolve `PartialType(CreateEventTypeDto) & {...}`
-// intersections. Confirmed via source that the backend really does accept all
-// of these (refs the calendar-backend API contract research).
-type UpdateEventTypeBody = Partial<
-  components["schemas"]["CreateEventTypeDto"]
-> & { isActive?: boolean };
+// @nestjs/swagger's CLI plugin doesn't fully resolve `PartialType(CreateXDto)
+// & {...}` compositions in the generated OpenAPI spec, so each generated
+// Update*Dto request type is missing fields the backend actually accepts
+// (confirmed via source for each use below). `Extra` covers fields present
+// on the real Update*Dto but not on Create*Dto, e.g. EventType's `isActive`.
+type PartialUpdateBody<
+  CreateSchema extends keyof components["schemas"],
+  Extra extends object = object,
+> = Partial<components["schemas"][CreateSchema]> & Extra;
 
-// Same PartialType-resolution gap as UpdateEventTypeBody above, for the
-// weekly availability update endpoint.
-type UpdateWeeklyAvailabilityBody = Partial<
-  components["schemas"]["CreateWeeklyAvailabilityDto"]
+type UpdateEventTypeBody = PartialUpdateBody<
+  "CreateEventTypeDto",
+  { isActive?: boolean }
 >;
-
-// Same gap, for the date-override update endpoint.
-type UpdateAvailabilityOverrideBody = Partial<
-  components["schemas"]["CreateAvailabilityOverrideDto"]
->;
+type UpdateWeeklyAvailabilityBody =
+  PartialUpdateBody<"CreateWeeklyAvailabilityDto">;
+type UpdateAvailabilityOverrideBody =
+  PartialUpdateBody<"CreateAvailabilityOverrideDto">;
 
 async function unwrap<T>(
   promise: Promise<{ data?: unknown; error?: unknown }>,
 ): Promise<T> {
   const { data, error } = await promise;
-  if (error) throw new Error(getErrorMessage(error));
+  if (error) throw new ApiError(extractApiErrorMessage(error));
   return data as T;
 }
 
@@ -133,6 +133,11 @@ export const adminApi = {
       }),
     ),
 
+  // One atomic backend transaction, unlike issuing one PATCH per item --
+  // a partial failure there could leave the display order half-updated.
+  reorderEventTypes: (ids: string[]) =>
+    unwrap<void>(apiClient.PATCH("/event-types/reorder", { body: { ids } })),
+
   weeklyAvailability: () =>
     unwrap<WeeklyAvailability[]>(apiClient.GET("/availability/weekly")),
 
@@ -199,4 +204,7 @@ export const adminApi = {
 
   googleStatus: () =>
     unwrap<GoogleStatus>(apiClient.GET("/admin/google/status")),
+
+  googleConnectState: () =>
+    unwrap<{ state: string }>(apiClient.GET("/admin/google/connect-token")),
 };
