@@ -17,7 +17,6 @@ import BookingForm, { type BookingFormValues } from "./BookingForm.tsx";
 import BookingConfirmation from "./BookingConfirmation.tsx";
 import { useEventTypes, useMonthSlots } from "./hooks";
 import { groupSlotsByDay, toDateKey } from "./dateUtils";
-import { formatHuf, getPriceHuf } from "./priceLookup";
 
 export default function BookingWizard(): ReactElement {
   const { t, i18n } = useTranslation();
@@ -240,7 +239,6 @@ function BookingSummary({
   onChangeSlot: (() => void) | undefined;
 }): ReactElement {
   const { t, i18n } = useTranslation();
-  const priceHuf = getPriceHuf(eventType.durationMinutes);
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-line bg-bg-card p-5 sm:sticky sm:top-24 sm:self-start">
@@ -259,7 +257,6 @@ function BookingSummary({
         </div>
         <div className="text-sm text-ink-soft">
           {eventType.durationMinutes} {t("pricing.minutesUnit")}
-          {priceHuf !== undefined && ` · ${formatHuf(priceHuf, i18n.language)}`}
         </div>
         {eventType.description && (
           <p className="mt-2 text-sm text-ink-soft">{eventType.description}</p>
