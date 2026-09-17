@@ -4,6 +4,17 @@ import { adminApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
 import type { Settings } from "../api/models";
 
+// A free-text timezone field lets a typo (e.g. "Europe/Budapset") reach the
+// backend's @IsTimeZone() validator as a cryptic save error. A fixed list of
+// real IANA zone names makes an invalid value impossible to select.
+const TIMEZONE_OPTIONS: string[] = (() => {
+  try {
+    return Intl.supportedValuesOf("timeZone");
+  } catch {
+    return ["Europe/Budapest"];
+  }
+})();
+
 export default function SettingsPage(): ReactElement {
   const { data: settings, isLoading } = useQuery({
     queryKey: ["admin", "settings"],
@@ -90,11 +101,20 @@ function SettingsForm({ settings }: { settings: Settings }): ReactElement {
         <span className="mb-1.5 block text-[13.5px] text-ink-soft">
           Időzóna
         </span>
-        <input
+        <select
           value={businessTimezone}
           onChange={(e) => setBusinessTimezone(e.target.value)}
           className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
-        />
+        >
+          {!TIMEZONE_OPTIONS.includes(businessTimezone) && (
+            <option value={businessTimezone}>{businessTimezone}</option>
+          )}
+          {TIMEZONE_OPTIONS.map((tz) => (
+            <option key={tz} value={tz}>
+              {tz}
+            </option>
+          ))}
+        </select>
       </label>
 
       {error && (
