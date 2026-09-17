@@ -143,7 +143,8 @@
       "back": "Vissza"
     },
     "errors": {
-      "generic": "Váratlan hiba történt. Próbáld újra."
+      "generic": "Váratlan hiba történt. Próbáld újra.",
+      "unavailable": "Karbantartás miatt az online időpontfoglalás jelenleg nem elérhető. Kérlek, írj emailt vagy hívj telefonon:"
     }
   },
   "contact": {

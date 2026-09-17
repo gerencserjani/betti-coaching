@@ -15,6 +15,7 @@ import MonthCalendar from "./MonthCalendar.tsx";
 import TimeSlotList from "./TimeSlotList.tsx";
 import BookingForm, { type BookingFormValues } from "./BookingForm.tsx";
 import BookingConfirmation from "./BookingConfirmation.tsx";
+import BookingUnavailableNotice from "./BookingUnavailableNotice.tsx";
 import { useEventTypes, useMonthSlots } from "./hooks";
 import { groupSlotsByDay, toDateKey } from "./dateUtils";
 import { formatPriceHuf } from "./formatPrice";
@@ -22,7 +23,11 @@ import { formatPriceHuf } from "./formatPrice";
 export default function BookingWizard(): ReactElement {
   const { t, i18n } = useTranslation();
   const today = useMemo(() => new Date(), []);
-  const { data: eventTypes, isLoading: eventTypesLoading } = useEventTypes();
+  const {
+    data: eventTypes,
+    isLoading: eventTypesLoading,
+    isError: eventTypesError,
+  } = useEventTypes();
 
   const [eventType, setEventType] = useState<PublicEventType | null>(null);
   const [location, setLocation] = useState<LocationType | null>(null);
@@ -44,11 +49,11 @@ export default function BookingWizard(): ReactElement {
       ? effectiveEventType.locations[0]
       : null);
 
-  const { data: slots, isLoading: slotsLoading } = useMonthSlots(
-    effectiveEventType?.id ?? null,
-    viewYear,
-    viewMonth,
-  );
+  const {
+    data: slots,
+    isLoading: slotsLoading,
+    isError: slotsError,
+  } = useMonthSlots(effectiveEventType?.id ?? null, viewYear, viewMonth);
   const slotsByDay = useMemo(
     () => (slots ? groupSlotsByDay(slots) : new Map<string, Slot[]>()),
     [slots],
@@ -120,6 +125,10 @@ export default function BookingWizard(): ReactElement {
     );
   }
 
+  if (eventTypesError) {
+    return <BookingUnavailableNotice />;
+  }
+
   if (eventTypesLoading) {
     return (
       <p className="text-sm text-ink-soft">{t("booking.loadingEventTypes")}</p>
@@ -176,6 +185,8 @@ export default function BookingWizard(): ReactElement {
               }
             />
           </>
+        ) : slotsError ? (
+          <BookingUnavailableNotice />
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-[1fr_1fr]">
             <MonthCalendar

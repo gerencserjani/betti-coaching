@@ -143,7 +143,8 @@
       "back": "Back"
     },
     "errors": {
-      "generic": "Something went wrong. Please try again."
+      "generic": "Something went wrong. Please try again.",
+      "unavailable": "Online booking is temporarily unavailable for maintenance. Please email or call by phone:"
     }
   },
   "contact": {
