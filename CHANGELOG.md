@@ -1,3 +1,30 @@
+# [1.22.0](https://github.com/gerencserjani/betti-coaching/compare/v1.21.1...v1.22.0) (2026-09-17)
+
+### Bug Fixes
+
+- add .npmrc with legacy-peer-deps so CI/Vercel installs cleanly ([fc49a71](https://github.com/gerencserjani/betti-coaching/commit/fc49a71572e2430d168d8cad969e560aa387c874))
+- cap the service list height and fix long-title overflow ([9bab174](https://github.com/gerencserjani/betti-coaching/commit/9bab17461ca4e691ab00aa172ee62721142c9998))
+- close audit findings across admin, booking, and API client ([9e4a6c3](https://github.com/gerencserjani/betti-coaching/commit/9e4a6c3b538474ebf4d98f5d62290a4fa3d311aa))
+- enlarge admin sidebar logo so it renders legibly ([8d55a92](https://github.com/gerencserjani/betti-coaching/commit/8d55a9259307265f2294f55f9d532940253926b2))
+- match browser autofill background to the site's own card color ([d8ada14](https://github.com/gerencserjani/betti-coaching/commit/d8ada14f14facefd4c1ea1cd631dd454ca6bdbfd))
+- redirect bare /admin instead of rendering a blank page ([5030201](https://github.com/gerencserjani/betti-coaching/commit/50302016f174f965e44c570c48e40538de7f8ba2))
+- refresh the slots cache after booking, cancelling, or rescheduling ([1085f0a](https://github.com/gerencserjani/betti-coaching/commit/1085f0a4260a270623236fab3572142931c57c72))
+- replace free-text timezone field with a validated dropdown ([39955f2](https://github.com/gerencserjani/betti-coaching/commit/39955f23348b2ae7c4b715b9bc4b6cce793f7da7))
+- switch service picker to a single-column list ([bf48ad5](https://github.com/gerencserjani/betti-coaching/commit/bf48ad56c729a523693e1c1387c62c21cd9bbd71))
+
+### Features
+
+- add editing for weekly availability and date overrides ([75deec3](https://github.com/gerencserjani/betti-coaching/commit/75deec39d96a499d105d6f4e04a9fd562b0cdff8))
+- add Google Places autocomplete to the business address field ([90edd58](https://github.com/gerencserjani/betti-coaching/commit/90edd5816f2e5cb8e5647748bc2c367df662e4fe))
+- add permanent delete for event types in the admin UI ([08f05c2](https://github.com/gerencserjani/betti-coaching/commit/08f05c2362966fe68478b330378d6a9b38690e9b))
+- build booking calendar frontend and admin dashboard ([aed09e6](https://github.com/gerencserjani/betti-coaching/commit/aed09e68bfabb0d6a8130488527ab0a87209968f)), closes [#58](https://github.com/gerencserjani/betti-coaching/issues/58)
+- handle backend outage gracefully in the booking flow ([6c28702](https://github.com/gerencserjani/betti-coaching/commit/6c287025a3859c6abaa0419377f13eb93165c2db))
+- wire up real service price and display order ([277bf4b](https://github.com/gerencserjani/betti-coaching/commit/277bf4b8073cb0d36ff63d2278f34a96bf083508))
+
+### Reverts
+
+- remove derived price display from the booking UI ([f772f21](https://github.com/gerencserjani/betti-coaching/commit/f772f213d774b62cbaa9330e5bd4e5014c6d2edf))
+
 ## [1.21.1](https://github.com/gerencserjani/betti-coaching/compare/v1.21.0...v1.21.1) (2026-09-16)
 
 ### Bug Fixes
