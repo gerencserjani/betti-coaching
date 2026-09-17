@@ -1,6 +1,6 @@
 import { useMemo, useState, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type {
   BookingWithRelations,
   LocationType,
@@ -22,6 +22,7 @@ import { formatPriceHuf } from "./formatPrice";
 
 export default function BookingWizard(): ReactElement {
   const { t, i18n } = useTranslation();
+  const queryClient = useQueryClient();
   const today = useMemo(() => new Date(), []);
   const {
     data: eventTypes,
@@ -64,7 +65,13 @@ export default function BookingWizard(): ReactElement {
 
   const createBooking = useMutation({
     mutationFn: publicApi.createBooking,
-    onSuccess: setConfirmedBooking,
+    onSuccess: (booking) => {
+      setConfirmedBooking(booking);
+      // The just-booked slot would otherwise keep showing as available for
+      // up to staleTime if the visitor immediately starts another booking
+      // in the same session (e.g. via "Book another session").
+      queryClient.invalidateQueries({ queryKey: ["slots"] });
+    },
   });
 
   const handleSelectEventType = (et: PublicEventType) => {

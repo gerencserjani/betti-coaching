@@ -29,6 +29,9 @@ export default function ManageBooking({
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["booking", "manage", token] });
+      // Cancelling frees the slot back up -- refresh so it shows as
+      // available again instead of staying "taken" until staleTime passes.
+      queryClient.invalidateQueries({ queryKey: ["slots"] });
       setMode("view");
     },
     onError: (err) =>
@@ -40,6 +43,7 @@ export default function ManageBooking({
       publicApi.rescheduleBookingByClient(token, { startAt }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["booking", "manage", token] });
+      queryClient.invalidateQueries({ queryKey: ["slots"] });
       setMode("view");
     },
     onError: (err) =>
