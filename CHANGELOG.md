@@ -1,3 +1,9 @@
+## [1.22.2](https://github.com/gerencserjani/betti-coaching/compare/v1.22.1...v1.22.2) (2026-09-17)
+
+### Performance Improvements
+
+- lazy-load booking flow and prevent image CLS (refs [#25](https://github.com/gerencserjani/betti-coaching/issues/25)) ([ee1cfb8](https://github.com/gerencserjani/betti-coaching/commit/ee1cfb8897d8fa245b46297751b4e70583b53869))
+
 ## [1.22.1](https://github.com/gerencserjani/betti-coaching/compare/v1.22.0...v1.22.1) (2026-09-17)
 
 ### Bug Fixes
