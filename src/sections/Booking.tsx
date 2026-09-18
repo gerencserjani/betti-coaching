@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ReactElement } from "react";
+import { lazy, Suspense, useEffect, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import Section from "../components/Section.tsx";
@@ -17,6 +17,18 @@ export default function Booking(): ReactElement {
   const [searchParams] = useSearchParams();
   const manageToken = searchParams.get("manage");
   const action = searchParams.get("action");
+
+  // The #idopontfoglalas hash in the email link can't scroll the browser
+  // here by itself: this section is a lazily-mounted client-rendered SPA
+  // route, so it doesn't exist in the DOM yet when the browser tries its
+  // native scroll-to-anchor on initial load.
+  useEffect(() => {
+    if (manageToken) {
+      document
+        .getElementById("idopontfoglalas")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [manageToken]);
 
   return (
     <Section
