@@ -44,6 +44,33 @@ Work is tracked as [GitHub issues](https://github.com/gerencserjani/betti-coachi
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`, ...) so `semantic-release` can version and release automatically.
 
+## Analytics (local, self-hosted Plausible)
+
+Analytics is wired up against [Plausible](https://plausible.io) but only activates when `VITE_PLAUSIBLE_DOMAIN` and `VITE_PLAUSIBLE_API_HOST` are set (`src/analytics.ts`) — currently that's only done in `.env.local`, against a self-hosted instance you run yourself. Production is deliberately not wired up yet.
+
+To run Plausible Community Edition locally via Docker:
+
+```bash
+git clone -b v3.2.1 --single-branch https://github.com/plausible/community-edition plausible-ce
+cd plausible-ce
+```
+
+Create a `.env` there with:
+
+```
+BASE_URL=http://localhost:8000
+SECRET_KEY_BASE=<run: openssl rand -base64 48>
+HTTP_PORT=8000
+```
+
+Then:
+
+```bash
+docker compose up -d
+```
+
+Visit `http://localhost:8000`, create the first admin account, and add a site with domain `localhost` (matching `VITE_PLAUSIBLE_DOMAIN` in this repo's `.env.local`). Restart `npm run dev` afterwards so Vite picks up the env vars, then visiting the site locally should show up as a pageview in the Plausible dashboard within a few seconds.
+
 ## Deployment
 
 Not yet configured — see the "Set up production deployment" issue on the board.

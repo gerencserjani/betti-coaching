@@ -6,6 +6,9 @@ import "./index.css";
 import "./i18n";
 import App from "./App.tsx";
 import ThemeContextProvider from "./store/ThemeContextProvider.tsx";
+import { initAnalytics } from "./analytics";
+
+initAnalytics();
 
 const queryClient = new QueryClient({
   defaultOptions: {
