@@ -30,3 +30,10 @@ export function useBookingByToken(token: string | null) {
     retry: false,
   });
 }
+
+export function useSettings() {
+  return useQuery({
+    queryKey: ["settings"],
+    queryFn: publicApi.settings,
+  });
+}

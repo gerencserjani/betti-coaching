@@ -45,6 +45,10 @@ async function unwrap<T>(
 export const publicApi = {
   eventTypes: () => unwrap<PublicEventType[]>(apiClient.GET("/event-types")),
 
+  // GET /settings has no auth guard -- the public booking page already
+  // relies on this for the business address/timezone.
+  settings: () => unwrap<Settings>(apiClient.GET("/settings")),
+
   slots: (params: { eventTypeId: string; from: string; to: string }) =>
     unwrap<Slot[]>(apiClient.GET("/slots", { params: { query: params } })),
 

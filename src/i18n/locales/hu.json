@@ -143,6 +143,7 @@
       "rescheduleSuccessHeading": "Időpontod módosítva!",
       "rescheduleSuccessBody": "Hamarosan email értesítést kapsz az új időpontról.",
       "backToHome": "Vissza a főoldalra",
+      "noticeWindowBlocked": "Ez a foglalás már csak legalább {{hours}} órával az időpont előtt módosítható vagy mondható le. Ha mégis változtatnál rajta, kérjük vedd fel velünk a kapcsolatot közvetlenül.",
       "back": "Vissza"
     },
     "errors": {

@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { publicApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
 import type { Slot } from "../api/models";
-import { useBookingByToken, useMonthSlots } from "./hooks";
+import { useBookingByToken, useMonthSlots, useSettings } from "./hooks";
 import MonthCalendar from "./MonthCalendar.tsx";
 import TimeSlotList from "./TimeSlotList.tsx";
 import { groupSlotsByDay, toDateKey } from "./dateUtils";
@@ -24,6 +24,8 @@ export default function ManageBooking({
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { data: booking, isLoading, isError } = useBookingByToken(token);
+  const { data: settings } = useSettings();
+  const now = useMemo(() => new Date(), []);
 
   const [mode, setMode] = useState<
     "view" | "cancel" | "reschedule" | "rescheduleSuccess"
@@ -101,6 +103,17 @@ export default function ManageBooking({
     { dateStyle: "full", timeStyle: "short" },
   );
 
+  // Mirrors the backend's own notice-window check (BookingsService) so the
+  // client sees this upfront instead of picking a new time only to have
+  // the submit rejected -- the check is against the CURRENT booking time,
+  // not whatever new time they're about to pick, so it can't be worked
+  // around by choosing a date further out.
+  const hoursUntilStart =
+    (new Date(booking.startAt).getTime() - now.getTime()) / (60 * 60 * 1000);
+  const pastNoticeWindow = settings
+    ? hoursUntilStart < settings.cancellationNoticeHours
+    : false;
+
   return (
     <div>
       <h3 className="serif mb-4 text-[22px] text-ink">
@@ -115,6 +128,12 @@ export default function ManageBooking({
       {booking.status === "CANCELLED" ? (
         <p className="text-sm text-ink-soft">
           {t("booking.manage.cancelledLabel")}
+        </p>
+      ) : pastNoticeWindow ? (
+        <p className="text-sm text-ink-soft">
+          {t("booking.manage.noticeWindowBlocked", {
+            hours: settings!.cancellationNoticeHours,
+          })}
         </p>
       ) : (
         <>
