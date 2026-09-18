@@ -1,5 +1,6 @@
 import { useMemo, useState, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { publicApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
@@ -20,12 +21,13 @@ export default function ManageBooking({
   initialAction?: "cancel" | "reschedule";
 }): ReactElement {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { data: booking, isLoading, isError } = useBookingByToken(token);
 
-  const [mode, setMode] = useState<"view" | "cancel" | "reschedule">(
-    initialAction ?? "view",
-  );
+  const [mode, setMode] = useState<
+    "view" | "cancel" | "reschedule" | "rescheduleSuccess"
+  >(initialAction ?? "view");
   const [cancelReason, setCancelReason] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -51,11 +53,36 @@ export default function ManageBooking({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["booking", "manage", token] });
       queryClient.invalidateQueries({ queryKey: ["slots"] });
-      setMode("view");
+      setMode("rescheduleSuccess");
     },
     onError: (err) =>
       setError(getErrorMessage(err, t("booking.errors.generic"))),
   });
+
+  const backToHome = () => {
+    navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (mode === "rescheduleSuccess") {
+    return (
+      <div className="text-center">
+        <h3 className="serif mb-3 text-[22px] text-ink">
+          {t("booking.manage.rescheduleSuccessHeading")}
+        </h3>
+        <p className="mx-auto mb-6 max-w-[44ch] text-sm text-ink-soft">
+          {t("booking.manage.rescheduleSuccessBody")}
+        </p>
+        <button
+          type="button"
+          onClick={backToHome}
+          className="rounded-full border border-line px-6 py-2.5 text-sm text-ink no-underline transition-colors duration-200 hover:border-accent hover:text-accent"
+        >
+          {t("booking.manage.backToHome")}
+        </button>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (

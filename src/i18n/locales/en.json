@@ -140,6 +140,9 @@
       "reschedule": "Reschedule",
       "rescheduleIntro": "Pick a new time.",
       "rescheduled": "Booking rescheduled.",
+      "rescheduleSuccessHeading": "Your booking has been rescheduled!",
+      "rescheduleSuccessBody": "You'll receive an email confirming the new time shortly.",
+      "backToHome": "Back to homepage",
       "back": "Back"
     },
     "errors": {

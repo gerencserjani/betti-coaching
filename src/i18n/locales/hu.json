@@ -140,6 +140,9 @@
       "reschedule": "Átütemezés",
       "rescheduleIntro": "Válassz új időpontot.",
       "rescheduled": "Az időpont átütemezve.",
+      "rescheduleSuccessHeading": "Időpontod módosítva!",
+      "rescheduleSuccessBody": "Hamarosan email értesítést kapsz az új időpontról.",
+      "backToHome": "Vissza a főoldalra",
       "back": "Vissza"
     },
     "errors": {
