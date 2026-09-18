@@ -1,3 +1,9 @@
+## [1.24.1](https://github.com/gerencserjani/betti-coaching/compare/v1.24.0...v1.24.1) (2026-09-18)
+
+### Performance Improvements
+
+- fix render-blocking font CSS, add responsive hero/community images ([1a7dec3](https://github.com/gerencserjani/betti-coaching/commit/1a7dec3bfebcfc1a0da81122279561e667540d42))
+
 # [1.24.0](https://github.com/gerencserjani/betti-coaching/compare/v1.23.1...v1.24.0) (2026-09-18)
 
 ### Features
