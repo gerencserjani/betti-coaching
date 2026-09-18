@@ -16,6 +16,7 @@ export default function Booking(): ReactElement {
   const { ref, className, isVisible } = useRevealOnScroll<HTMLDivElement>();
   const [searchParams] = useSearchParams();
   const manageToken = searchParams.get("manage");
+  const action = searchParams.get("action");
 
   return (
     <Section
@@ -49,7 +50,14 @@ export default function Booking(): ReactElement {
             }
           >
             {manageToken ? (
-              <ManageBooking token={manageToken} />
+              <ManageBooking
+                token={manageToken}
+                initialAction={
+                  action === "cancel" || action === "reschedule"
+                    ? action
+                    : undefined
+                }
+              />
             ) : (
               <BookingWizard />
             )}
