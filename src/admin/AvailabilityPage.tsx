@@ -20,7 +20,7 @@ const MINUTES = Array.from({ length: 60 }, (_, i) =>
 // A plain <input type="time"> renders 12h AM/PM here regardless of a `lang`
 // hint on the element -- Chrome derives that format from the browser's own
 // language setting, not the page. Two selects sidestep it entirely.
-function TimeInput24({
+export function TimeInput24({
   value,
   onChange,
   bg = "bg-bg",
