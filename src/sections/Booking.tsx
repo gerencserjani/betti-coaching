@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ReactElement } from "react";
+import { lazy, Suspense, useEffect, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import Section from "../components/Section.tsx";
@@ -16,6 +16,21 @@ export default function Booking(): ReactElement {
   const { ref, className, isVisible } = useRevealOnScroll<HTMLDivElement>();
   const [searchParams] = useSearchParams();
   const manageToken = searchParams.get("manage");
+  const action = searchParams.get("action");
+
+  // The #idopontfoglalas hash in the email link can't scroll the browser
+  // here by itself: this section is a lazily-mounted client-rendered SPA
+  // route, so it doesn't exist in the DOM yet when the browser tries its
+  // native scroll-to-anchor on initial load. Targets the manage-content
+  // block directly (not the section's top) so the heading/intro copy above
+  // it -- which a manage link doesn't need -- isn't left filling the screen.
+  useEffect(() => {
+    if (manageToken) {
+      document
+        .getElementById("idopontfoglalas-manage")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [manageToken]);
 
   return (
     <Section
@@ -41,19 +56,28 @@ export default function Booking(): ReactElement {
             waits for scroll-into-view, since that's the case where deferring
             the ~50KB chunk actually helps someone who never gets here. */}
         {manageToken || isVisible ? (
-          <Suspense
-            fallback={
-              <p className="text-sm text-ink-soft">
-                {t("booking.manage.loading")}
-              </p>
-            }
-          >
-            {manageToken ? (
-              <ManageBooking token={manageToken} />
-            ) : (
-              <BookingWizard />
-            )}
-          </Suspense>
+          <div id="idopontfoglalas-manage" className="scroll-mt-[92px]">
+            <Suspense
+              fallback={
+                <p className="text-sm text-ink-soft">
+                  {t("booking.manage.loading")}
+                </p>
+              }
+            >
+              {manageToken ? (
+                <ManageBooking
+                  token={manageToken}
+                  initialAction={
+                    action === "cancel" || action === "reschedule"
+                      ? action
+                      : undefined
+                  }
+                />
+              ) : (
+                <BookingWizard />
+              )}
+            </Suspense>
+          </div>
         ) : null}
       </Container>
     </Section>
