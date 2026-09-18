@@ -1,3 +1,16 @@
+# [1.23.0](https://github.com/gerencserjani/betti-coaching/compare/v1.22.2...v1.23.0) (2026-09-18)
+
+### Bug Fixes
+
+- hide cancel/reschedule actions once past the notice window ([48ba03c](https://github.com/gerencserjani/betti-coaching/commit/48ba03c626d5b9b7ef9d32ef35716700633a5cdd))
+- scroll to the booking section on manage links, not just rely on the hash ([925e954](https://github.com/gerencserjani/betti-coaching/commit/925e9540a18f248350f129fe1e5919815bc9e9f4)), closes [#idopontfoglalas](https://github.com/gerencserjani/betti-coaching/issues/idopontfoglalas)
+- scroll to the manage content itself, not the section's heading ([1cae373](https://github.com/gerencserjani/betti-coaching/commit/1cae3738eea167ac118639c84f69477438235a3e))
+
+### Features
+
+- pre-select mode and current date for booking manage links ([c8b9642](https://github.com/gerencserjani/betti-coaching/commit/c8b9642e73d0aa7c9b705fc442ac5417b58554c4))
+- show a confirmation screen and return home after rescheduling ([1f7625f](https://github.com/gerencserjani/betti-coaching/commit/1f7625f167981a6a88dca919cd2de0ac3695f019))
+
 ## [1.22.2](https://github.com/gerencserjani/betti-coaching/compare/v1.22.1...v1.22.2) (2026-09-17)
 
 ### Performance Improvements
