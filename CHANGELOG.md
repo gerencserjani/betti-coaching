@@ -1,3 +1,9 @@
+# [1.24.0](https://github.com/gerencserjani/betti-coaching/compare/v1.23.1...v1.24.0) (2026-09-18)
+
+### Features
+
+- add Vercel Web Analytics ([0bd7e20](https://github.com/gerencserjani/betti-coaching/commit/0bd7e20826e163bc763fc81f26a35dbf95b62bb5))
+
 ## [1.23.1](https://github.com/gerencserjani/betti-coaching/compare/v1.23.0...v1.23.1) (2026-09-18)
 
 ### Bug Fixes
