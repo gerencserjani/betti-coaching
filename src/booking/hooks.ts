@@ -13,11 +13,18 @@ export function useMonthSlots(
   eventTypeId: string | null,
   year: number,
   month: number,
+  excludeBookingId?: string,
 ) {
   const { from, to } = getMonthRange(year, month);
   return useQuery({
-    queryKey: ["slots", eventTypeId, from, to],
-    queryFn: () => publicApi.slots({ eventTypeId: eventTypeId!, from, to }),
+    queryKey: ["slots", eventTypeId, from, to, excludeBookingId],
+    queryFn: () =>
+      publicApi.slots({
+        eventTypeId: eventTypeId!,
+        from,
+        to,
+        excludeBookingId,
+      }),
     enabled: !!eventTypeId,
   });
 }

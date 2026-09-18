@@ -195,6 +195,7 @@ export default function ManageBooking({
             <RescheduleCalendar
               eventTypeId={booking.eventTypeId}
               excludeStartAt={booking.startAt}
+              excludeBookingId={booking.id}
               isPending={rescheduleMutation.isPending}
               onBack={() => setMode("view")}
               onSelect={(startAt) => rescheduleMutation.mutate(startAt)}
@@ -209,12 +210,14 @@ export default function ManageBooking({
 function RescheduleCalendar({
   eventTypeId,
   excludeStartAt,
+  excludeBookingId,
   isPending,
   onSelect,
   onBack,
 }: {
   eventTypeId: string;
   excludeStartAt: string;
+  excludeBookingId: string;
   isPending: boolean;
   onSelect: (startAt: string) => void;
   onBack: () => void;
@@ -235,6 +238,7 @@ function RescheduleCalendar({
     eventTypeId,
     viewYear,
     viewMonth,
+    excludeBookingId,
   );
   const slotsByDay = useMemo(
     () => (slots ? groupSlotsByDay(slots) : new Map<string, Slot[]>()),

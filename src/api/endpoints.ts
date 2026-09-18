@@ -49,8 +49,12 @@ export const publicApi = {
   // relies on this for the business address/timezone.
   settings: () => unwrap<Settings>(apiClient.GET("/settings")),
 
-  slots: (params: { eventTypeId: string; from: string; to: string }) =>
-    unwrap<Slot[]>(apiClient.GET("/slots", { params: { query: params } })),
+  slots: (params: {
+    eventTypeId: string;
+    from: string;
+    to: string;
+    excludeBookingId?: string;
+  }) => unwrap<Slot[]>(apiClient.GET("/slots", { params: { query: params } })),
 
   createBooking: (body: components["schemas"]["CreateBookingDto"]) =>
     unwrap<BookingWithRelations>(apiClient.POST("/bookings", { body })),
