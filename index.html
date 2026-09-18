@@ -6,7 +6,25 @@
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,480;0,9..144,560;1,9..144,420&family=Work+Sans:wght@350;400;500;600&display=swap">
+    <!-- Loaded non-blocking (media="print" until onload swaps it to "all") --
+         a synchronous <link rel="stylesheet"> to a third-party origin was
+         the single largest render-blocking cost in Lighthouse (~1.7s on a
+         throttled mobile connection). font-display=swap in the URL already
+         keeps fallback-font text visible in the meantime, so this only
+         trades a brief flash of the fallback font for a much earlier first
+         paint. <noscript> covers the no-JS case. -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,480;0,9..144,560;1,9..144,420&family=Work+Sans:wght@350;400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,480;0,9..144,560;1,9..144,420&family=Work+Sans:wght@350;400;500;600&display=swap"
+      />
+    </noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerencsér Bernadett — Családi és párkapcsolati coach</title>
     <meta
@@ -16,8 +34,13 @@
     <!-- Absolute URLs below use Vite's built-in %ENV_VAR% HTML replacement,
          reading VITE_SITE_URL from .env (dev default) / the hosting
          platform's env config (production -- see issue #26). -->
+    <!-- hu must self-reference the bare URL, matching the canonical below --
+         Hungarian is what's actually served there by default (no ?lang=hu
+         needed). Pointing hu's hreflang at a different URL than the
+         canonical is what Lighthouse's SEO audit was flagging as an
+         invalid/conflicting canonical. -->
     <link rel="canonical" href="%VITE_SITE_URL%/" />
-    <link rel="alternate" hreflang="hu" href="%VITE_SITE_URL%/?lang=hu" />
+    <link rel="alternate" hreflang="hu" href="%VITE_SITE_URL%/" />
     <link rel="alternate" hreflang="en" href="%VITE_SITE_URL%/?lang=en" />
     <link rel="alternate" hreflang="x-default" href="%VITE_SITE_URL%/" />
     <meta property="og:type" content="website" />

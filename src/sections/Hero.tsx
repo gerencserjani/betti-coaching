@@ -3,6 +3,7 @@ import { Trans, useTranslation } from "react-i18next";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import heroArt from "../assets/hero-art.webp";
+import heroArtSmall from "../assets/hero-art-560w.webp";
 
 const topics = ["partnership", "communication", "parenting"] as const;
 
@@ -40,6 +41,8 @@ export default function Hero(): ReactElement {
 
           <img
             src={heroArt}
+            srcSet={`${heroArtSmall} 560w, ${heroArt} 720w`}
+            sizes="(min-width: 860px) 500px, 280px"
             alt=""
             aria-hidden="true"
             width={720}
