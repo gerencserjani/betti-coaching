@@ -32,3 +32,9 @@ dist-ssr
 
 # Vitest coverage
 /coverage/
+
+# Agent skills: .claude/skills/<name> is a symlink to .agents/skills/<name>
+# (the tracked, canonical copy). On machines where git can't store real
+# symlinks (core.symlinks=false, common on Windows), `git add` would
+# otherwise silently follow it and duplicate every file underneath.
+/.claude/skills/

@@ -5,6 +5,7 @@ import Container from "../components/Container.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 import { communityCtaHref } from "../content/community";
 import communityArt from "../assets/community-art.webp";
+import communityArtSmall from "../assets/community-art-520w.webp";
 
 export default function Community(): ReactElement {
   const { t } = useTranslation();
@@ -28,6 +29,8 @@ export default function Community(): ReactElement {
         >
           <img
             src={communityArt}
+            srcSet={`${communityArtSmall} 520w, ${communityArt} 700w`}
+            sizes="(min-width: 860px) 420px, 260px"
             alt=""
             aria-hidden="true"
             width={700}
