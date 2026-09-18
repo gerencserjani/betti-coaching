@@ -1,3 +1,9 @@
+## [1.23.1](https://github.com/gerencserjani/betti-coaching/compare/v1.23.0...v1.23.1) (2026-09-18)
+
+### Bug Fixes
+
+- exclude the booking being rescheduled from its own slot conflicts ([e6bf664](https://github.com/gerencserjani/betti-coaching/commit/e6bf664ff09b9948500bda50eee07468c442c542))
+
 # [1.23.0](https://github.com/gerencserjani/betti-coaching/compare/v1.22.2...v1.23.0) (2026-09-18)
 
 ### Bug Fixes
