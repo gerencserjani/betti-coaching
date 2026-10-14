@@ -92,7 +92,7 @@
   "booking": {
     "heading": "Foglalj időpontot",
     "intro": "Válaszd ki a szolgáltatást, majd egy szabad időpontot.",
-    "loadingEventTypes": "Szolgáltatások betöltése…",
+    "loadingEventTypes": "Kérjük, várj egy pillanatot, amíg betöltődik a naptár…",
     "noEventTypes": "Jelenleg nincs elérhető szolgáltatás.",
     "pickService": "Válassz szolgáltatást",
     "change": "Módosítás",

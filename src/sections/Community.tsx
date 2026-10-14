@@ -51,7 +51,12 @@ export default function Community(): ReactElement {
               {t("community.body")}
             </p>
             {communityCtaHref ? (
-              <a href={communityCtaHref} className={ctaClassName}>
+              <a
+                href={communityCtaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={ctaClassName}
+              >
                 {t("community.cta")}
               </a>
             ) : (
