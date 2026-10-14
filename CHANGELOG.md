@@ -1,3 +1,9 @@
+# [1.25.0](https://github.com/gerencserjani/betti-coaching/compare/v1.24.1...v1.25.0) (2026-10-14)
+
+### Features
+
+- wire community CTA link, restore pricing section, hide language switcher, add booking loading spinner ([cddc94a](https://github.com/gerencserjani/betti-coaching/commit/cddc94a53df03e83ba1b752875ce2c7d935d05e3))
+
 ## [1.24.1](https://github.com/gerencserjani/betti-coaching/compare/v1.24.0...v1.24.1) (2026-09-18)
 
 ### Performance Improvements
