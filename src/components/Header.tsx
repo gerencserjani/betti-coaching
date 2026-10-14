@@ -1,7 +1,6 @@
 import { useState, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import Container from "./Container.tsx";
-import LanguageSwitcher from "./LanguageSwitcher.tsx";
 import ThemeToggle from "./ThemeToggle.tsx";
 import MenuIcon from "./icons/MenuIcon";
 import { navLinks, contactLink } from "../content/navLinks";
@@ -60,7 +59,9 @@ export default function Header(): ReactElement {
           >
             {t(contactLink.labelKey)}
           </a>
-          <LanguageSwitcher />
+          {/* LanguageSwitcher intentionally not rendered -- language
+              switching stays fully functional (see LanguageSwitcher.tsx,
+              i18n/index.ts), just not surfaced in the UI for now. */}
           <ThemeToggle />
           <button
             type="button"

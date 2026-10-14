@@ -4,9 +4,7 @@ import Hero from "./sections/Hero.tsx";
 import QuoteBlock from "./components/QuoteBlock.tsx";
 import Services from "./sections/Services.tsx";
 import Community from "./sections/Community.tsx";
-// Temporarily disabled: prices are moving into the Booking section's
-// service list once the backend gets per-service pricing + ordering.
-// import Pricing from "./sections/Pricing.tsx";
+import Pricing from "./sections/Pricing.tsx";
 import Booking from "./sections/Booking.tsx";
 import Contact from "./sections/Contact.tsx";
 import Footer from "./components/Footer.tsx";
@@ -25,7 +23,7 @@ export default function PublicSite() {
         />
         <Services />
         <Community />
-        {/* <Pricing /> */}
+        <Pricing />
         <Booking />
         <Contact />
       </main>
