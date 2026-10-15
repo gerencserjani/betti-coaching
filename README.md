@@ -112,11 +112,7 @@ not done here yet.
 
 ## Project workflow
 
-Work is tracked as [GitHub issues](https://github.com/gerencserjani/betti-coaching/issues) on the [project board](https://github.com/users/gerencserjani/projects/1), one issue per feature/section. This repo includes a few Claude Code slash commands to drive that workflow end to end:
-
-- **`/start-issue <number>`** — creates a feature branch from a GitHub issue and moves it to "In Progress" on the board.
-- **`/test-issue [number]`** — checks the current branch's changes against the issue's acceptance criteria (plus lint/build) and reports whether it's ready to ship.
-- **`/end-issue [number]`** — runs `/test-issue` as a gate, then commits, pushes, opens a PR, and moves the issue to "Done" on the board.
+Work is tracked as [GitHub issues](https://github.com/gerencserjani/betti-coaching/issues) on the [project board](https://github.com/users/gerencserjani/projects/1), one issue per feature/section.
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`, ...) so `semantic-release` can version and release automatically.
 
