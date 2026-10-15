@@ -21,21 +21,14 @@ test("nav link scrolls to the booking section", async ({ page }) => {
   await expect(page.locator("#idopontfoglalas")).toBeInViewport();
 });
 
-test("language switcher changes visible text and updates the URL", async ({
+test("?lang=en query param switches visible text (LanguageSwitcher UI is hidden, but the i18n mechanism it used stays live)", async ({
   page,
 }) => {
-  await page.goto("/");
-
-  await expect(
-    page.getByRole("link", { name: "Időpontfoglalás" }),
-  ).toBeVisible();
-
-  await page.getByRole("button", { name: "en", exact: true }).click();
+  await page.goto("/?lang=en");
 
   await expect(
     page.getByRole("link", { name: "Book a session" }),
   ).toBeVisible();
-  await expect(page).toHaveURL(/lang=en/);
 });
 
 test("theme toggle switches the color scheme", async ({ page }) => {
