@@ -1,3 +1,9 @@
+## [1.28.1](https://github.com/gerencserjani/betti-coaching/compare/v1.28.0...v1.28.1) (2026-10-20)
+
+### Bug Fixes
+
+- correct mobile-wrong "select a service" copy on the booking calendar ([#83](https://github.com/gerencserjani/betti-coaching/issues/83)) ([d61717d](https://github.com/gerencserjani/betti-coaching/commit/d61717d50546a4aca13c0bcb6c2bcdee12ae47c0))
+
 # [1.28.0](https://github.com/gerencserjani/betti-coaching/compare/v1.27.0...v1.28.0) (2026-10-20)
 
 ### Features
