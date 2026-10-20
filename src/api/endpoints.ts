@@ -69,8 +69,21 @@ export const publicApi = {
     excludeBookingId?: string;
   }) => unwrap<Slot[]>(apiClient.GET("/slots", { params: { query: params } })),
 
+  // The generated type demands an explicit origin/referer header pair,
+  // matching the backend's @Headers('origin')/@Headers('referer') params
+  // (used to stamp Booking.originUrl) -- but those are both optional at
+  // runtime there, and Origin is a forbidden header name a fetch() call
+  // can't actually override anyway (the browser sets the real one
+  // regardless of what's passed here). This just satisfies the type; the
+  // @nestjs/swagger CLI plugin not marking them optional in the generated
+  // spec is the same class of imprecision noted on PartialUpdateBody above.
   createBooking: (body: components["schemas"]["CreateBookingDto"]) =>
-    unwrap<BookingWithRelations>(apiClient.POST("/bookings", { body })),
+    unwrap<BookingWithRelations>(
+      apiClient.POST("/bookings", {
+        body,
+        params: { header: { origin: "", referer: "" } },
+      }),
+    ),
 
   getBookingByToken: (token: string) =>
     unwrap<BookingWithRelations>(
@@ -109,6 +122,12 @@ export const authApi = {
     unwrap<LoginResponse>(apiClient.POST("/auth/login", { body })),
 
   me: () => unwrap<Coach>(apiClient.GET("/coaches/me")),
+
+  // Public: redeems a coach-invite token (see coach-calendar's
+  // CoachesService.acceptInvite) -- creates the Coach for the first time
+  // and logs her straight in, same response shape as login().
+  acceptInvite: (body: components["schemas"]["AcceptInviteDto"]) =>
+    unwrap<LoginResponse>(apiClient.POST("/coaches/accept-invite", { body })),
 };
 
 // ---------- Admin / coach (auth required) ----------
@@ -231,11 +250,6 @@ export const adminApi = {
         params: { path: { id } },
       }),
     ),
-
-  coaches: () => unwrap<Coach[]>(apiClient.GET("/coaches")),
-
-  createCoach: (body: components["schemas"]["CreateCoachDto"]) =>
-    unwrap<Coach>(apiClient.POST("/coaches", { body })),
 
   updateMe: (body: components["schemas"]["UpdateCoachDto"]) =>
     unwrap<Coach>(apiClient.PATCH("/coaches/me", { body })),
