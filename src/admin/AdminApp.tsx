@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthProvider from "./AuthProvider.tsx";
-import { RequireAuth, RequireAdmin } from "./RequireAuth";
+import { RequireAuth } from "./RequireAuth";
 import AdminLayout from "./AdminLayout.tsx";
 import LoginPage from "./LoginPage.tsx";
 import BookingsPage from "./BookingsPage.tsx";
@@ -26,10 +26,13 @@ export default function AdminApp(): ReactElement {
             <Route path="bookings" element={<BookingsPage />} />
             <Route path="availability" element={<AvailabilityPage />} />
             <Route path="event-types" element={<EventTypesPage />} />
-            <Route element={<RequireAdmin />}>
-              <Route path="settings" element={<SettingsPage />} />
-              <Route path="google" element={<GoogleStatusPage />} />
-            </Route>
+            {/* Any authenticated coach, not just ADMIN -- both settings.
+                controller.ts's update() and google.controller.ts's routes
+                only ever act on the caller's own coachId, so there's
+                nothing here to restrict by role (see those backends'
+                own comments). */}
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="google" element={<GoogleStatusPage />} />
             <Route path="*" element={<Navigate to="bookings" replace />} />
           </Route>
         </Route>
