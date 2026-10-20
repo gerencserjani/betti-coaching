@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { adminApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
 import type { Settings } from "../api/models";
+import { useAuth } from "./AuthContext";
 import AddressAutocomplete from "./AddressAutocomplete.tsx";
 
 // A free-text timezone field lets a typo (e.g. "Europe/Budapset") reach the
@@ -17,9 +18,11 @@ const TIMEZONE_OPTIONS: string[] = (() => {
 })();
 
 export default function SettingsPage(): ReactElement {
+  const { coach } = useAuth();
   const { data: settings, isLoading } = useQuery({
-    queryKey: ["admin", "settings"],
-    queryFn: adminApi.settings,
+    queryKey: ["admin", "settings", coach?.id],
+    queryFn: () => adminApi.settings(coach!.id),
+    enabled: !!coach,
   });
 
   return (

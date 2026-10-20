@@ -41,10 +41,9 @@ export interface EventType {
   updatedAt: string;
 }
 
-/** GET /event-types (public) includes only a partial coach. */
-export interface PublicEventType extends EventType {
-  coach: { id: string; name: string };
-}
+/** GET /event-types (public) -- the caller already knows the coachId (it's
+ * what they queried by), so no embedded coach object. */
+export type PublicEventType = EventType;
 
 export interface Slot {
   coachId: string;

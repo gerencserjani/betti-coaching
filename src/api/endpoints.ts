@@ -43,11 +43,24 @@ async function unwrap<T>(
 // ---------- Public (no auth) ----------
 
 export const publicApi = {
-  eventTypes: () => unwrap<PublicEventType[]>(apiClient.GET("/event-types")),
+  // The backend has no other way to know which coach's data an anonymous
+  // request is for (see backend issue #14) -- every frontend deployment is
+  // configured with its own VITE_COACH_ID and sends it on every public call.
+  eventTypes: () =>
+    unwrap<PublicEventType[]>(
+      apiClient.GET("/event-types", {
+        params: { query: { coachId: import.meta.env.VITE_COACH_ID } },
+      }),
+    ),
 
   // GET /settings has no auth guard -- the public booking page already
   // relies on this for the business address/timezone.
-  settings: () => unwrap<Settings>(apiClient.GET("/settings")),
+  settings: () =>
+    unwrap<Settings>(
+      apiClient.GET("/settings", {
+        params: { query: { coachId: import.meta.env.VITE_COACH_ID } },
+      }),
+    ),
 
   slots: (params: {
     eventTypeId: string;
@@ -205,7 +218,13 @@ export const adminApi = {
   updateMe: (body: components["schemas"]["UpdateCoachDto"]) =>
     unwrap<Coach>(apiClient.PATCH("/coaches/me", { body })),
 
-  settings: () => unwrap<Settings>(apiClient.GET("/settings")),
+  // GET /settings is the same public, unauthenticated endpoint publicApi
+  // uses -- the data isn't sensitive, so no auth is needed here, just the
+  // caller's own coachId (see publicApi.settings above for why).
+  settings: (coachId: string) =>
+    unwrap<Settings>(
+      apiClient.GET("/settings", { params: { query: { coachId } } }),
+    ),
 
   updateSettings: (body: components["schemas"]["UpdateSettingsDto"]) =>
     unwrap<Settings>(apiClient.PATCH("/settings", { body })),

@@ -417,6 +417,7 @@ export interface components {
       businessAddress?: string;
       cancellationNoticeHours?: number;
       businessTimezone?: string;
+      emailFrom?: string | null;
     };
     UpdateCoachDto: {
       name?: string;
@@ -534,7 +535,9 @@ export interface operations {
   };
   SettingsController_get: {
     parameters: {
-      query?: never;
+      query: {
+        coachId: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -667,7 +670,9 @@ export interface operations {
   };
   EventTypesController_findActive: {
     parameters: {
-      query?: never;
+      query: {
+        coachId: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -968,6 +973,7 @@ export interface operations {
         eventTypeId: string;
         from: string;
         to: string;
+        excludeBookingId?: string;
       };
       header?: never;
       path?: never;
