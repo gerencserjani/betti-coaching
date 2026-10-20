@@ -112,7 +112,7 @@
       "noSlotsThisDay": "No available times on this day.",
       "selectDay": "Select a highlighted day to see available times.",
       "selectLocationFirst": "Pick a location to see available times.",
-      "selectServiceFirst": "Choose a service on the left"
+      "selectServiceFirst": "Choose a service first"
     },
     "form": {
       "name": "Name",
