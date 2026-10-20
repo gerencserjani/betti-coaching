@@ -93,6 +93,7 @@
     "heading": "Book a session",
     "intro": "Pick a service, then an available time.",
     "loadingEventTypes": "Please wait a moment while the calendar loads…",
+    "loadingEventTypesExtended": "This can take a few extra seconds — thanks for your patience!",
     "noEventTypes": "No services are available right now.",
     "pickService": "Choose a service",
     "change": "Change",

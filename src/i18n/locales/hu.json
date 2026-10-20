@@ -93,6 +93,7 @@
     "heading": "Foglalj időpontot",
     "intro": "Válaszd ki a szolgáltatást, majd egy szabad időpontot.",
     "loadingEventTypes": "Kérjük, várj egy pillanatot, amíg betöltődik a naptár…",
+    "loadingEventTypesExtended": "Ez néhány másodpercig is eltarthat — köszönjük a türelmed!",
     "noEventTypes": "Jelenleg nincs elérhető szolgáltatás.",
     "pickService": "Válassz szolgáltatást",
     "change": "Módosítás",

@@ -16,7 +16,7 @@ import TimeSlotList from "./TimeSlotList.tsx";
 import BookingForm, { type BookingFormValues } from "./BookingForm.tsx";
 import BookingConfirmation from "./BookingConfirmation.tsx";
 import BookingUnavailableNotice from "./BookingUnavailableNotice.tsx";
-import SpinnerIcon from "../components/icons/SpinnerIcon";
+import BookingWizardSkeleton from "./BookingWizardSkeleton.tsx";
 import { useEventTypes, useMonthSlots } from "./hooks";
 import { groupSlotsByDay, toDateKey } from "./dateUtils";
 import { formatPriceHuf } from "../format";
@@ -138,14 +138,7 @@ export default function BookingWizard(): ReactElement {
   }
 
   if (eventTypesLoading) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-10 text-center">
-        <SpinnerIcon size={28} className="text-accent" />
-        <p className="text-sm text-ink-soft">
-          {t("booking.loadingEventTypes")}
-        </p>
-      </div>
-    );
+    return <BookingWizardSkeleton />;
   }
 
   if (!eventTypes || eventTypes.length === 0) {
