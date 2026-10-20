@@ -710,7 +710,9 @@ export interface operations {
   };
   EventTypesController_findMine: {
     parameters: {
-      query?: never;
+      query?: {
+        coachId?: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -809,7 +811,9 @@ export interface operations {
   };
   AvailabilityController_findMyWeekly: {
     parameters: {
-      query?: never;
+      query?: {
+        coachId?: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -889,7 +893,9 @@ export interface operations {
   };
   AvailabilityController_findMyOverrides: {
     parameters: {
-      query?: never;
+      query?: {
+        coachId?: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
@@ -1066,7 +1072,9 @@ export interface operations {
   };
   BookingsController_findAll: {
     parameters: {
-      query?: never;
+      query?: {
+        coachId?: string;
+      };
       header?: never;
       path?: never;
       cookie?: never;
