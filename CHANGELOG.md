@@ -1,3 +1,9 @@
+# [1.27.0](https://github.com/gerencserjani/betti-coaching/compare/v1.26.1...v1.27.0) (2026-10-20)
+
+### Features
+
+- send coachId on public API calls, for the shared backend ([25b7758](https://github.com/gerencserjani/betti-coaching/commit/25b775844108b455f2817807b9947d2b078522f2))
+
 ## [1.26.1](https://github.com/gerencserjani/betti-coaching/compare/v1.26.0...v1.26.1) (2026-10-20)
 
 ### Bug Fixes
