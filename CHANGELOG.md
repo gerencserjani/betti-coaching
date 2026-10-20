@@ -1,3 +1,9 @@
+# [1.29.0](https://github.com/gerencserjani/betti-coaching/compare/v1.28.1...v1.29.0) (2026-10-20)
+
+### Features
+
+- add accept-invite page, remove broken coach-creation page ([#84](https://github.com/gerencserjani/betti-coaching/issues/84)) ([7a5fc0d](https://github.com/gerencserjani/betti-coaching/commit/7a5fc0d481453646bc3fc6d083ee82adccff7d04)), closes [coach-calendar#39](https://github.com/coach-calendar/issues/39) [#81](https://github.com/gerencserjani/betti-coaching/issues/81)
+
 ## [1.28.1](https://github.com/gerencserjani/betti-coaching/compare/v1.28.0...v1.28.1) (2026-10-20)
 
 ### Bug Fixes
