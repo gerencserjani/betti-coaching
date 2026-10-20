@@ -1,3 +1,9 @@
+# [1.26.0](https://github.com/gerencserjani/betti-coaching/compare/v1.25.0...v1.26.0) (2026-10-20)
+
+### Features
+
+- pulsing skeleton + spinner for the initial booking load ([be0c319](https://github.com/gerencserjani/betti-coaching/commit/be0c319e9bb079b486757ba9f169fdea35175fe1))
+
 # [1.25.0](https://github.com/gerencserjani/betti-coaching/compare/v1.24.1...v1.25.0) (2026-10-14)
 
 ### Features
