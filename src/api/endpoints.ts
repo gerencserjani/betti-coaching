@@ -114,7 +114,16 @@ export const authApi = {
 // ---------- Admin / coach (auth required) ----------
 
 export const adminApi = {
-  bookings: () => unwrap<BookingWithRelations[]>(apiClient.GET("/bookings")),
+  // Tells the backend which coach's site this is (see backend issue #27) --
+  // a plain coach is always restricted to their own data regardless, but
+  // this is what lets an ADMIN visiting one coach's admin dashboard see
+  // only that coach's data instead of every coach's.
+  bookings: () =>
+    unwrap<BookingWithRelations[]>(
+      apiClient.GET("/bookings", {
+        params: { query: { coachId: import.meta.env.VITE_COACH_ID } },
+      }),
+    ),
 
   cancelBooking: (
     id: string,
@@ -127,7 +136,12 @@ export const adminApi = {
       }),
     ),
 
-  eventTypesMine: () => unwrap<EventType[]>(apiClient.GET("/event-types/mine")),
+  eventTypesMine: () =>
+    unwrap<EventType[]>(
+      apiClient.GET("/event-types/mine", {
+        params: { query: { coachId: import.meta.env.VITE_COACH_ID } },
+      }),
+    ),
 
   createEventType: (body: components["schemas"]["CreateEventTypeDto"]) =>
     unwrap<EventType>(apiClient.POST("/event-types", { body })),
@@ -160,7 +174,11 @@ export const adminApi = {
     unwrap<void>(apiClient.PATCH("/event-types/reorder", { body: { ids } })),
 
   weeklyAvailability: () =>
-    unwrap<WeeklyAvailability[]>(apiClient.GET("/availability/weekly")),
+    unwrap<WeeklyAvailability[]>(
+      apiClient.GET("/availability/weekly", {
+        params: { query: { coachId: import.meta.env.VITE_COACH_ID } },
+      }),
+    ),
 
   createWeeklyAvailability: (
     body: components["schemas"]["CreateWeeklyAvailabilityDto"],
@@ -186,7 +204,11 @@ export const adminApi = {
     ),
 
   overrides: () =>
-    unwrap<AvailabilityOverride[]>(apiClient.GET("/availability/overrides")),
+    unwrap<AvailabilityOverride[]>(
+      apiClient.GET("/availability/overrides", {
+        params: { query: { coachId: import.meta.env.VITE_COACH_ID } },
+      }),
+    ),
 
   createOverride: (
     body: components["schemas"]["CreateAvailabilityOverrideDto"],
