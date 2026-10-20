@@ -1,3 +1,9 @@
+## [1.26.1](https://github.com/gerencserjani/betti-coaching/compare/v1.26.0...v1.26.1) (2026-10-20)
+
+### Bug Fixes
+
+- remove the card-like backdrop behind the booking skeleton spinner ([97214a9](https://github.com/gerencserjani/betti-coaching/commit/97214a91a9e475d0748a6aadefec3837af3ab1eb))
+
 # [1.26.0](https://github.com/gerencserjani/betti-coaching/compare/v1.25.0...v1.26.0) (2026-10-20)
 
 ### Features
