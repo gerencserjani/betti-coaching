@@ -1,3 +1,9 @@
+# [1.30.0](https://github.com/gerencserjani/betti-coaching/compare/v1.29.0...v1.30.0) (2026-10-20)
+
+### Features
+
+- self-service change-password form, fix admin-only gating bug ([#85](https://github.com/gerencserjani/betti-coaching/issues/85)) ([af37719](https://github.com/gerencserjani/betti-coaching/commit/af37719b1cc175a4bffc82f94183e37b7c369a15)), closes [coach-calendar#31](https://github.com/coach-calendar/issues/31) [#81](https://github.com/gerencserjani/betti-coaching/issues/81)
+
 # [1.29.0](https://github.com/gerencserjani/betti-coaching/compare/v1.28.1...v1.29.0) (2026-10-20)
 
 ### Features
