@@ -1,6 +1,6 @@
 # Betti Coaching
 
-Website for **Gerencsér Bernadett**, a family & couples communication coach based in Szeged, Hungary. A one-page marketing site (services, pricing, community, booking) plus a small admin dashboard, backed by a custom booking/calendar API — the sibling [betti-coaching-calendar](https://github.com/gerencserjani/betti-coaching-calendar) repo.
+Website for **Gerencsér Bernadett**, a family & couples communication coach based in Szeged, Hungary. A one-page marketing site (services, pricing, community, booking) plus a small admin dashboard, backed by a custom booking/calendar API — the sibling [coach-calendar](https://github.com/gerencserjani/coach-calendar) repo (a shared backend, not specific to this one site -- see that repo's own README).
 
 ## System design
 
@@ -8,7 +8,7 @@ Website for **Gerencsér Bernadett**, a family & couples communication coach bas
 graph TB
     Visitor["Visitor"]
     Site["React SPA<br/>(Vercel)"]
-    API["betti-coaching-calendar<br/>NestJS API (Google Cloud Run)"]
+    API["coach-calendar<br/>NestJS API (Google Cloud Run)"]
 
     Visitor -- "HTTPS" --> Site
     Site -- "openapi-fetch, typed from the API's OpenAPI spec" --> API
@@ -53,7 +53,7 @@ locally too, create `.env.local` (gitignored) with your own
 variables" below.
 
 The booking wizard and admin dashboard need the backend running locally too
-— see [betti-coaching-calendar](https://github.com/gerencserjani/betti-coaching-calendar)'s
+— see [coach-calendar](https://github.com/gerencserjani/coach-calendar)'s
 own README for that setup.
 
 ## Project structure
