@@ -1,3 +1,9 @@
+# [1.31.0](https://github.com/gerencserjani/betti-coaching/compare/v1.30.0...v1.31.0) (2026-10-20)
+
+### Features
+
+- forgot/reset password pages ([#86](https://github.com/gerencserjani/betti-coaching/issues/86)) ([fda0b4b](https://github.com/gerencserjani/betti-coaching/commit/fda0b4b55d9e8d12ae8f20b53211401dc005f0de))
+
 # [1.30.0](https://github.com/gerencserjani/betti-coaching/compare/v1.29.0...v1.30.0) (2026-10-20)
 
 ### Features
