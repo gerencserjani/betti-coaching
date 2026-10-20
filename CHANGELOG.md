@@ -1,3 +1,9 @@
+# [1.28.0](https://github.com/gerencserjani/betti-coaching/compare/v1.27.0...v1.28.0) (2026-10-20)
+
+### Features
+
+- send coachId on authenticated admin API calls (refs [#79](https://github.com/gerencserjani/betti-coaching/issues/79)) ([4b6347f](https://github.com/gerencserjani/betti-coaching/commit/4b6347f488e6fe83661c5bff2823be6ea27e441e)), closes [#27](https://github.com/gerencserjani/betti-coaching/issues/27) [#14](https://github.com/gerencserjani/betti-coaching/issues/14) [gerencserjani/coach-calendar#27](https://github.com/gerencserjani/coach-calendar/issues/27)
+
 # [1.27.0](https://github.com/gerencserjani/betti-coaching/compare/v1.26.1...v1.27.0) (2026-10-20)
 
 ### Features
