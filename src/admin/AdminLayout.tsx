@@ -15,7 +15,6 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function AdminLayout(): ReactElement {
   const { coach, logout } = useAuth();
-  const isAdmin = coach?.role === "ADMIN";
 
   return (
     <div className="flex min-h-screen bg-bg text-ink">
@@ -39,16 +38,12 @@ export default function AdminLayout(): ReactElement {
           <NavLink to="/admin/event-types" className={navLinkClass}>
             Szolgáltatások
           </NavLink>
-          {isAdmin && (
-            <>
-              <NavLink to="/admin/google" className={navLinkClass}>
-                Google Naptár
-              </NavLink>
-              <NavLink to="/admin/settings" className={navLinkClass}>
-                Beállítások
-              </NavLink>
-            </>
-          )}
+          <NavLink to="/admin/google" className={navLinkClass}>
+            Google Naptár
+          </NavLink>
+          <NavLink to="/admin/settings" className={navLinkClass}>
+            Beállítások
+          </NavLink>
         </nav>
         <div className="mt-auto flex items-center gap-2 pt-6">
           <button
