@@ -128,6 +128,23 @@ export const authApi = {
   // and logs her straight in, same response shape as login().
   acceptInvite: (body: components["schemas"]["AcceptInviteDto"]) =>
     unwrap<LoginResponse>(apiClient.POST("/coaches/accept-invite", { body })),
+
+  // Public, always resolves (204) whether or not the email has an account --
+  // see AuthService.forgotPassword()'s own comment for why. The empty
+  // origin/referer header values are the same type-satisfying no-op as
+  // publicApi.createBooking above -- the backend reads the browser's real
+  // headers regardless of what's passed here.
+  forgotPassword: (body: components["schemas"]["ForgotPasswordDto"]) =>
+    unwrap<void>(
+      apiClient.POST("/auth/forgot-password", {
+        body,
+        params: { header: { origin: "", referer: "" } },
+      }),
+    ),
+
+  // Public: redeems a password-reset token -- same response shape as login().
+  resetPassword: (body: components["schemas"]["ResetPasswordDto"]) =>
+    unwrap<LoginResponse>(apiClient.POST("/auth/reset-password", { body })),
 };
 
 // ---------- Admin / coach (auth required) ----------
