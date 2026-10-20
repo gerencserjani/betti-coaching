@@ -8,6 +8,10 @@ import { beforeSend } from "./analytics";
 // Code-split: the admin dashboard is a large, separate bundle that public
 // visitors (the vast majority) never need to download.
 const AdminApp = lazy(() => import("./admin/AdminApp.tsx"));
+// A newly invited coach lands here from an emailed link, before she has any
+// session -- kept as its own top-level route (not nested under /admin/*) so
+// it never passes through RequireAuth/AuthProvider's "am I logged in" check.
+const AcceptInvitePage = lazy(() => import("./admin/AcceptInvitePage.tsx"));
 
 function App() {
   return (
@@ -19,6 +23,14 @@ function App() {
           element={
             <Suspense fallback={null}>
               <AdminApp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/accept-invite"
+          element={
+            <Suspense fallback={null}>
+              <AcceptInvitePage />
             </Suspense>
           }
         />

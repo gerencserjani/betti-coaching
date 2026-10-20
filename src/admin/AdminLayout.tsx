@@ -41,9 +41,6 @@ export default function AdminLayout(): ReactElement {
           </NavLink>
           {isAdmin && (
             <>
-              <NavLink to="/admin/coaches" className={navLinkClass}>
-                Coach fiókok
-              </NavLink>
               <NavLink to="/admin/google" className={navLinkClass}>
                 Google Naptár
               </NavLink>
