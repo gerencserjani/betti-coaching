@@ -85,7 +85,7 @@ export default function BookingWizardSkeleton(): ReactElement {
         </div>
       </div>
 
-      <div className="bg-bg-card/70 absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center backdrop-blur-[1px]">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center">
         <SpinnerIcon size={28} className="text-accent" />
         <p className="text-sm text-ink-soft">
           {t("booking.loadingEventTypes")}
