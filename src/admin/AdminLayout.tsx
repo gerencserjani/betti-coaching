@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import ThemeToggle from "../components/ThemeToggle.tsx";
@@ -21,44 +21,61 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : "text-ink-soft hover:bg-bg-panel hover:text-ink",
   ].join(" ");
 
-// Same look, just compact enough to sit in a single-row, horizontally
-// scrollable strip instead of a stacked column -- used below md only.
-const mobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-  [
-    "shrink-0 rounded-full px-3 py-1.5 text-sm whitespace-nowrap transition-colors duration-200",
-    isActive ? "bg-ink text-bg" : "bg-bg-panel text-ink-soft hover:text-ink",
-  ].join(" ");
-
 export default function AdminLayout(): ReactElement {
   const { coach, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col bg-bg text-ink md:flex-row">
-      {/* Below md: a compact top bar (logo + horizontally scrollable nav +
-          logout) replaces the full sidebar -- a fixed 224px-wide column
-          would otherwise eat more than half of a phone's own width. */}
-      <header className="flex items-center gap-3 border-b border-line bg-bg-card p-3 md:hidden">
-        <img
-          src={brandLogo}
-          alt={siteName}
-          className="h-9 w-9 shrink-0 transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
-        />
-        <nav className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto">
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className={mobileNavLinkClass}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-        <button
-          type="button"
-          onClick={logout}
-          aria-label="Kijelentkezés"
-          className="shrink-0 rounded-lg border border-line p-2 text-ink-soft transition-colors duration-200 hover:border-accent hover:text-accent"
-        >
-          ⏻
-        </button>
-      </header>
+      {/* Below md: a compact top bar with a hamburger toggle replaces the
+          full sidebar -- a fixed 224px-wide column, or a single-row nav
+          strip with 5 items, both leave too little room on a phone. */}
+      <div className="border-b border-line bg-bg-card md:hidden">
+        <div className="flex items-center gap-3 p-3">
+          <img
+            src={brandLogo}
+            alt={siteName}
+            className="h-9 w-9 shrink-0 transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
+          />
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-sm font-semibold">{coach?.name}</div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Menü bezárása" : "Menü megnyitása"}
+            aria-expanded={menuOpen}
+            className="shrink-0 rounded-lg border border-line p-2 text-ink-soft transition-colors duration-200 hover:border-accent hover:text-accent"
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+
+        {menuOpen && (
+          <nav className="flex flex-col gap-1 border-t border-line p-3">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={navLinkClass}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <div className="mt-2 flex items-center gap-2 border-t border-line pt-3">
+              <button
+                type="button"
+                onClick={logout}
+                className="flex-1 rounded-lg border border-line px-3 py-2 text-left text-sm text-ink-soft transition-colors duration-200 hover:border-accent hover:text-accent"
+              >
+                Kijelentkezés
+              </button>
+              <ThemeToggle />
+            </div>
+          </nav>
+        )}
+      </div>
 
       <aside className="hidden w-56 shrink-0 flex-col border-r border-line bg-bg-card p-4 md:flex">
         <img
