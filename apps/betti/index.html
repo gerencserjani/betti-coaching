@@ -26,11 +26,12 @@
       />
     </noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gerencsér Bernadett — Családi és párkapcsolati coach</title>
-    <meta
-      name="description"
-      content="Családi és párkapcsolati coaching Szegeden. Segítek megtalálni a szavakat párkapcsolati, kommunikációs és szülői témákban."
-    />
+    <!-- Reads VITE_SITE_TITLE/VITE_SITE_NAME/VITE_SITE_DESCRIPTION the same
+         way VITE_SITE_URL is read below -- a new coach's app sets three env
+         vars instead of hand-editing this file's title/meta/OG/Twitter tags
+         in six separate places. -->
+    <title>%VITE_SITE_TITLE%</title>
+    <meta name="description" content="%VITE_SITE_DESCRIPTION%" />
     <!-- Absolute URLs below use Vite's built-in %ENV_VAR% HTML replacement,
          reading VITE_SITE_URL from .env (dev default) / the hosting
          platform's env config (production -- see issue #26). -->
@@ -44,15 +45,9 @@
     <link rel="alternate" hreflang="en" href="%VITE_SITE_URL%/?lang=en" />
     <link rel="alternate" hreflang="x-default" href="%VITE_SITE_URL%/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Gerencsér Bernadett" />
-    <meta
-      property="og:title"
-      content="Gerencsér Bernadett — Családi és párkapcsolati coach"
-    />
-    <meta
-      property="og:description"
-      content="Családi és párkapcsolati coaching Szegeden. Segítek megtalálni a szavakat párkapcsolati, kommunikációs és szülői témákban."
-    />
+    <meta property="og:site_name" content="%VITE_SITE_NAME%" />
+    <meta property="og:title" content="%VITE_SITE_TITLE%" />
+    <meta property="og:description" content="%VITE_SITE_DESCRIPTION%" />
     <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -60,14 +55,8 @@
     <meta property="og:locale" content="hu_HU" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Gerencsér Bernadett — Családi és párkapcsolati coach"
-    />
-    <meta
-      name="twitter:description"
-      content="Családi és párkapcsolati coaching Szegeden. Segítek megtalálni a szavakat párkapcsolati, kommunikációs és szülői témákban."
-    />
+    <meta name="twitter:title" content="%VITE_SITE_TITLE%" />
+    <meta name="twitter:description" content="%VITE_SITE_DESCRIPTION%" />
     <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
     <script>
       const stored = localStorage.getItem("theme");

@@ -13,8 +13,8 @@ apps/
   betti/              Gerencsér Bernadett's site — see apps/betti/README.md
 packages/
   coaching-core/       shared admin dashboard, booking wizard, components,
-                       hooks, API client, i18n infrastructure (coming soon --
-                       not yet split out of apps/betti)
+                       hooks, API client, i18n infrastructure, and the
+                       CoachConfig contract each app supplies
 ```
 
 Each app in `apps/*` is its own npm workspace with its own `package.json`,
@@ -49,9 +49,7 @@ All apps talk to the same backend — [coach-calendar](https://github.com/gerenc
 
 ## Adding a new coach
 
-Not yet documented as a runbook — today, copy `apps/betti` as a starting
-point, replace its coach-specific content/branding/assets, create a new
-Vercel project pointing at the new `apps/<coach>` folder, and add the usual
-env vars + DNS + backend `AllowedOrigin` entry. A proper scaffold/checklist
-for this is planned once `packages/coaching-core` exists and a second
-coach's site is actually being built.
+See [`docs/new-coach-runbook.md`](docs/new-coach-runbook.md). There's no
+generator/scaffold script yet — `apps/betti` is the template, copied by
+hand; the runbook walks through what to replace, what env vars a new app
+needs, and the deploy/backend/DNS steps.

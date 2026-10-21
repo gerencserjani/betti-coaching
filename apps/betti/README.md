@@ -104,6 +104,13 @@ out of git:
   `robots.txt`). No trailing slash. Set in Vercel's dashboard for
   production; the committed `.env` default is the localhost dev value.
 - **`VITE_API_URL`** — the backend's base URL.
+- **`VITE_SITE_NAME`**, **`VITE_SITE_TITLE`**, **`VITE_SITE_DESCRIPTION`** —
+  `index.html`'s `<title>`/meta description/OG/Twitter tags read these via
+  Vite's `%ENV_VAR%` HTML replacement, the same mechanism `VITE_SITE_URL`
+  uses there. `VITE_SITE_NAME` also becomes `CoachConfig.siteName` (see
+  `src/content/site.ts`), so it's what the UI itself shows too (header logo
+  alt text, footer copyright line, admin sidebar). A new coach's app sets
+  these three instead of hand-editing `index.html`.
 
 ## Testing
 
