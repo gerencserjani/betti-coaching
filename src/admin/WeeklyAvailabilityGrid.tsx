@@ -1,10 +1,10 @@
-import { useState, type ReactElement } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { adminApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
 import type { WeeklyAvailability } from "../api/models";
 import { WEEKDAY_LABELS, hhmmToMinutes, minutesToHHmm } from "./utils";
-import { TimeInput24 } from "./TimeInput24";
+import { TimePicker } from "./TimePicker";
 
 // Monday-first, matching WEEKDAY_LABELS (1 = Monday ... 7 = Sunday) and the
 // public booking calendar's own convention (MonthCalendar.tsx).
@@ -97,11 +97,11 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
       {isLoading ? (
         <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
+        <div className="grid grid-cols-1 items-start gap-1.5 sm:grid-cols-2 sm:gap-2 md:grid-cols-4 lg:grid-cols-7">
           {WEEKDAYS.map((day) => (
             <div
               key={day}
-              className="flex flex-col gap-2 rounded-xl border border-line bg-bg-card p-2"
+              className="mx-auto flex w-full max-w-xs flex-col gap-1.5 rounded-xl border border-line bg-bg-card p-1.5 sm:gap-2 sm:p-2"
             >
               <div className="serif text-center text-[13px] text-ink-soft">
                 <span className="lg:hidden">{WEEKDAY_LABELS[day]}</span>
@@ -132,10 +132,11 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
                       key={row.id}
                       type="button"
                       onClick={() => setEditingId(row.id)}
-                      className="group rounded-lg border border-accent-soft bg-bg px-2 py-1.5 text-left text-xs text-ink transition-colors duration-150 hover:border-accent"
+                      className="group rounded-lg border border-accent-soft bg-bg px-2 py-1 text-xs text-ink transition-colors duration-150 hover:border-accent sm:py-1.5"
                     >
-                      <div className="flex items-center justify-between gap-1">
-                        <span>
+                      <div className="grid grid-cols-[20px_1fr_20px] items-center gap-1">
+                        <span aria-hidden="true" />
+                        <span className="text-center">
                           {minutesToHHmm(row.startMinute)}
                           {" – "}
                           {minutesToHHmm(row.endMinute)}
@@ -147,7 +148,7 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
                             e.stopPropagation();
                             removeMutation.mutate(row.id);
                           }}
-                          className="text-ink-soft opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:text-red-600 dark:hover:text-red-400"
+                          className="justify-self-end text-ink-soft opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:text-red-600 dark:hover:text-red-400"
                         >
                           ×
                         </span>
@@ -173,7 +174,7 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
                 <button
                   type="button"
                   onClick={() => setAddingDay(day)}
-                  className="rounded-lg border border-dashed border-line px-2 py-1.5 text-xs text-ink-soft transition-colors duration-150 hover:border-accent-soft hover:text-accent"
+                  className="rounded-lg border border-dashed border-line px-2 py-1 text-xs text-ink-soft transition-colors duration-150 hover:border-accent-soft hover:text-accent sm:py-1.5"
                 >
                   + Hozzáadás
                 </button>
@@ -210,13 +211,25 @@ function ChipTimeForm({
   const [start, setStart] = useState(initialStart);
   const [end, setEnd] = useState(initialEnd);
   const [error, setError] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) {
+        onCancel();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSave = () => {
     const startMinute = hhmmToMinutes(start);
     const endMinute = hhmmToMinutes(end);
     // Checked here, not just left to the backend, so this never surfaces
     // the backend's own (English) validation message -- the admin UI is
-    // Hungarian throughout, see TimeInput24's own comment.
+    // Hungarian throughout.
     if (startMinute >= endMinute) {
       setError("A kezdésnek korábban kell lennie, mint a végének.");
       return;
@@ -227,25 +240,35 @@ function ChipTimeForm({
 
   return (
     <div
-      className={`flex flex-col gap-1.5 rounded-lg border ${borderClass} bg-bg px-2 py-1.5`}
+      ref={containerRef}
+      className={`flex flex-col gap-2 rounded-lg border ${borderClass} bg-bg px-2.5 py-2`}
     >
-      <label className="flex flex-col gap-0.5">
-        <span className="text-[10px] text-ink-soft">Kezdés</span>
-        <TimeInput24 value={start} onChange={setStart} />
-      </label>
-      <label className="flex flex-col gap-0.5">
-        <span className="text-[10px] text-ink-soft">Vége</span>
-        <TimeInput24 value={end} onChange={setEnd} />
-      </label>
+      <div className="flex flex-row items-center justify-center gap-1.5 lg:flex-col lg:gap-1">
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="hidden text-[10px] text-ink-soft lg:block">
+            Kezdés
+          </span>
+          <TimePicker value={start} onChange={setStart} ariaLabel="Kezdés" />
+        </div>
+        <span className="text-ink-soft lg:hidden" aria-hidden="true">
+          –
+        </span>
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="hidden text-[10px] text-ink-soft lg:block">
+            Vége
+          </span>
+          <TimePicker value={end} onChange={setEnd} ariaLabel="Vége" />
+        </div>
+      </div>
       {error && (
         <p className="text-[10px] text-red-600 dark:text-red-400">{error}</p>
       )}
-      <div className="flex gap-2">
+      <div className="flex items-center justify-center gap-2">
         <button
           type="button"
           disabled={isPending}
           onClick={handleSave}
-          className="flex-1 rounded-full bg-ink px-2 py-1 text-xs text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
+          className="rounded-full bg-ink px-4 py-1 text-xs text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Mentés
         </button>

@@ -1,10 +1,17 @@
-import { useState, type FormEvent, type ReactElement } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactElement,
+} from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { adminApi } from "../api/endpoints";
 import { getErrorMessage } from "../api/client";
 import type { AvailabilityOverride } from "../api/models";
 import { formatDate, hhmmToMinutes, minutesToHHmm } from "./utils";
-import { TimeInput24 } from "./TimeInput24";
+import { TimePicker } from "./TimePicker";
+import { DatePicker } from "./DatePicker";
 import WeeklyAvailabilityGrid from "./WeeklyAvailabilityGrid";
 
 export default function AvailabilityPage(): ReactElement {
@@ -74,7 +81,7 @@ function OverridesSection(): ReactElement {
     e.preventDefault();
     // Checked here, not just left to the backend, so this never surfaces
     // the backend's own (English) validation message -- the admin UI is
-    // Hungarian throughout, see TimeInput24's own comment.
+    // Hungarian throughout.
     if (!isUnavailable && hhmmToMinutes(start) >= hhmmToMinutes(end)) {
       setError("A kezdésnek korábban kell lennie, mint a végének.");
       return;
@@ -93,7 +100,10 @@ function OverridesSection(): ReactElement {
     <section className="rounded-xl border border-line bg-bg-card p-4">
       <h2 className="mb-1 text-[15px] font-medium text-ink">Dátum-kivételek</h2>
       <p className="mb-3 text-xs text-ink-soft">
-        Egy adott napra: szabadnap, vagy a heti órarendtől eltérő elérhetőség.
+        Egy konkrét napra ad kivételt a heti visszatérő órarendhez képest,
+        anélkül, hogy az állandó beosztást át kellene írnod. Jelölj ki egész
+        napos szabadnapot (pl. ünnep, szabadság), vagy adj meg egy ettől eltérő
+        idősávot, ha aznap csak rövidebb ideig vagy elérhető.
       </p>
 
       {error && (
@@ -102,48 +112,53 @@ function OverridesSection(): ReactElement {
 
       <form
         onSubmit={handleSubmit}
-        className="mb-4 flex flex-wrap items-end gap-2 rounded-lg border border-line bg-bg p-3"
+        className="mb-4 flex flex-col gap-3 rounded-lg border border-line bg-bg p-3"
       >
         <label className="text-sm">
           <span className="mb-1.5 block text-[13.5px] text-ink-soft">
             Dátum
           </span>
-          <input
-            type="date"
-            required
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
-          />
+          <DatePicker value={date} onChange={setDate} bg="bg-bg-card" />
         </label>
-        <label className="flex items-center gap-1.5 text-sm text-ink-soft">
+        <label className="flex items-center gap-2 text-sm text-ink-soft">
           <input
             type="checkbox"
             checked={isUnavailable}
             onChange={(e) => setIsUnavailable(e.target.checked)}
+            className="h-4 w-4 cursor-pointer accent-[var(--accent)]"
           />
           Egész napos szabadnap
         </label>
         {!isUnavailable && (
-          <>
+          <div className="flex flex-wrap items-end gap-2">
             <label className="text-sm">
               <span className="mb-1.5 block text-[13.5px] text-ink-soft">
                 Kezdés
               </span>
-              <TimeInput24 value={start} onChange={setStart} bg="bg-bg-card" />
+              <TimePicker
+                value={start}
+                onChange={setStart}
+                ariaLabel="Kezdés"
+                bg="bg-bg-card"
+              />
             </label>
             <label className="text-sm">
               <span className="mb-1.5 block text-[13.5px] text-ink-soft">
                 Vége
               </span>
-              <TimeInput24 value={end} onChange={setEnd} bg="bg-bg-card" />
+              <TimePicker
+                value={end}
+                onChange={setEnd}
+                ariaLabel="Vége"
+                bg="bg-bg-card"
+              />
             </label>
-          </>
+          </div>
         )}
         <button
           type="submit"
           disabled={createMutation.isPending || !date}
-          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
+          className="self-start rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Hozzáadás
         </button>
@@ -237,6 +252,18 @@ function EditOverrideRow({
     row.endMinute !== null ? minutesToHHmm(row.endMinute) : "17:00",
   );
   const [error, setError] = useState<string | null>(null);
+  const containerRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) {
+        onCancel();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSave = () => {
     if (!isUnavailable && hhmmToMinutes(start) >= hhmmToMinutes(end)) {
@@ -254,45 +281,53 @@ function EditOverrideRow({
   };
 
   return (
-    <li className="flex flex-wrap items-end gap-2 rounded-lg border border-accent-soft bg-bg px-3 py-2 text-sm">
+    <li
+      ref={containerRef}
+      className="flex flex-col gap-3 rounded-lg border border-accent-soft bg-bg px-3 py-3 text-sm"
+    >
       <label className="text-sm">
         <span className="mb-1.5 block text-[13.5px] text-ink-soft">Dátum</span>
-        <input
-          type="date"
-          required
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="rounded-lg border border-line bg-bg-card px-2 py-1.5 text-ink"
-        />
+        <DatePicker value={date} onChange={setDate} bg="bg-bg-card" />
       </label>
-      <label className="flex items-center gap-1.5 text-sm text-ink-soft">
+      <label className="flex items-center gap-2 text-sm text-ink-soft">
         <input
           type="checkbox"
           checked={isUnavailable}
           onChange={(e) => setIsUnavailable(e.target.checked)}
+          className="h-4 w-4 cursor-pointer accent-[var(--accent)]"
         />
         Egész napos szabadnap
       </label>
       {!isUnavailable && (
-        <>
+        <div className="flex flex-wrap items-end gap-2">
           <label className="text-sm">
             <span className="mb-1.5 block text-[13.5px] text-ink-soft">
               Kezdés
             </span>
-            <TimeInput24 value={start} onChange={setStart} bg="bg-bg-card" />
+            <TimePicker
+              value={start}
+              onChange={setStart}
+              ariaLabel="Kezdés"
+              bg="bg-bg-card"
+            />
           </label>
           <label className="text-sm">
             <span className="mb-1.5 block text-[13.5px] text-ink-soft">
               Vége
             </span>
-            <TimeInput24 value={end} onChange={setEnd} bg="bg-bg-card" />
+            <TimePicker
+              value={end}
+              onChange={setEnd}
+              ariaLabel="Vége"
+              bg="bg-bg-card"
+            />
           </label>
-        </>
+        </div>
       )}
       {error && (
-        <p className="w-full text-sm text-red-600 dark:text-red-400">{error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
-      <div className="ml-auto flex gap-3">
+      <div className="flex gap-3">
         <button
           type="button"
           disabled={isPending}
