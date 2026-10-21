@@ -5,33 +5,51 @@ import {
   type KeyboardEvent,
   type ReactElement,
 } from "react";
+import { hhmmToMinutes, minutesToHHmm } from "./utils";
 
-const HOURS = Array.from({ length: 24 }, (_, i) =>
-  i.toString().padStart(2, "0"),
+const STEP_MINUTES = 15;
+const TIME_OPTIONS = Array.from({ length: (24 * 60) / STEP_MINUTES }, (_, i) =>
+  minutesToHHmm(i * STEP_MINUTES),
 );
-const MINUTES = Array.from({ length: 60 }, (_, i) =>
-  i.toString().padStart(2, "0"),
-);
+
+// Existing data isn't guaranteed to land on a 15-minute mark (the old plain
+// hour/minute selects allowed any value) -- splice it into the list so
+// opening the picker on, say, "09:10" never silently hides or snaps away
+// from the value already saved.
+function optionsFor(value: string): string[] {
+  if (!value || TIME_OPTIONS.includes(value)) return TIME_OPTIONS;
+  const valueMinutes = hhmmToMinutes(value);
+  const insertAt = TIME_OPTIONS.findIndex(
+    (opt) => hhmmToMinutes(opt) > valueMinutes,
+  );
+  const options = [...TIME_OPTIONS];
+  options.splice(insertAt === -1 ? options.length : insertAt, 0, value);
+  return options;
+}
 
 /**
- * A button that opens a popover with two scrollable hour/minute columns,
- * replacing a plain <input type="time"> (which renders 12h AM/PM in Chrome
- * regardless of a `lang` hint -- it derives that format from the browser's
- * own language setting, not the page) and the bare native <select> pair this
- * used to be, which looked out of place next to the redesigned date picker.
+ * A button that opens a popover with a single scrollable list of times (15
+ * minute steps, the saved value spliced in if it isn't on one), replacing a
+ * plain <input type="time"> (which renders 12h AM/PM in Chrome regardless of
+ * a `lang` hint -- it derives that format from the browser's own language
+ * setting, not the page) and the bare native <select> pair this used to be.
+ * A single list reads faster than two independent hour/minute wheels and
+ * matches how Calendly/Google Calendar's own time pickers are laid out.
  */
 export function TimePicker({
   value,
   onChange,
+  ariaLabel,
   bg = "bg-bg",
 }: {
   value: string;
   onChange: (value: string) => void;
+  ariaLabel?: string;
   bg?: "bg-bg" | "bg-bg-card";
 }): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hh, mm] = value.split(":");
+  const selectedRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -43,6 +61,13 @@ export function TimePicker({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Scroll the selected option into view the moment the popover opens --
+  // not on every value change, or picking a time would yank the list's own
+  // scroll position around right as it's about to close.
+  useEffect(() => {
+    if (isOpen) selectedRef.current?.scrollIntoView({ block: "center" });
+  }, [isOpen]);
+
   const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Escape") setIsOpen(false);
   };
@@ -51,83 +76,44 @@ export function TimePicker({
     <div ref={containerRef} className="relative">
       <button
         type="button"
-        aria-haspopup="true"
+        aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-label={ariaLabel}
         onClick={() => setIsOpen((o) => !o)}
         onKeyDown={handleKeyDown}
-        className={`rounded-lg border border-line ${bg} px-2 py-1.5 text-ink transition-colors duration-150 hover:border-accent-soft`}
+        className={`rounded-lg border border-line ${bg} px-2.5 py-1.5 text-sm text-ink transition-colors duration-150 hover:border-accent-soft`}
       >
-        {hh}:{mm}
+        {value}
       </button>
       {isOpen && (
-        <div className="absolute z-10 mt-1 flex overflow-hidden rounded-lg border border-line bg-bg-card shadow-lg">
-          <ScrollColumn
-            label="Óra"
-            options={HOURS}
-            value={hh}
-            isOpen={isOpen}
-            onSelect={(h) => onChange(`${h}:${mm}`)}
-          />
-          <div className="w-px bg-line" />
-          <ScrollColumn
-            label="Perc"
-            options={MINUTES}
-            value={mm}
-            isOpen={isOpen}
-            onSelect={(m) => onChange(`${hh}:${m}`)}
-          />
+        <div
+          role="listbox"
+          aria-label={ariaLabel}
+          className="brand-scrollbar absolute z-10 mt-1 max-h-52 w-20 overflow-y-auto rounded-lg border border-line bg-bg-card py-1 shadow-lg"
+        >
+          {optionsFor(value).map((opt) => (
+            <button
+              key={opt}
+              ref={opt === value ? selectedRef : undefined}
+              type="button"
+              role="option"
+              aria-selected={opt === value}
+              onClick={() => {
+                onChange(opt);
+                setIsOpen(false);
+              }}
+              className={[
+                "block w-full px-2.5 py-1.5 text-center text-sm transition-colors duration-150",
+                opt === value
+                  ? "bg-accent-soft font-medium text-ink"
+                  : "text-ink hover:bg-bg-panel",
+              ].join(" ")}
+            >
+              {opt}
+            </button>
+          ))}
         </div>
       )}
-    </div>
-  );
-}
-
-function ScrollColumn({
-  label,
-  options,
-  value,
-  isOpen,
-  onSelect,
-}: {
-  label: string;
-  options: string[];
-  value: string;
-  isOpen: boolean;
-  onSelect: (value: string) => void;
-}): ReactElement {
-  const selectedRef = useRef<HTMLButtonElement>(null);
-
-  // Only scroll the selected option into view the moment the popover opens
-  // -- not on every value change, or picking an hour would yank the minute
-  // column's scroll position around too.
-  useEffect(() => {
-    if (isOpen) selectedRef.current?.scrollIntoView({ block: "center" });
-  }, [isOpen]);
-
-  return (
-    <div
-      role="listbox"
-      aria-label={label}
-      className="max-h-48 w-12 overflow-y-auto py-1"
-    >
-      {options.map((opt) => (
-        <button
-          key={opt}
-          ref={opt === value ? selectedRef : undefined}
-          type="button"
-          role="option"
-          aria-selected={opt === value}
-          onClick={() => onSelect(opt)}
-          className={[
-            "block w-full px-2 py-1 text-center text-sm transition-colors duration-150",
-            opt === value
-              ? "bg-accent-soft font-medium text-ink"
-              : "text-ink hover:bg-bg-panel",
-          ].join(" ")}
-        >
-          {opt}
-        </button>
-      ))}
     </div>
   );
 }

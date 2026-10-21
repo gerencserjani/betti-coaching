@@ -241,16 +241,25 @@ function ChipTimeForm({
   return (
     <div
       ref={containerRef}
-      className={`flex flex-col gap-1.5 rounded-lg border ${borderClass} bg-bg px-2 py-1.5`}
+      className={`flex flex-col gap-2 rounded-lg border ${borderClass} bg-bg px-2.5 py-2`}
     >
-      <label className="flex flex-col gap-0.5">
-        <span className="text-[10px] text-ink-soft">Kezdés</span>
-        <TimePicker value={start} onChange={setStart} />
-      </label>
-      <label className="flex flex-col gap-0.5">
-        <span className="text-[10px] text-ink-soft">Vége</span>
-        <TimePicker value={end} onChange={setEnd} />
-      </label>
+      <div className="flex flex-row items-center justify-center gap-1.5 lg:flex-col lg:gap-1">
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="hidden text-[10px] text-ink-soft lg:block">
+            Kezdés
+          </span>
+          <TimePicker value={start} onChange={setStart} ariaLabel="Kezdés" />
+        </div>
+        <span className="text-ink-soft lg:hidden" aria-hidden="true">
+          –
+        </span>
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="hidden text-[10px] text-ink-soft lg:block">
+            Vége
+          </span>
+          <TimePicker value={end} onChange={setEnd} ariaLabel="Vége" />
+        </div>
+      </div>
       {error && (
         <p className="text-[10px] text-red-600 dark:text-red-400">{error}</p>
       )}

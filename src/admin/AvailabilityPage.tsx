@@ -134,13 +134,23 @@ function OverridesSection(): ReactElement {
               <span className="mb-1.5 block text-[13.5px] text-ink-soft">
                 Kezdés
               </span>
-              <TimePicker value={start} onChange={setStart} bg="bg-bg-card" />
+              <TimePicker
+                value={start}
+                onChange={setStart}
+                ariaLabel="Kezdés"
+                bg="bg-bg-card"
+              />
             </label>
             <label className="text-sm">
               <span className="mb-1.5 block text-[13.5px] text-ink-soft">
                 Vége
               </span>
-              <TimePicker value={end} onChange={setEnd} bg="bg-bg-card" />
+              <TimePicker
+                value={end}
+                onChange={setEnd}
+                ariaLabel="Vége"
+                bg="bg-bg-card"
+              />
             </label>
           </>
         )}
@@ -292,13 +302,23 @@ function EditOverrideRow({
             <span className="mb-1.5 block text-[13.5px] text-ink-soft">
               Kezdés
             </span>
-            <TimePicker value={start} onChange={setStart} bg="bg-bg-card" />
+            <TimePicker
+              value={start}
+              onChange={setStart}
+              ariaLabel="Kezdés"
+              bg="bg-bg-card"
+            />
           </label>
           <label className="text-sm">
             <span className="mb-1.5 block text-[13.5px] text-ink-soft">
               Vége
             </span>
-            <TimePicker value={end} onChange={setEnd} bg="bg-bg-card" />
+            <TimePicker
+              value={end}
+              onChange={setEnd}
+              ariaLabel="Vége"
+              bg="bg-bg-card"
+            />
           </label>
         </>
       )}

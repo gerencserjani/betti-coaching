@@ -1,11 +1,11 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { TimePicker } from "./TimePicker";
 
 // jsdom doesn't implement scrollIntoView -- TimePicker calls it to bring the
-// selected hour/minute into view when the popover opens.
+// selected time into view when the popover opens.
 beforeEach(() => {
   Element.prototype.scrollIntoView = vi.fn();
 });
@@ -26,6 +26,7 @@ function Harness({
         setValue(v);
         onChange(v);
       }}
+      ariaLabel="Kezdés"
     />
   );
 }
@@ -33,34 +34,37 @@ function Harness({
 describe("TimePicker", () => {
   it("shows the current value on the trigger and is closed by default", () => {
     render(<Harness initial="09:30" onChange={vi.fn()} />);
-    expect(screen.getByRole("button", { name: "09:30" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Kezdés" })).toHaveTextContent(
+      "09:30",
+    );
     expect(
-      screen.queryByRole("listbox", { name: "Óra" }),
+      screen.queryByRole("listbox", { name: "Kezdés" }),
     ).not.toBeInTheDocument();
   });
 
-  it("opens the popover and selecting an hour keeps the minute", async () => {
+  it("offers 15-minute steps and selecting one updates the value and closes", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Harness initial="09:30" onChange={onChange} />);
 
-    await user.click(screen.getByRole("button", { name: "09:30" }));
-    const hourList = screen.getByRole("listbox", { name: "Óra" });
-    await user.click(within(hourList).getByRole("option", { name: "17" }));
-
-    expect(onChange).toHaveBeenLastCalledWith("17:30");
-  });
-
-  it("selecting a minute keeps the hour", async () => {
-    const user = userEvent.setup();
-    const onChange = vi.fn();
-    render(<Harness initial="09:30" onChange={onChange} />);
-
-    await user.click(screen.getByRole("button", { name: "09:30" }));
-    const minuteList = screen.getByRole("listbox", { name: "Perc" });
-    await user.click(within(minuteList).getByRole("option", { name: "45" }));
+    await user.click(screen.getByRole("button", { name: "Kezdés" }));
+    await user.click(screen.getByRole("option", { name: "09:45" }));
 
     expect(onChange).toHaveBeenLastCalledWith("09:45");
+    expect(
+      screen.queryByRole("listbox", { name: "Kezdés" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("splices a non-15-minute saved value into the list instead of hiding it", async () => {
+    const user = userEvent.setup();
+    render(<Harness initial="09:07" onChange={vi.fn()} />);
+
+    await user.click(screen.getByRole("button", { name: "Kezdés" }));
+
+    expect(
+      screen.getByRole("option", { name: "09:07", selected: true }),
+    ).toBeInTheDocument();
   });
 
   it("closes when clicking outside", async () => {
@@ -72,13 +76,13 @@ describe("TimePicker", () => {
       </div>,
     );
 
-    await user.click(screen.getByRole("button", { name: "09:30" }));
-    expect(screen.getByRole("listbox", { name: "Óra" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Kezdés" }));
+    expect(screen.getByRole("listbox", { name: "Kezdés" })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "outside" }));
 
     expect(
-      screen.queryByRole("listbox", { name: "Óra" }),
+      screen.queryByRole("listbox", { name: "Kezdés" }),
     ).not.toBeInTheDocument();
   });
 });
