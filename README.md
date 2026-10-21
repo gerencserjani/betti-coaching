@@ -110,6 +110,11 @@ loads, nav scrolls to a section, theme toggle, `?lang=en` switches text,
 to end against a seeded backend is a separate CI infrastructure decision,
 not done here yet.
 
+`.github/workflows/ci.yml` runs `lint` → `test` → `build` → the Playwright
+e2e suite on every pull request. Separate from
+`.github/workflows/release.yml` (semantic-release on push to `main`), which
+doesn't run the test suites itself.
+
 ## Project workflow
 
 Work is tracked as [GitHub issues](https://github.com/gerencserjani/betti-coaching/issues) on the [project board](https://github.com/users/gerencserjani/projects/1), one issue per feature/section.
@@ -123,3 +128,9 @@ Hosted on [Vercel](https://vercel.com), auto-deploying on every push to
 for `VITE_SITE_URL`, `VITE_API_URL`, and `VITE_GOOGLE_PLACES_API_KEY` are
 set in Vercel's own dashboard, overriding the committed `.env`'s localhost
 defaults during the Vercel build.
+
+Production domain: **gerencserbernadettcoaching.hu** (DNS at Forpsi; `www` is
+the canonical host, the apex 308-redirects to it — both are registered as
+Vercel domains and both are in the backend's `AllowedOrigin` allow-list, see
+coach-calendar's `CONTEXT.md`). `betti-coaching.vercel.app` still works too
+and is kept in `AllowedOrigin` as a fallback.
