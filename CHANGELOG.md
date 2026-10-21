@@ -1,3 +1,9 @@
+# [1.33.0](https://github.com/gerencserjani/betti-coaching/compare/v1.32.0...v1.33.0) (2026-10-21)
+
+### Features
+
+- hide the price line entirely when a service has no price set ([#89](https://github.com/gerencserjani/betti-coaching/issues/89)) ([d6effb5](https://github.com/gerencserjani/betti-coaching/commit/d6effb5d03befee04776676beed68f8e934d1914)), closes [#48](https://github.com/gerencserjani/betti-coaching/issues/48)
+
 # [1.32.0](https://github.com/gerencserjani/betti-coaching/compare/v1.31.0...v1.32.0) (2026-10-21)
 
 ### Features
