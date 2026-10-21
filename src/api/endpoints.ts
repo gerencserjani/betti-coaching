@@ -271,9 +271,6 @@ export const adminApi = {
   updateMe: (body: components["schemas"]["UpdateCoachDto"]) =>
     unwrap<Coach>(apiClient.PATCH("/coaches/me", { body })),
 
-  changePassword: (body: components["schemas"]["ChangePasswordDto"]) =>
-    unwrap<void>(apiClient.PATCH("/coaches/me/password", { body })),
-
   // GET /settings is the same public, unauthenticated endpoint publicApi
   // uses -- the data isn't sensitive, so no auth is needed here, just the
   // caller's own coachId (see publicApi.settings above for why).
