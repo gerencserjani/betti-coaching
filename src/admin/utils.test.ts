@@ -44,8 +44,12 @@ describe("formatDate", () => {
 const NBSP = String.fromCharCode(160);
 
 describe("formatPriceHuf (admin)", () => {
+  it("returns null for null -- no price shown at all", () => {
+    expect(formatPriceHuf(null)).toBeNull();
+  });
+
   it("always formats in Hungarian regardless of caller", () => {
     expect(formatPriceHuf(0)).toBe("Díjmentes");
-    expect(formatPriceHuf(12500).split(NBSP).join(" ")).toBe("12 500 HUF");
+    expect(formatPriceHuf(12500)!.split(NBSP).join(" ")).toBe("12 500 HUF");
   });
 });

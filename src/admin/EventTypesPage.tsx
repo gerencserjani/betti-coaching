@@ -176,7 +176,8 @@ export default function EventTypesPage(): ReactElement {
                     )}
                   </div>
                   <div className="text-xs text-ink-soft">
-                    {et.durationMinutes} perc · {formatPriceHuf(et.price)} ·{" "}
+                    {et.durationMinutes} perc ·{" "}
+                    {formatPriceHuf(et.price) ?? "nincs ár megadva"} ·{" "}
                     {et.locations.map((l) => LOCATION_LABELS[l]).join(", ")}
                   </div>
                 </div>
@@ -261,7 +262,14 @@ function EventTypeForm({
   const [durationMinutes, setDurationMinutes] = useState(
     eventType?.durationMinutes ?? 60,
   );
-  const [price, setPrice] = useState(eventType?.price ?? 0);
+  // A plain string, not a number, specifically so the field can be
+  // genuinely empty (-> price: null, "no price shown") rather than always
+  // coercing to 0 ("free") the moment it's cleared -- these mean different
+  // things, see EventType.price.
+  const [priceInput, setPriceInput] = useState(
+    eventType?.price?.toString() ?? "",
+  );
+  const price = priceInput === "" ? null : Number(priceInput);
   const [locations, setLocations] = useState<LocationType[]>(
     eventType?.locations ?? ["GOOGLE_MEET"],
   );
@@ -347,12 +355,13 @@ function EventTypeForm({
             type="number"
             min={0}
             step={100}
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            placeholder="nincs ár megadva"
+            value={priceInput}
+            onChange={(e) => setPriceInput(e.target.value)}
             className="w-32 rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
           />
           <span className="mt-1 block text-xs text-ink-soft">
-            0 = nincs ár megjelenítve (Díjmentes)
+            Üresen hagyva nem jelenik meg ár. 0 = Díjmentes.
           </span>
         </label>
       </div>

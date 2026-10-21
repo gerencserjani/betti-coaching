@@ -578,8 +578,11 @@ export interface components {
       description?: string;
       durationMinutes: number;
       locations: ("IN_PERSON" | "GOOGLE_MEET" | "PHONE")[];
-      /** @description Whole HUF amount. Optional - omit or send 0 for "no price shown". */
-      price?: number;
+      /**
+       * @description Whole HUF amount. Omit/null for no price shown at all; 0 for
+       *     explicitly free (shown as such) -- see EventType.price.
+       */
+      price?: number | null;
       /** @description Display order in the public catalog. Defaults to appended at the end. */
       position?: number;
     };

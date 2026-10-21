@@ -54,6 +54,6 @@ export function formatDate(isoDate: string): string {
 }
 
 /** The admin UI is always Hungarian, unlike the public booking UI's formatPriceHuf. */
-export function formatPriceHuf(priceHuf: number): string {
+export function formatPriceHuf(priceHuf: number | null): string | null {
   return formatPriceHufShared(priceHuf, "hu", "Díjmentes");
 }
