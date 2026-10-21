@@ -1,3 +1,9 @@
+# [1.34.0](https://github.com/gerencserjani/betti-coaching/compare/v1.33.0...v1.34.0) (2026-10-21)
+
+### Features
+
+- real weekly grid for the Availability page, fix Invalid Date bug ([#90](https://github.com/gerencserjani/betti-coaching/issues/90)) ([0a11228](https://github.com/gerencserjani/betti-coaching/commit/0a112280e19af7a70df19ba8a86b61f11ec0ef3e))
+
 # [1.33.0](https://github.com/gerencserjani/betti-coaching/compare/v1.32.0...v1.33.0) (2026-10-21)
 
 ### Features
