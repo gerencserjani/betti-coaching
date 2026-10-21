@@ -41,13 +41,17 @@ export function formatDateTime(iso: string): string {
   });
 }
 
-/** For a bare "YYYY-MM-DD" date (no time component), e.g. AvailabilityOverride.date. */
+/** For a "YYYY-MM-DD" date, or a full ISO datetime whose date portion is the
+ * one that matters (e.g. AvailabilityOverride.date comes back from the API
+ * as "2026-11-05T00:00:00.000Z", not a bare date, despite its own type
+ * saying otherwise -- EditOverrideRow already slices it the same way when
+ * seeding its date input). */
 export function formatDate(isoDate: string): string {
   // `new Date("YYYY-MM-DD")` parses as UTC midnight, which
   // toLocaleDateString then renders back in the browser's local zone --
   // for a negative UTC offset that shows the previous day. Building the
   // Date from local year/month/day components instead sidesteps that.
-  const [year, month, day] = isoDate.split("-").map(Number);
+  const [year, month, day] = isoDate.slice(0, 10).split("-").map(Number);
   return new Date(year, month - 1, day).toLocaleDateString("hu-HU", {
     dateStyle: "medium",
   });
