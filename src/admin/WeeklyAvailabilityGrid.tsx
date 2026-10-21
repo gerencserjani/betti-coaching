@@ -97,11 +97,11 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
       {isLoading ? (
         <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
-        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-2 md:grid-cols-4 lg:grid-cols-7">
+        <div className="grid grid-cols-1 items-start gap-1.5 sm:grid-cols-2 sm:gap-2 md:grid-cols-4 lg:grid-cols-7">
           {WEEKDAYS.map((day) => (
             <div
               key={day}
-              className="flex flex-col gap-1.5 rounded-xl border border-line bg-bg-card p-1.5 sm:gap-2 sm:p-2"
+              className="mx-auto flex w-full max-w-xs flex-col gap-1.5 rounded-xl border border-line bg-bg-card p-1.5 sm:gap-2 sm:p-2"
             >
               <div className="serif text-center text-[13px] text-ink-soft">
                 <span className="lg:hidden">{WEEKDAY_LABELS[day]}</span>
@@ -259,7 +259,7 @@ function ChipTimeForm({
           type="button"
           disabled={isPending}
           onClick={handleSave}
-          className="flex-1 rounded-full bg-ink px-2 py-1 text-xs text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
+          className="rounded-full bg-ink px-4 py-1 text-xs text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Mentés
         </button>
