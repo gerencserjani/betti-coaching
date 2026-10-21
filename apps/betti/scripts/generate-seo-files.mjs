@@ -10,7 +10,9 @@ const env = loadEnv("production", process.cwd(), "VITE_");
 const siteUrl = env.VITE_SITE_URL;
 
 if (!siteUrl) {
-  console.error("VITE_SITE_URL is not set -- skipping robots.txt/sitemap.xml generation.");
+  console.error(
+    "VITE_SITE_URL is not set -- skipping robots.txt/sitemap.xml generation.",
+  );
   process.exit(1);
 }
 
