@@ -13,8 +13,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
+      - run: npm run lint --workspace=betti-coaching
+      - run: npm test --workspace=betti-coaching
+      - run: npm run build --workspace=betti-coaching
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
+      - run: npm run test:e2e --workspace=betti-coaching
