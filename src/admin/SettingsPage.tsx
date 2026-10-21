@@ -50,6 +50,8 @@ function SettingsForm({ settings }: { settings: Settings }): ReactElement {
   const [businessTimezone, setBusinessTimezone] = useState(
     settings.businessTimezone,
   );
+  const [brandName, setBrandName] = useState(settings.brandName ?? "");
+  const [brandTagline, setBrandTagline] = useState(settings.brandTagline ?? "");
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
@@ -70,6 +72,8 @@ function SettingsForm({ settings }: { settings: Settings }): ReactElement {
       businessAddress,
       cancellationNoticeHours,
       businessTimezone,
+      brandName: brandName.trim() || null,
+      brandTagline: brandTagline.trim() || null,
     });
   };
 
@@ -124,6 +128,41 @@ function SettingsForm({ settings }: { settings: Settings }): ReactElement {
           ))}
         </select>
       </label>
+
+      <div className="mt-2 border-t border-line pt-3">
+        <h3 className="mb-2 text-sm text-ink">Email-márkázás</h3>
+        <label className="text-sm">
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Márkanév
+          </span>
+          <input
+            type="text"
+            placeholder="Gerencsér Bernadett"
+            value={brandName}
+            onChange={(e) => setBrandName(e.target.value)}
+            className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
+          />
+          <span className="mt-1 block text-xs text-ink-soft">
+            Ez jelenik meg a foglalási emailek fejlécében. Üresen hagyva a
+            fiókod nevét használja.
+          </span>
+        </label>
+        <label className="mt-3 block text-sm">
+          <span className="mb-1.5 block text-[13.5px] text-ink-soft">
+            Alcím
+          </span>
+          <input
+            type="text"
+            placeholder="Családi és párkapcsolati coach"
+            value={brandTagline}
+            onChange={(e) => setBrandTagline(e.target.value)}
+            className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
+          />
+          <span className="mt-1 block text-xs text-ink-soft">
+            Üresen hagyva nem jelenik meg alcím a márkanév alatt.
+          </span>
+        </label>
+      </div>
 
       {error && (
         <p className="text-sm text-red-600 dark:text-red-400">{error}</p>

@@ -109,6 +109,11 @@ export interface Settings {
   businessAddress: string;
   cancellationNoticeHours: number;
   businessTimezone: string;
+  // Public-facing business name/tagline shown in booking email letterheads
+  // (see coach-calendar's BookingEmail.tsx) -- null falls back to the
+  // coach's own account name / omits the tagline line.
+  brandName: string | null;
+  brandTagline: string | null;
   updatedAt: string;
 }
 

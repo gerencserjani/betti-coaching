@@ -196,6 +196,22 @@ export interface paths {
     patch: operations["CoachesController_revokeSessions"];
     trace?: never;
   };
+  "/coaches/{id}/frontend-url": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch: operations["CoachesController_setFrontendUrl"];
+    trace?: never;
+  };
   "/event-types": {
     parameters: {
       query?: never;
@@ -527,6 +543,11 @@ export interface components {
       cancellationNoticeHours?: number;
       businessTimezone?: string;
       emailFrom?: string | null;
+      brandName?: string | null;
+      brandTagline?: string | null;
+      emailBrandPalette?: {
+        [key: string]: unknown;
+      } | null;
     };
     UpdateCoachDto: {
       name?: string;
@@ -547,6 +568,10 @@ export interface components {
     AcceptInviteDto: {
       token: string;
       password: string;
+    };
+    SetFrontendUrlDto: {
+      /** Format: uri */
+      frontendUrl: string;
     };
     CreateEventTypeDto: {
       title: string;
@@ -921,6 +946,29 @@ export interface operations {
       cookie?: never;
     };
     requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  CoachesController_setFrontendUrl: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SetFrontendUrlDto"];
+      };
+    };
     responses: {
       200: {
         headers: {
