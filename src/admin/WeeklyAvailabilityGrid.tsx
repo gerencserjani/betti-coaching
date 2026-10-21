@@ -97,91 +97,89 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
       {isLoading ? (
         <p className="text-sm text-ink-soft">Betöltés…</p>
       ) : (
-        <div className="overflow-x-auto">
-          <div className="grid grid-cols-7 gap-2" style={{ minWidth: 820 }}>
-            {WEEKDAYS.map((day) => (
-              <div
-                key={day}
-                className="flex flex-col gap-2 rounded-xl border border-line bg-bg-card p-2"
-              >
-                <div
-                  className="serif text-center text-[13px] text-ink-soft"
-                  title={WEEKDAY_LABELS[day]}
-                >
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
+          {WEEKDAYS.map((day) => (
+            <div
+              key={day}
+              className="flex flex-col gap-2 rounded-xl border border-line bg-bg-card p-2"
+            >
+              <div className="serif text-center text-[13px] text-ink-soft">
+                <span className="lg:hidden">{WEEKDAY_LABELS[day]}</span>
+                <span className="hidden lg:inline" title={WEEKDAY_LABELS[day]}>
                   {SHORT_LABELS[day]}
-                </div>
+                </span>
+              </div>
 
-                <div className="flex flex-col gap-1.5">
-                  {byDay.get(day)!.map((row) =>
-                    editingId === row.id ? (
-                      <EditChip
-                        key={row.id}
-                        row={row}
-                        isPending={updateMutation.isPending}
-                        onCancel={() => setEditingId(null)}
-                        onSave={(startMinute, endMinute) =>
-                          updateMutation.mutate({
-                            id: row.id,
-                            weekday: row.weekday,
-                            startMinute,
-                            endMinute,
-                          })
-                        }
-                      />
-                    ) : (
-                      <button
-                        key={row.id}
-                        type="button"
-                        onClick={() => setEditingId(row.id)}
-                        className="group rounded-lg border border-accent-soft bg-bg px-2 py-1.5 text-left text-xs text-ink transition-colors duration-150 hover:border-accent"
-                      >
-                        <div className="flex items-center justify-between gap-1">
-                          <span>
-                            {minutesToHHmm(row.startMinute)}
-                            {" – "}
-                            {minutesToHHmm(row.endMinute)}
-                          </span>
-                          <span
-                            role="button"
-                            aria-label="Törlés"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeMutation.mutate(row.id);
-                            }}
-                            className="text-ink-soft opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:text-red-600 dark:hover:text-red-400"
-                          >
-                            ×
-                          </span>
-                        </div>
-                      </button>
-                    ),
-                  )}
-                </div>
-
-                {addingDay === day ? (
-                  <AddChip
-                    isPending={createMutation.isPending}
-                    onCancel={() => setAddingDay(null)}
-                    onSave={(startMinute, endMinute) =>
-                      createMutation.mutate({
-                        weekday: day,
-                        startMinute,
-                        endMinute,
-                      })
-                    }
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setAddingDay(day)}
-                    className="rounded-lg border border-dashed border-line px-2 py-1.5 text-xs text-ink-soft transition-colors duration-150 hover:border-accent-soft hover:text-accent"
-                  >
-                    + Hozzáadás
-                  </button>
+              <div className="flex flex-col gap-1.5">
+                {byDay.get(day)!.map((row) =>
+                  editingId === row.id ? (
+                    <EditChip
+                      key={row.id}
+                      row={row}
+                      isPending={updateMutation.isPending}
+                      onCancel={() => setEditingId(null)}
+                      onSave={(startMinute, endMinute) =>
+                        updateMutation.mutate({
+                          id: row.id,
+                          weekday: row.weekday,
+                          startMinute,
+                          endMinute,
+                        })
+                      }
+                    />
+                  ) : (
+                    <button
+                      key={row.id}
+                      type="button"
+                      onClick={() => setEditingId(row.id)}
+                      className="group rounded-lg border border-accent-soft bg-bg px-2 py-1.5 text-left text-xs text-ink transition-colors duration-150 hover:border-accent"
+                    >
+                      <div className="flex items-center justify-between gap-1">
+                        <span>
+                          {minutesToHHmm(row.startMinute)}
+                          {" – "}
+                          {minutesToHHmm(row.endMinute)}
+                        </span>
+                        <span
+                          role="button"
+                          aria-label="Törlés"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            removeMutation.mutate(row.id);
+                          }}
+                          className="text-ink-soft opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:text-red-600 dark:hover:text-red-400"
+                        >
+                          ×
+                        </span>
+                      </div>
+                    </button>
+                  ),
                 )}
               </div>
-            ))}
-          </div>
+
+              {addingDay === day ? (
+                <AddChip
+                  isPending={createMutation.isPending}
+                  onCancel={() => setAddingDay(null)}
+                  onSave={(startMinute, endMinute) =>
+                    createMutation.mutate({
+                      weekday: day,
+                      startMinute,
+                      endMinute,
+                    })
+                  }
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setAddingDay(day)}
+                  className="rounded-lg border border-dashed border-line px-2 py-1.5 text-xs text-ink-soft transition-colors duration-150 hover:border-accent-soft hover:text-accent"
+                >
+                  + Hozzáadás
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       )}
     </section>
