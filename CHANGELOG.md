@@ -1,3 +1,9 @@
+## [1.34.1](https://github.com/gerencserjani/betti-coaching/compare/v1.34.0...v1.34.1) (2026-10-21)
+
+### Bug Fixes
+
+- remove the in-admin change-password form ([#91](https://github.com/gerencserjani/betti-coaching/issues/91)) ([6f579f1](https://github.com/gerencserjani/betti-coaching/commit/6f579f1138d4bcfa6edebac169500f6c3c93cc6a)), closes [42/#43](https://github.com/gerencserjani/betti-coaching/issues/43) [betti-coaching#86](https://github.com/betti-coaching/issues/86)
+
 # [1.34.0](https://github.com/gerencserjani/betti-coaching/compare/v1.33.0...v1.34.0) (2026-10-21)
 
 ### Features
