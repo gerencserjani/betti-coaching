@@ -98,6 +98,13 @@ export default function EventTypesPage(): ReactElement {
         </button>
       </div>
 
+      <p className="mb-4 text-xs text-ink-soft">
+        Az <strong className="text-ink">Archiválás</strong> elrejti a
+        szolgáltatást az új foglalásokból, de megőrzi a hozzá tartozó korábbi
+        foglalások adatait. Ha egy szolgáltatásnak már volt foglalása, a
+        végleges törlés előtt előbb archiválni kell.
+      </p>
+
       {error && (
         <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
