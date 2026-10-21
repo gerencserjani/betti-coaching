@@ -33,8 +33,6 @@ export default function SettingsPage(): ReactElement {
       ) : (
         <SettingsForm settings={settings} />
       )}
-      <h2 className="mt-8 mb-4 text-lg text-ink">Jelszó megváltoztatása</h2>
-      <ChangePasswordForm />
     </div>
   );
 }
@@ -179,100 +177,6 @@ function SettingsForm({ settings }: { settings: Settings }): ReactElement {
         className="self-start rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
       >
         Mentés
-      </button>
-    </form>
-  );
-}
-
-function ChangePasswordForm(): ReactElement {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [saved, setSaved] = useState(false);
-
-  const mutation = useMutation({
-    mutationFn: adminApi.changePassword,
-    onSuccess: () => {
-      setError(null);
-      setSaved(true);
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
-      setTimeout(() => setSaved(false), 2000);
-    },
-    onError: (err) => setError(getErrorMessage(err)),
-  });
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    if (newPassword !== confirmPassword) {
-      setError("Az új jelszó és a megerősítés nem egyezik.");
-      return;
-    }
-    mutation.mutate({ currentPassword, newPassword });
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex max-w-md flex-col gap-3 rounded-xl border border-line bg-bg-card p-4"
-    >
-      <label className="text-sm">
-        <span className="mb-1.5 block text-[13.5px] text-ink-soft">
-          Jelenlegi jelszó
-        </span>
-        <input
-          type="password"
-          required
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
-        />
-      </label>
-      <label className="text-sm">
-        <span className="mb-1.5 block text-[13.5px] text-ink-soft">
-          Új jelszó (min. 8 karakter)
-        </span>
-        <input
-          type="password"
-          required
-          minLength={8}
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
-        />
-      </label>
-      <label className="text-sm">
-        <span className="mb-1.5 block text-[13.5px] text-ink-soft">
-          Új jelszó megerősítése
-        </span>
-        <input
-          type="password"
-          required
-          minLength={8}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full rounded-lg border border-line bg-bg px-2 py-1.5 text-ink"
-        />
-      </label>
-
-      {error && (
-        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-      )}
-      {saved && (
-        <p className="text-sm text-emerald-700 dark:text-emerald-400">
-          Jelszó megváltoztatva.
-        </p>
-      )}
-
-      <button
-        type="submit"
-        disabled={mutation.isPending}
-        className="self-start rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
-      >
-        Jelszó megváltoztatása
       </button>
     </form>
   );
