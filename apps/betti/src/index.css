@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Tailwind's automatic content detection only scans this app's own
+   directory tree -- packages/coaching-core is a sibling outside it, so
+   without this, every utility class used in its components (which is most
+   of the UI) would silently never get generated. */
+@source "../../../packages/coaching-core/src";
+
 html {
   scroll-behavior: smooth;
 }

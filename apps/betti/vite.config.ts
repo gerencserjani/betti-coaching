@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -6,16 +7,29 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: [
+      // Resolves straight to packages/coaching-core/src as ordinary app
+      // source (not a real npm dependency under node_modules) -- avoids any
+      // question of whether Vite applies its usual TSX/JSX transform to
+      // node_modules content. A subpath import like
+      // "@coaching/core/admin/AdminApp.tsx" resolves the same way, which is
+      // how apps/betti's own lazy()-loaded admin routes reach it without
+      // pulling admin code into this app's main chunk via the barrel.
+      {
+        find: "@coaching/core",
+        replacement: fileURLToPath(
+          new URL("../../packages/coaching-core/src", import.meta.url),
+        ),
+      },
+    ],
+  },
   test: {
-    environment: "jsdom",
-    setupFiles: ["./src/test/setup.ts"],
-    css: false,
-    // Vitest's default include glob is project-wide and would otherwise
-    // also pick up e2e/*.spec.ts -- those use @playwright/test's own
-    // test()/expect(), which fail confusingly (not a clean "wrong runner"
-    // error) when executed through Vitest instead of `playwright test`.
-    // Keeping Vitest's own default excludes and adding e2e/ to them,
-    // rather than replacing the list outright.
+    // No unit/component tests live in this app -- they all moved to
+    // packages/coaching-core along with the code they test. Keeping this
+    // block (rather than deleting it) means `npm test` here still works, it
+    // just currently has nothing to run.
+    passWithNoTests: true,
     exclude: [
       "**/node_modules/**",
       "**/dist/**",
@@ -24,9 +38,5 @@ export default defineConfig({
       "**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,playwright}.config.*",
       "**/e2e/**",
     ],
-    coverage: {
-      provider: "v8",
-      reporter: ["text", "html"],
-    },
   },
 });

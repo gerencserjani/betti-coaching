@@ -4,10 +4,11 @@ import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import ServiceRow from "../components/ServiceRow.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
-import { services } from "../content/services";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 export default function Services(): ReactElement {
   const { t } = useTranslation();
+  const { services } = useCoachConfig();
   const { ref, className } = useRevealOnScroll<HTMLDivElement>();
 
   return (

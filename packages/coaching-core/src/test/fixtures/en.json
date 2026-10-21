@@ -1,0 +1,166 @@
+{
+  "common": {
+    "siteTitle": "Gerencsér Bernadett — Family & Couples Communication Coach",
+    "siteDescription": "Family & couples communication coaching in Szeged, Hungary. Helping you find the words for relationships, assertive communication, and parenting.",
+    "themeToggle": {
+      "toDark": "Switch to dark mode",
+      "toLight": "Switch to light mode"
+    },
+    "menuToggle": {
+      "open": "Open menu",
+      "close": "Close menu"
+    },
+    "nav": {
+      "introduction": "About",
+      "help": "How I can help",
+      "community": "Community",
+      "prices": "Pricing",
+      "booking": "Book a session",
+      "contact": "Contact"
+    }
+  },
+  "hero": {
+    "kicker": "Family & couples communication coach",
+    "headline": "About communication.<br/>About connection.<br/>About you.",
+    "role": "I help you find the words when it's hard to say what's on your mind in your relationships — in a way that brings you closer, not further apart.",
+    "topics": {
+      "partnership": "Relationships",
+      "communication": "Assertive communication",
+      "parenting": "Parenting atmosphere"
+    }
+  },
+  "quoteBlock": {
+    "quote": "“Communication became especially important to me because, as a child, I experienced firsthand what it costs when two people can no longer truly talk to each other.”",
+    "leadIn": "This is where my path toward coaching began — and today I do this work so others don't have to go through the same thing. [CONTENT NEEDED: professional background, training, experience]"
+  },
+  "services": {
+    "heading": "How can I help you?",
+    "intro": "Three areas, three life situations — see which one you recognize yourself in.",
+    "items": {
+      "partnership": {
+        "tag": "Relationship",
+        "title": "Relationship coaching",
+        "situation": "When it's already hard to hear each other, and conversations tend to pull you apart rather than bring you together.",
+        "blockquote": "If you'd finally like to say what's on your mind in a way that brings you closer instead of further apart — let's work on it together."
+      },
+      "communication": {
+        "tag": "Communication",
+        "title": "Assertive communication",
+        "situation": "When you want to say what's on your mind — in a way that preserves the relationship too. \"How do I say it?\"",
+        "chips": [
+          "I want to say no",
+          "I want to set a boundary",
+          "I want to say what hurts me",
+          "I don't want conflict, but I don't want to stay silent either",
+          "I'm always the one who adapts",
+          "It's hard for me to stand up for myself",
+          "I want to be honest without hurting the other person"
+        ]
+      },
+      "parenting": {
+        "tag": "Home",
+        "title": "Parental communication and family atmosphere",
+        "situation": "When you want to show up differently at home. This is for you if the following sound familiar:",
+        "chips": [
+          "\"I yelled at them again.\"",
+          "\"They don't listen to me.\"",
+          "\"How do I set boundaries without punishment?\"",
+          "\"How do I say no without it turning into a fight?\"",
+          "\"My partner and I don't agree on parenting either.\"",
+          "\"What atmosphere are we creating at home?\""
+        ]
+      }
+    }
+  },
+  "community": {
+    "kicker": "Mothers for each other · Women for ourselves",
+    "heading": "Be part of a judgment-free, connection-rich, supportive community.",
+    "body": "Supporting. Connecting. Speaking honestly. A place where you don't have to carry the load alone — where other mothers and women understand what you're going through, and where you can share your thoughts in a safe space.",
+    "cta": "Join us"
+  },
+  "pricing": {
+    "heading": "Pricing",
+    "freeCall": {
+      "badge": "First step",
+      "heading": "Free introductory call",
+      "text": "A short online or in-person conversation where we get to know each other, and find out if I'm the right person for you.",
+      "priceLabel": "Free"
+    },
+    "tableCaption": "Coaching sessions",
+    "minutesUnit": "min"
+  },
+  "booking": {
+    "heading": "Book a session",
+    "intro": "Pick a service, then an available time.",
+    "loadingEventTypes": "Please wait a moment while the calendar loads…",
+    "loadingEventTypesExtended": "This can take a few extra seconds — thanks for your patience!",
+    "noEventTypes": "No services are available right now.",
+    "pickService": "Choose a service",
+    "change": "Change",
+    "free": "Free",
+    "detailsHeading": "Enter your details",
+    "location": {
+      "IN_PERSON": "In person",
+      "GOOGLE_MEET": "Google Meet",
+      "PHONE": "Phone"
+    },
+    "calendar": {
+      "prevMonth": "Previous month",
+      "nextMonth": "Next month",
+      "loading": "Loading available times…",
+      "noSlotsThisMonth": "No available times this month.",
+      "noSlotsThisDay": "No available times on this day.",
+      "selectDay": "Select a highlighted day to see available times.",
+      "selectLocationFirst": "Pick a location to see available times.",
+      "selectServiceFirst": "Choose a service first"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "note": "Note (optional)",
+      "phoneInvalid": "Enter a valid phone number.",
+      "submit": "Confirm booking",
+      "submitting": "Booking…",
+      "back": "Back"
+    },
+    "confirmation": {
+      "heading": "Booking confirmed!",
+      "body": "You'll get a confirmation email shortly with the details and a calendar attachment.",
+      "newBooking": "Book another session"
+    },
+    "manage": {
+      "heading": "Your booking",
+      "loading": "Loading…",
+      "notFound": "No booking found for this link.",
+      "cancelledLabel": "This booking has been cancelled.",
+      "cancel": "Cancel",
+      "cancelReasonLabel": "Reason (optional)",
+      "cancelConfirm": "Confirm cancellation",
+      "reschedule": "Reschedule",
+      "rescheduleIntro": "Pick a new time.",
+      "rescheduleSuccessHeading": "Your booking has been rescheduled!",
+      "rescheduleSuccessBody": "You'll receive an email confirming the new time shortly.",
+      "backToHome": "Back to homepage",
+      "noticeWindowBlocked": "This booking can only be changed or cancelled at least {{hours}} hours before the appointment. Please contact us directly if you need to make a change.",
+      "back": "Back"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "unavailable": "Online booking is temporarily unavailable for maintenance. Please email or call by phone:"
+    }
+  },
+  "contact": {
+    "heading": "Let's start the conversation",
+    "intro": "Feel free to write or call — the first, 30-minute conversation is free, with no obligation.",
+    "labels": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "mapLink": "Open in Google Maps ↗"
+  },
+  "footer": {
+    "tagline": "Family & couples communication coach"
+  }
+}

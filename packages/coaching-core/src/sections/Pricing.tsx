@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
-import { freeCallMinutes, priceRows } from "../content/pricing";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 function formatHuf(amount: number, language: string): string {
   const locale = language.startsWith("hu") ? "hu-HU" : "en-US";
@@ -12,6 +12,9 @@ function formatHuf(amount: number, language: string): string {
 
 export default function Pricing(): ReactElement {
   const { t, i18n } = useTranslation();
+  const {
+    pricing: { freeCallMinutes, priceRows },
+  } = useCoachConfig();
   const { ref, className } = useRevealOnScroll<HTMLDivElement>();
 
   return (

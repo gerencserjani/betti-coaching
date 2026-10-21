@@ -1,7 +1,4 @@
-export interface NavLink {
-  id: string;
-  labelKey: string;
-}
+import type { NavLink } from "@coaching/core";
 
 export const navLinks: NavLink[] = [
   { id: "bemutatkozas", labelKey: "common.nav.introduction" },

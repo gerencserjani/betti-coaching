@@ -2,13 +2,13 @@ import type { ReactElement } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
-import heroArt from "../assets/hero-art.webp";
-import heroArtSmall from "../assets/hero-art-560w.webp";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 const topics = ["partnership", "communication", "parenting"] as const;
 
 export default function Hero(): ReactElement {
   const { t } = useTranslation();
+  const { heroImage } = useCoachConfig();
 
   return (
     <Section
@@ -40,8 +40,8 @@ export default function Hero(): ReactElement {
           </div>
 
           <img
-            src={heroArt}
-            srcSet={`${heroArtSmall} 560w, ${heroArt} 720w`}
+            src={heroImage.src}
+            srcSet={heroImage.srcSet}
             sizes="(min-width: 860px) 500px, 280px"
             alt=""
             aria-hidden="true"

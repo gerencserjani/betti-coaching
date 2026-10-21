@@ -1,37 +1,15 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import hu from "./locales/hu.json";
-import en from "./locales/en.json";
-import { siteUrl } from "../content/site";
 
 export const supportedLanguages = ["hu", "en"] as const;
 export type SupportedLanguage = (typeof supportedLanguages)[number];
-
-void i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources: {
-      hu: { translation: hu },
-      en: { translation: en },
-    },
-    fallbackLng: "hu",
-    supportedLngs: supportedLanguages,
-    detection: {
-      order: ["querystring", "localStorage", "navigator"],
-      lookupQuerystring: "lang",
-      lookupLocalStorage: "lang",
-      caches: ["localStorage"],
-    },
-    interpolation: { escapeValue: false },
-  });
 
 function setMetaContent(selector: string, content: string) {
   document.querySelector(selector)?.setAttribute("content", content);
 }
 
-function syncDocumentMeta(lng: string) {
+function syncDocumentMeta(lng: string, siteUrl: string) {
   document.documentElement.lang = lng;
 
   const title = i18n.t("common.siteTitle");
@@ -59,7 +37,40 @@ function syncDocumentMeta(lng: string) {
   setMetaContent('meta[property="og:url"]', canonicalUrl);
 }
 
-syncDocumentMeta(i18n.language);
-i18n.on("languageChanged", syncDocumentMeta);
+/**
+ * Each app owns its own marketing copy (locale JSON) and absolute site URL
+ * (VITE_SITE_URL) -- this just wires i18next up with whatever the calling
+ * app supplies, instead of this shared package reaching into one specific
+ * app's content files.
+ */
+export function initI18n(resources: {
+  hu: object;
+  en: object;
+  siteUrl: string;
+}): typeof i18n {
+  void i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      resources: {
+        hu: { translation: resources.hu },
+        en: { translation: resources.en },
+      },
+      fallbackLng: "hu",
+      supportedLngs: supportedLanguages,
+      detection: {
+        order: ["querystring", "localStorage", "navigator"],
+        lookupQuerystring: "lang",
+        lookupLocalStorage: "lang",
+        caches: ["localStorage"],
+      },
+      interpolation: { escapeValue: false },
+    });
+
+  syncDocumentMeta(i18n.language, resources.siteUrl);
+  i18n.on("languageChanged", (lng) => syncDocumentMeta(lng, resources.siteUrl));
+
+  return i18n;
+}
 
 export default i18n;

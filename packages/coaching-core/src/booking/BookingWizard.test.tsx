@@ -5,6 +5,8 @@ import { http, HttpResponse } from "msw";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { server } from "../test/server";
 import BookingWizard from "./BookingWizard";
+import CoachConfigProvider from "../CoachConfigProvider.tsx";
+import { testCoachConfig } from "../test/fixtures/coachConfig.ts";
 import type {
   BookingWithRelations,
   PublicEventType,
@@ -47,9 +49,11 @@ function renderWizard() {
     defaultOptions: { queries: { retry: false } },
   });
   return render(
-    <QueryClientProvider client={queryClient}>
-      <BookingWizard />
-    </QueryClientProvider>,
+    <CoachConfigProvider config={testCoachConfig}>
+      <QueryClientProvider client={queryClient}>
+        <BookingWizard />
+      </QueryClientProvider>
+    </CoachConfigProvider>,
   );
 }
 

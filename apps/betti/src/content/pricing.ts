@@ -1,7 +1,4 @@
-export interface PriceRow {
-  minutes: number;
-  priceHuf: number;
-}
+import type { PriceRow } from "@coaching/core";
 
 // Keep in sync with the actual Cal.com event types once configured (#17).
 export const freeCallMinutes = 30;

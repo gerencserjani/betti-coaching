@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
-import type { Service } from "../content/services";
+import type { Service } from "../CoachConfig.ts";
 
 export default function ServiceRow({
   keyPrefix,

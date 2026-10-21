@@ -17,6 +17,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Matches the Vite alias in vite.config.ts -- @coaching/core resolves
+       straight to the package's source, not a built/published artifact. */
+    "paths": {
+      "@coaching/core": ["../../packages/coaching-core/src/index.ts"],
+      "@coaching/core/*": ["../../packages/coaching-core/src/*"]
+    },
+
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,

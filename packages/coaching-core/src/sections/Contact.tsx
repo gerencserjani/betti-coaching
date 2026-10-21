@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
-import { contactInfo } from "../content/contact";
+import { useCoachConfig } from "../CoachConfig.ts";
 import PinIcon from "../components/icons/PinIcon";
 
 const linkClassName =
@@ -11,6 +11,7 @@ const linkClassName =
 
 export default function Contact(): ReactElement {
   const { t } = useTranslation();
+  const { contact: contactInfo } = useCoachConfig();
   const { ref, className } = useRevealOnScroll<HTMLDivElement>();
 
   return (

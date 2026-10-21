@@ -2,8 +2,7 @@ import { useState, type ReactElement } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import ThemeToggle from "../components/ThemeToggle.tsx";
-import { siteName } from "../content/site";
-import brandLogo from "../assets/brand-logo.webp";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 const navItems = [
   { to: "/admin/bookings", label: "Foglalások" },
@@ -23,6 +22,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function AdminLayout(): ReactElement {
   const { coach, logout } = useAuth();
+  const { siteName, logo } = useCoachConfig();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -33,7 +33,7 @@ export default function AdminLayout(): ReactElement {
       <div className="border-b border-line bg-bg-card md:hidden">
         <div className="flex items-center gap-3 p-3">
           <img
-            src={brandLogo}
+            src={logo}
             alt={siteName}
             className="h-9 w-9 shrink-0 transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
           />
@@ -79,7 +79,7 @@ export default function AdminLayout(): ReactElement {
 
       <aside className="hidden w-56 shrink-0 flex-col border-r border-line bg-bg-card p-4 md:flex">
         <img
-          src={brandLogo}
+          src={logo}
           alt={siteName}
           className="mb-5 h-14 w-14 transition-[filter] duration-200 dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1.15)_contrast(0.92)]"
         />

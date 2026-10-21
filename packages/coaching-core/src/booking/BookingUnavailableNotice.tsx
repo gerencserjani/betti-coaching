@@ -1,9 +1,10 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { contactInfo } from "../content/contact";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 export default function BookingUnavailableNotice(): ReactElement {
   const { t } = useTranslation();
+  const { contact: contactInfo } = useCoachConfig();
 
   return (
     <div className="rounded-2xl border border-line bg-bg-card p-5 text-sm text-ink-soft">

@@ -3,12 +3,11 @@ import { useTranslation } from "react-i18next";
 import Section from "../components/Section.tsx";
 import Container from "../components/Container.tsx";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
-import { communityCtaHref } from "../content/community";
-import communityArt from "../assets/community-art.webp";
-import communityArtSmall from "../assets/community-art-520w.webp";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 export default function Community(): ReactElement {
   const { t } = useTranslation();
+  const { communityImage, communityCtaHref } = useCoachConfig();
   const { ref, className } = useRevealOnScroll<HTMLDivElement>();
 
   const ctaClassName =
@@ -28,8 +27,8 @@ export default function Community(): ReactElement {
           ].join(" ")}
         >
           <img
-            src={communityArt}
-            srcSet={`${communityArtSmall} 520w, ${communityArt} 700w`}
+            src={communityImage.src}
+            srcSet={communityImage.srcSet}
             sizes="(min-width: 860px) 420px, 260px"
             alt=""
             aria-hidden="true"

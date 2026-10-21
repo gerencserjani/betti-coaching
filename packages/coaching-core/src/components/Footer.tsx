@@ -1,10 +1,11 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import Container from "./Container.tsx";
-import { siteName } from "../content/site";
+import { useCoachConfig } from "../CoachConfig.ts";
 
 export default function Footer(): ReactElement {
   const { t } = useTranslation();
+  const { siteName } = useCoachConfig();
   const year = new Date().getFullYear();
 
   return (

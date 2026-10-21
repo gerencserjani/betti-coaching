@@ -1,8 +1,4 @@
-export interface Service {
-  id: string;
-  keyPrefix: string;
-  hasChips: boolean;
-}
+import type { Service } from "@coaching/core";
 
 export const services: Service[] = [
   {

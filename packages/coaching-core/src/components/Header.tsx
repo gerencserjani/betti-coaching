@@ -3,13 +3,8 @@ import { useTranslation } from "react-i18next";
 import Container from "./Container.tsx";
 import ThemeToggle from "./ThemeToggle.tsx";
 import MenuIcon from "./icons/MenuIcon";
-import { navLinks, contactLink } from "../content/navLinks";
-import { siteName } from "../content/site";
 import { useActiveSection } from "../hooks/useActiveSection";
-import brandLogo from "../assets/brand-logo.webp";
-
-const allLinks = [...navLinks, contactLink];
-const sectionIds = allLinks.map((link) => link.id);
+import { useCoachConfig } from "../CoachConfig.ts";
 
 const desktopLinkClasses =
   "relative pb-[3px] no-underline transition-colors duration-200 hover:text-accent after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300";
@@ -19,6 +14,9 @@ const mobileLinkClasses =
 
 export default function Header(): ReactElement {
   const { t } = useTranslation();
+  const { siteName, logo, navLinks, contactLink } = useCoachConfig();
+  const allLinks = [...navLinks, contactLink];
+  const sectionIds = allLinks.map((link) => link.id);
   const [menuOpen, setMenuOpen] = useState(false);
   const activeId = useActiveSection(sectionIds);
 
@@ -27,9 +25,12 @@ export default function Header(): ReactElement {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/88 backdrop-blur-[10px]">
       <Container className="flex h-[76px] items-center justify-between">
-        <a href="#bemutatkozas" className="flex items-center no-underline">
+        <a
+          href={`#${navLinks[0]?.id}`}
+          className="flex items-center no-underline"
+        >
           <img
-            src={brandLogo}
+            src={logo}
             alt={siteName}
             width={160}
             height={160}

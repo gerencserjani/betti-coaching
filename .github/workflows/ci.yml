@@ -13,6 +13,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run lint --workspace=@coaching/core
+      - run: npm test --workspace=@coaching/core
       - run: npm run lint --workspace=betti-coaching
       - run: npm test --workspace=betti-coaching
       - run: npm run build --workspace=betti-coaching
