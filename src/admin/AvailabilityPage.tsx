@@ -72,6 +72,14 @@ function OverridesSection(): ReactElement {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    // Checked here, not just left to the backend, so this never surfaces
+    // the backend's own (English) validation message -- the admin UI is
+    // Hungarian throughout, see TimeInput24's own comment.
+    if (!isUnavailable && hhmmToMinutes(start) >= hhmmToMinutes(end)) {
+      setError("A kezdésnek korábban kell lennie, mint a végének.");
+      return;
+    }
+    setError(null);
     createMutation.mutate({
       date,
       isUnavailable,
@@ -228,6 +236,22 @@ function EditOverrideRow({
   const [end, setEnd] = useState(
     row.endMinute !== null ? minutesToHHmm(row.endMinute) : "17:00",
   );
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSave = () => {
+    if (!isUnavailable && hhmmToMinutes(start) >= hhmmToMinutes(end)) {
+      setError("A kezdésnek korábban kell lennie, mint a végének.");
+      return;
+    }
+    setError(null);
+    onSave({
+      date,
+      isUnavailable,
+      ...(isUnavailable
+        ? {}
+        : { startMinute: hhmmToMinutes(start), endMinute: hhmmToMinutes(end) }),
+    });
+  };
 
   return (
     <li className="flex flex-wrap items-end gap-2 rounded-lg border border-accent-soft bg-bg px-3 py-2 text-sm">
@@ -265,22 +289,14 @@ function EditOverrideRow({
           </label>
         </>
       )}
+      {error && (
+        <p className="w-full text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
       <div className="ml-auto flex gap-3">
         <button
           type="button"
           disabled={isPending}
-          onClick={() =>
-            onSave({
-              date,
-              isUnavailable,
-              ...(isUnavailable
-                ? {}
-                : {
-                    startMinute: hhmmToMinutes(start),
-                    endMinute: hhmmToMinutes(end),
-                  }),
-            })
-          }
+          onClick={handleSave}
           className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Mentés

@@ -188,29 +188,65 @@ export default function WeeklyAvailabilityGrid(): ReactElement {
   );
 }
 
-function EditChip({
-  row,
+/**
+ * Shared by EditChip/AddChip below -- both are "a start time, an end time,
+ * Mentés/Mégse" with the exact same labeling and validation, just different
+ * initial values and a different border color to tell them apart (editing
+ * an existing block vs. adding a new one).
+ */
+function ChipTimeForm({
+  initialStart,
+  initialEnd,
   isPending,
+  borderClass,
   onSave,
   onCancel,
 }: {
-  row: WeeklyAvailability;
+  initialStart: string;
+  initialEnd: string;
   isPending: boolean;
+  borderClass: string;
   onSave: (startMinute: number, endMinute: number) => void;
   onCancel: () => void;
 }): ReactElement {
-  const [start, setStart] = useState(minutesToHHmm(row.startMinute));
-  const [end, setEnd] = useState(minutesToHHmm(row.endMinute));
+  const [start, setStart] = useState(initialStart);
+  const [end, setEnd] = useState(initialEnd);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSave = () => {
+    const startMinute = hhmmToMinutes(start);
+    const endMinute = hhmmToMinutes(end);
+    // Checked here, not just left to the backend, so this never surfaces
+    // the backend's own (English) validation message -- the admin UI is
+    // Hungarian throughout, see TimeInput24's own comment.
+    if (startMinute >= endMinute) {
+      setError("A kezdésnek korábban kell lennie, mint a végének.");
+      return;
+    }
+    setError(null);
+    onSave(startMinute, endMinute);
+  };
 
   return (
-    <div className="flex flex-col gap-1.5 rounded-lg border border-accent bg-bg px-2 py-1.5">
-      <TimeInput24 value={start} onChange={setStart} />
-      <TimeInput24 value={end} onChange={setEnd} />
+    <div
+      className={`flex flex-col gap-1.5 rounded-lg border ${borderClass} bg-bg px-2 py-1.5`}
+    >
+      <label className="flex flex-col gap-0.5">
+        <span className="text-[10px] text-ink-soft">Kezdés</span>
+        <TimeInput24 value={start} onChange={setStart} />
+      </label>
+      <label className="flex flex-col gap-0.5">
+        <span className="text-[10px] text-ink-soft">Vége</span>
+        <TimeInput24 value={end} onChange={setEnd} />
+      </label>
+      {error && (
+        <p className="text-[10px] text-red-600 dark:text-red-400">{error}</p>
+      )}
       <div className="flex gap-2">
         <button
           type="button"
           disabled={isPending}
-          onClick={() => onSave(hhmmToMinutes(start), hhmmToMinutes(end))}
+          onClick={handleSave}
           className="flex-1 rounded-full bg-ink px-2 py-1 text-xs text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Mentés
@@ -227,6 +263,29 @@ function EditChip({
   );
 }
 
+function EditChip({
+  row,
+  isPending,
+  onSave,
+  onCancel,
+}: {
+  row: WeeklyAvailability;
+  isPending: boolean;
+  onSave: (startMinute: number, endMinute: number) => void;
+  onCancel: () => void;
+}): ReactElement {
+  return (
+    <ChipTimeForm
+      initialStart={minutesToHHmm(row.startMinute)}
+      initialEnd={minutesToHHmm(row.endMinute)}
+      isPending={isPending}
+      borderClass="border-accent"
+      onSave={onSave}
+      onCancel={onCancel}
+    />
+  );
+}
+
 function AddChip({
   isPending,
   onSave,
@@ -236,30 +295,14 @@ function AddChip({
   onSave: (startMinute: number, endMinute: number) => void;
   onCancel: () => void;
 }): ReactElement {
-  const [start, setStart] = useState("09:00");
-  const [end, setEnd] = useState("17:00");
-
   return (
-    <div className="flex flex-col gap-1.5 rounded-lg border border-accent-soft bg-bg px-2 py-1.5">
-      <TimeInput24 value={start} onChange={setStart} />
-      <TimeInput24 value={end} onChange={setEnd} />
-      <div className="flex gap-2">
-        <button
-          type="button"
-          disabled={isPending}
-          onClick={() => onSave(hhmmToMinutes(start), hhmmToMinutes(end))}
-          className="flex-1 rounded-full bg-ink px-2 py-1 text-xs text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
-        >
-          Mentés
-        </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="text-xs text-ink-soft hover:underline"
-        >
-          Mégse
-        </button>
-      </div>
-    </div>
+    <ChipTimeForm
+      initialStart="09:00"
+      initialEnd="17:00"
+      isPending={isPending}
+      borderClass="border-accent-soft"
+      onSave={onSave}
+      onCancel={onCancel}
+    />
   );
 }
