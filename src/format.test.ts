@@ -12,6 +12,10 @@ function withPlainSpaces(s: string): string {
 }
 
 describe("formatPriceHuf", () => {
+  it("returns null for null -- no price shown at all, distinct from free", () => {
+    expect(formatPriceHuf(null, "hu", "Díjmentes")).toBeNull();
+  });
+
   it("returns the free label for zero", () => {
     expect(formatPriceHuf(0, "hu", "Díjmentes")).toBe("Díjmentes");
   });
@@ -21,7 +25,7 @@ describe("formatPriceHuf", () => {
   });
 
   it("formats a positive price with hu-HU grouping for a hu language tag", () => {
-    expect(withPlainSpaces(formatPriceHuf(12500, "hu", "Díjmentes"))).toBe(
+    expect(withPlainSpaces(formatPriceHuf(12500, "hu", "Díjmentes")!)).toBe(
       "12 500 HUF",
     );
   });
@@ -34,7 +38,7 @@ describe("formatPriceHuf", () => {
     // Below 10,000 hu-HU's Intl grouping doesn't insert a separator at all
     // (a real ICU quirk, not a bug in formatPriceHuf) -- use a value well
     // above that threshold so this test actually exercises the grouping.
-    expect(withPlainSpaces(formatPriceHuf(12500, "hu-HU", "Díjmentes"))).toBe(
+    expect(withPlainSpaces(formatPriceHuf(12500, "hu-HU", "Díjmentes")!)).toBe(
       "12 500 HUF",
     );
   });

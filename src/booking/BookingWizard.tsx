@@ -257,6 +257,11 @@ function BookingSummary({
   onChangeSlot: (() => void) | undefined;
 }): ReactElement {
   const { t, i18n } = useTranslation();
+  const priceLabel = formatPriceHuf(
+    eventType.price,
+    i18n.language,
+    t("booking.free"),
+  );
 
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-line bg-bg-card p-5 sm:sticky sm:top-24 sm:self-start">
@@ -274,8 +279,8 @@ function BookingSummary({
           )}
         </div>
         <div className="text-sm text-ink-soft">
-          {eventType.durationMinutes} {t("pricing.minutesUnit")} ·{" "}
-          {formatPriceHuf(eventType.price, i18n.language, t("booking.free"))}
+          {eventType.durationMinutes} {t("pricing.minutesUnit")}
+          {priceLabel ? ` · ${priceLabel}` : null}
         </div>
         {eventType.description && (
           <p className="mt-2 text-sm text-ink-soft">{eventType.description}</p>
