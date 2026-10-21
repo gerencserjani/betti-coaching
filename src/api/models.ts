@@ -96,7 +96,9 @@ export interface WeeklyAvailability {
 export interface AvailabilityOverride {
   id: string;
   coachId: string;
-  /** "YYYY-MM-DD" */
+  /** Full ISO datetime at UTC midnight (e.g. "2026-11-05T00:00:00.000Z"),
+   * not a bare date despite the Prisma `@db.Date` column -- see
+   * formatDate()'s own comment. */
   date: string;
   isUnavailable: boolean;
   startMinute: number | null;

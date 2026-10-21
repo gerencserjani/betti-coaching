@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
-import { TimeInput24 } from "./AvailabilityPage";
+import { TimeInput24 } from "./TimeInput24";
 
 // Controlled component -- feed onChange back into value like a real caller.
 function Harness({

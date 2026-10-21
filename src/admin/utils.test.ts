@@ -35,6 +35,14 @@ describe("formatDate", () => {
   it("formats an arbitrary date correctly", () => {
     expect(formatDate("2026-03-29")).toBe("2026. márc. 29.");
   });
+
+  it("handles a full ISO datetime, not just a bare date -- the real shape AvailabilityOverride.date comes back as", () => {
+    // Regression test: this used to produce "Invalid Date" because
+    // splitting "2026-11-05T00:00:00.000Z" on "-" leaves the time/timezone
+    // suffix glued onto the day ("05T00:00:00.000Z"), which Number()
+    // can't parse.
+    expect(formatDate("2026-11-05T00:00:00.000Z")).toBe("2026. nov. 5.");
+  });
 });
 
 // hu-HU's Intl.NumberFormat grouping separator is a non-breaking space,
