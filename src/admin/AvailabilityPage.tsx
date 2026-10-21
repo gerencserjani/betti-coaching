@@ -112,7 +112,7 @@ function OverridesSection(): ReactElement {
 
       <form
         onSubmit={handleSubmit}
-        className="mb-4 flex flex-wrap items-end gap-2 rounded-lg border border-line bg-bg p-3"
+        className="mb-4 flex flex-col gap-3 rounded-lg border border-line bg-bg p-3"
       >
         <label className="text-sm">
           <span className="mb-1.5 block text-[13.5px] text-ink-soft">
@@ -120,16 +120,17 @@ function OverridesSection(): ReactElement {
           </span>
           <DatePicker value={date} onChange={setDate} bg="bg-bg-card" />
         </label>
-        <label className="flex items-center gap-1.5 text-sm text-ink-soft">
+        <label className="flex items-center gap-2 text-sm text-ink-soft">
           <input
             type="checkbox"
             checked={isUnavailable}
             onChange={(e) => setIsUnavailable(e.target.checked)}
+            className="h-4 w-4 cursor-pointer accent-[var(--accent)]"
           />
           Egész napos szabadnap
         </label>
         {!isUnavailable && (
-          <>
+          <div className="flex flex-wrap items-end gap-2">
             <label className="text-sm">
               <span className="mb-1.5 block text-[13.5px] text-ink-soft">
                 Kezdés
@@ -152,12 +153,12 @@ function OverridesSection(): ReactElement {
                 bg="bg-bg-card"
               />
             </label>
-          </>
+          </div>
         )}
         <button
           type="submit"
           disabled={createMutation.isPending || !date}
-          className="rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
+          className="self-start rounded-full bg-ink px-4 py-1.5 text-sm text-bg transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
         >
           Hozzáadás
         </button>
@@ -282,22 +283,23 @@ function EditOverrideRow({
   return (
     <li
       ref={containerRef}
-      className="flex flex-wrap items-end gap-2 rounded-lg border border-accent-soft bg-bg px-3 py-2 text-sm"
+      className="flex flex-col gap-3 rounded-lg border border-accent-soft bg-bg px-3 py-3 text-sm"
     >
       <label className="text-sm">
         <span className="mb-1.5 block text-[13.5px] text-ink-soft">Dátum</span>
         <DatePicker value={date} onChange={setDate} bg="bg-bg-card" />
       </label>
-      <label className="flex items-center gap-1.5 text-sm text-ink-soft">
+      <label className="flex items-center gap-2 text-sm text-ink-soft">
         <input
           type="checkbox"
           checked={isUnavailable}
           onChange={(e) => setIsUnavailable(e.target.checked)}
+          className="h-4 w-4 cursor-pointer accent-[var(--accent)]"
         />
         Egész napos szabadnap
       </label>
       {!isUnavailable && (
-        <>
+        <div className="flex flex-wrap items-end gap-2">
           <label className="text-sm">
             <span className="mb-1.5 block text-[13.5px] text-ink-soft">
               Kezdés
@@ -320,12 +322,12 @@ function EditOverrideRow({
               bg="bg-bg-card"
             />
           </label>
-        </>
+        </div>
       )}
       {error && (
-        <p className="w-full text-sm text-red-600 dark:text-red-400">{error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
-      <div className="ml-auto flex gap-3">
+      <div className="flex gap-3">
         <button
           type="button"
           disabled={isPending}
