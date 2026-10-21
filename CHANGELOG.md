@@ -1,3 +1,9 @@
+# [1.32.0](https://github.com/gerencserjani/betti-coaching/compare/v1.31.0...v1.32.0) (2026-10-21)
+
+### Features
+
+- brand name/tagline fields on the Settings page ([#88](https://github.com/gerencserjani/betti-coaching/issues/88)) ([e3a58cb](https://github.com/gerencserjani/betti-coaching/commit/e3a58cb5ed93eadf4863b254971c2e23539c52cb)), closes [#33](https://github.com/gerencserjani/betti-coaching/issues/33)
+
 # [1.31.0](https://github.com/gerencserjani/betti-coaching/compare/v1.30.0...v1.31.0) (2026-10-20)
 
 ### Features
