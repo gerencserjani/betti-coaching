@@ -146,16 +146,26 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 
 Hosted on [Vercel](https://vercel.com), auto-deploying on every push to
 `main` (`vercel.json` just has the SPA rewrite). Production/preview values
-for `VITE_SITE_URL`, `VITE_API_URL`, and `VITE_GOOGLE_PLACES_API_KEY` are
-set in Vercel's own dashboard, overriding the committed `.env`'s localhost
-defaults during the Vercel build.
+for every `VITE_*` var (`VITE_SITE_URL`, `VITE_API_URL`, `VITE_COACH_ID`,
+`VITE_SITE_NAME`, `VITE_SITE_TITLE`, `VITE_SITE_DESCRIPTION`,
+`VITE_GOOGLE_PLACES_API_KEY`) are set in Vercel's own dashboard, overriding
+the committed `.env`'s localhost defaults during the Vercel build.
 
-**Vercel project setting:** since this app now lives at `apps/betti` inside
-the monorepo (not the repo root), the Vercel project's **Root Directory**
-setting must be set to `apps/betti` -- Settings → General → Root Directory
-in the Vercel dashboard. This is a one-time manual change after the
-monorepo migration; Vercel's own `npm install`/build steps then run with
-that as the working directory and pick up `vercel.json` from there.
+**Vercel project settings for the monorepo** (Settings → Build and
+Deployment in the Vercel dashboard) -- both required, done once after the
+monorepo migration:
+
+- **Root Directory** → `apps/betti`, with "Include files outside the root
+  directory in the Build Step" left enabled (needed so the build can reach
+  `packages/coaching-core`, which sits outside `apps/betti`).
+- **Build Command override** → `npm run build`. Without this, Vercel's own
+  Nx-monorepo auto-detection guesses the Nx project name from the _folder_
+  name (`betti`) instead of the name actually configured in
+  `package.json` (`betti-coaching`), generates `cd ../.. && npx nx build
+betti`, and fails with `NX Cannot find project 'betti'` -- hit this for
+  real the first time this app was pointed at `apps/betti` on Vercel.
+  Overriding the Build Command bypasses that auto-detection and just runs
+  this app's own `package.json` `build` script directly.
 
 Production domain: **gerencserbernadettcoaching.hu** (DNS at Forpsi; `www` is
 the canonical host, the apex 308-redirects to it — both are registered as

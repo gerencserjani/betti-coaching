@@ -73,8 +73,19 @@ emails an accept-invite link. The resulting coach id is this app's
 ## 6. Deploy
 
 - New Vercel project, **Root Directory** set to `apps/<coach-slug>`
-  (Settings → General) -- this is what makes Vercel find that app's own
-  `vercel.json`/`package.json` inside the monorepo.
+  (Settings → Build and Deployment) -- this is what makes Vercel find that
+  app's own `vercel.json`/`package.json` inside the monorepo. Leave
+  "Include files outside the root directory in the Build Step" enabled
+  (needed to reach `packages/coaching-core`).
+- **Also override the Build Command** to `npm run build` on that same
+  settings page. Required, not optional: Vercel's own Nx-monorepo
+  auto-detection guesses the Nx project name from the _app's folder name_
+  rather than its `package.json` name, and those two differ here (folder
+  `apps/betti`, package name `betti-coaching`) -- confirmed by hitting
+  `NX Cannot find project 'betti'` the first time this was set up. If the
+  new app's folder name and `package.json` `"name"` happen to match
+  exactly, this override may not be necessary -- but setting it anyway
+  costs nothing and sidesteps the question.
 - Set `VITE_SITE_URL`, `VITE_API_URL`, `VITE_COACH_ID`, `VITE_SITE_NAME`,
   `VITE_SITE_TITLE`, `VITE_SITE_DESCRIPTION`, `VITE_GOOGLE_PLACES_API_KEY`
   in that Vercel project's own dashboard, overriding the committed `.env`
