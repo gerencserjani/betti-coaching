@@ -1,3 +1,9 @@
+# [1.35.0](https://github.com/gerencserjani/betti-coaching/compare/v1.34.1...v1.35.0) (2026-10-21)
+
+### Features
+
+- polish the Availability admin page ([#93](https://github.com/gerencserjani/betti-coaching/issues/93)) ([d6b61a2](https://github.com/gerencserjani/betti-coaching/commit/d6b61a2d1186daaa8a48f32d2579daf22a7e10db))
+
 ## [1.34.1](https://github.com/gerencserjani/betti-coaching/compare/v1.34.0...v1.34.1) (2026-10-21)
 
 ### Bug Fixes
