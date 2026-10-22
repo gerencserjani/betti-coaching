@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/gerencserjani/coach-monorepo/compare/v1.35.0...v1.36.0) (2026-10-22)
+
+### Features
+
+- add scaffold generator script for new coach apps (refs [#97](https://github.com/gerencserjani/coach-monorepo/issues/97)) ([780d1f7](https://github.com/gerencserjani/coach-monorepo/commit/780d1f71718913962ebf6c156a70ec97b36202b1))
+- generify ci/release workflows across every apps/* (refs [#96](https://github.com/gerencserjani/coach-monorepo/issues/96)) ([f3ac32c](https://github.com/gerencserjani/coach-monorepo/commit/f3ac32c818c617b71f4faeb719d51bdaa2ecada4)), closes [#97](https://github.com/gerencserjani/coach-monorepo/issues/97)
+
 # [1.35.0](https://github.com/gerencserjani/betti-coaching/compare/v1.34.1...v1.35.0) (2026-10-21)
 
 ### Features
