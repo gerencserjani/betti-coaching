@@ -1,5 +1,5 @@
 {
-  "name": "coaching-skeleton",
+  "name": "coach-monorepo",
   "private": true,
   "workspaces": [
     "apps/*",

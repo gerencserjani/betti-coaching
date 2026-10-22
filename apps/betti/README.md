@@ -138,7 +138,7 @@ doesn't run the test suites itself.
 
 ## Project workflow
 
-Work is tracked as [GitHub issues](https://github.com/gerencserjani/betti-coaching/issues) on the [project board](https://github.com/users/gerencserjani/projects/1), one issue per feature/section.
+Work is tracked as [GitHub issues](https://github.com/gerencserjani/coach-monorepo/issues) on the [project board](https://github.com/users/gerencserjani/projects/1), one issue per feature/section.
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`, ...) so `semantic-release` can version and release automatically.
 

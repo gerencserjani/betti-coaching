@@ -1,4 +1,4 @@
-# coaching-skeleton
+# coach-monorepo
 
 A monorepo for coach-facing marketing + booking sites, each sharing the same
 components, admin dashboard, and booking flow via `packages/coaching-core`,

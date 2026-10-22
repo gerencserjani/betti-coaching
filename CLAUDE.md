@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues live as GitHub issues in this repo (gerencserjani/betti-coaching), managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues live as GitHub issues in this repo (gerencserjani/coach-monorepo), managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Domain docs
 
