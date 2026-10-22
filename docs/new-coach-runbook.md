@@ -93,6 +93,30 @@ emails an accept-invite link. The resulting coach id is this app's
 - DNS for the real domain, pointed at Vercel.
 - Add both the apex and `www` domains to the backend's `AllowedOrigin`
   allow-list (see `coach-calendar`'s own `CONTEXT.md`).
+- **Set a proper "Ignored Build Step"** (Settings → Build and Deployment,
+  below Root Directory) on _every_ coach's Vercel project once there are
+  two or more apps -- not needed with only one app, since literally
+  everything that could change necessarily affects the one app that
+  exists. Vercel's own "Skip deployments when there are no changes to the
+  root directory or its dependencies" toggle (already on) is **not
+  sufficient on its own**: it infers "dependencies" from the package
+  manager's dependency graph, but `apps/*` consume `@coaching/core` through
+  a Vite/TS path alias (see `vite.config.ts`'s own comment on why), not a
+  real `package.json` dependency entry -- so Vercel has no declared edge
+  telling it that a `packages/coaching-core` change affects any given app,
+  and would likely skip a deploy that should have happened. The correct
+  fix is an Ignored Build Step script using Nx's own affected-detection,
+  which reads the real import graph instead of package.json:
+  ```bash
+  npx nx show projects --affected --base=$VERCEL_GIT_PREVIOUS_SHA --head=$VERCEL_GIT_COMMIT_SHA | grep -qx betti-coaching && exit 1 || exit 0
+  ```
+  (swap `betti-coaching` for the new app's own `package.json` `"name"`;
+  exit `1` tells Vercel to proceed with the build, exit `0` tells it to
+  skip -- backwards from most CLIs, this is Vercel's own convention for
+  this field.) Set this on **every** app's Vercel project, including
+  `apps/betti`'s, at the same time -- not just the new one, since the gap
+  applies equally to the existing app once a second one exists to diverge
+  from it.
 
 ## 7. CI/release workflows -- not yet generic
 
