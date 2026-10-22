@@ -279,8 +279,14 @@ console.log("Next (see docs/new-coach-runbook.md for the full checklist):");
 console.log(
   `  1. Fill in the TODOs in apps/${slug}/src/content/*.ts and src/i18n/locales/{hu,en}.json`,
 );
-console.log(`  2. Replace src/assets/* and public/* with this coach's real images`);
-console.log(`  3. Fill in apps/${slug}/.env (VITE_SITE_NAME/TITLE/DESCRIPTION/COACH_ID)`);
-console.log(`  4. Check the palette's contrast if colors change (runbook step 4)`);
+console.log(
+  `  2. Replace src/assets/* and public/* with this coach's real images`,
+);
+console.log(
+  `  3. Fill in apps/${slug}/.env (VITE_SITE_NAME/TITLE/DESCRIPTION/COACH_ID)`,
+);
+console.log(
+  `  4. Check the palette's contrast if colors change (runbook step 4)`,
+);
 console.log(`  5. Create the Coach via the invite flow (runbook step 5)`);
 console.log(`  6. Set up the Vercel project + DNS (runbook step 6)`);
