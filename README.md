@@ -53,3 +53,4 @@ See [`docs/new-coach-runbook.md`](docs/new-coach-runbook.md). There's no
 generator/scaffold script yet — `apps/betti` is the template, copied by
 hand; the runbook walks through what to replace, what env vars a new app
 needs, and the deploy/backend/DNS steps.
+
