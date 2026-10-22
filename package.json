@@ -6,7 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "create-coach-app": "node scripts/create-coach-app.mjs"
   },
   "devDependencies": {
     "@nx/react": "^23.3.0",

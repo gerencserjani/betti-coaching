@@ -2,7 +2,7 @@
 
 Website for **Gerencsér Bernadett**, a family & couples communication coach based in Szeged, Hungary. A one-page marketing site (services, pricing, community, booking) plus a small admin dashboard, backed by a custom booking/calendar API — the sibling [coach-calendar](https://github.com/gerencserjani/coach-calendar) repo (a shared backend, not specific to this one site -- see that repo's own README).
 
-This is one app (`apps/betti`) inside the `coaching-skeleton` monorepo -- see the [repo root README](../../README.md) for how that's laid out and how a new coach's site gets added.
+This is one app (`apps/betti`) inside the `coach-monorepo` monorepo -- see the [repo root README](../../README.md) for how that's laid out and how a new coach's site gets added.
 
 ## System design
 
@@ -41,7 +41,7 @@ pages all hit the real API.
 ## Getting started
 
 Run these from the **repo root** (this app is a workspace inside the
-`coaching-skeleton` monorepo, so `npm install` always happens at the root,
+`coach-monorepo` monorepo, so `npm install` always happens at the root,
 never inside `apps/betti`):
 
 ```bash
