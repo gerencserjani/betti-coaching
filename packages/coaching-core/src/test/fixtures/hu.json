@@ -1,0 +1,166 @@
+{
+  "common": {
+    "siteTitle": "Gerencsér Bernadett — Családi és párkapcsolati coach",
+    "siteDescription": "Családi és párkapcsolati coaching Szegeden. Segítek megtalálni a szavakat párkapcsolati, kommunikációs és szülői témákban.",
+    "themeToggle": {
+      "toDark": "Váltás sötét módra",
+      "toLight": "Váltás világos módra"
+    },
+    "menuToggle": {
+      "open": "Menü megnyitása",
+      "close": "Menü bezárása"
+    },
+    "nav": {
+      "introduction": "Bemutatkozás",
+      "help": "Miben segíthetek",
+      "community": "Közösség",
+      "prices": "Árak",
+      "booking": "Időpontfoglalás",
+      "contact": "Kapcsolat"
+    }
+  },
+  "hero": {
+    "kicker": "Családi és párkapcsolati coach",
+    "headline": "Kommunikációról.<br/>Kapcsolódásról.<br/>Rólad.",
+    "role": "Segítek megtalálni a szavakat, amikor a kapcsolataidban nehéz elmondani, ami benned van — úgy, hogy közben ne távolodjatok, hanem közelebb kerüljetek egymáshoz.",
+    "topics": {
+      "partnership": "Párkapcsolat",
+      "communication": "Asszertív kommunikáció",
+      "parenting": "Szülői légkör"
+    }
+  },
+  "quoteBlock": {
+    "quote": "„Azért vált számomra különösen fontossá a kommunikáció, mert gyerekként megtapasztaltam, milyen ára lehet annak, amikor két ember már nem tud igazán beszélni egymással.”",
+    "leadIn": "Innen indult az utam a coaching felé — és ma azért dolgozom, hogy másoknak ne kelljen ugyanezt átélniük. [TARTALOM SZÜKSÉGES: szakmai út, képzések, tapasztalat]"
+  },
+  "services": {
+    "heading": "Miben lehetek a segítségedre?",
+    "intro": "Három terület, három élethelyzet — nézd meg, melyikben ismersz magadra.",
+    "items": {
+      "partnership": {
+        "tag": "Párkapcsolat",
+        "title": "Párkapcsolati coaching",
+        "situation": "Amikor már nehéz egymást meghallani, és a beszélgetések inkább eltávolítanak, mint összekötnek.",
+        "blockquote": "Ha szeretnéd végre úgy elmondani, ami benned van, hogy közben ne távolodjatok, hanem közelebb kerüljetek egymáshoz — dolgozzunk rajta együtt."
+      },
+      "communication": {
+        "tag": "Kommunikáció",
+        "title": "Asszertív kommunikáció",
+        "situation": "Amikor szeretnéd kimondani, ami benned van — úgy, hogy közben a kapcsolat is megmaradjon. „Hogyan mondjam el?”",
+        "chips": [
+          "nemet szeretnék mondani",
+          "határt szeretnék húzni",
+          "el szeretném mondani, ami bánt",
+          "nem akarok konfliktust, de nem akarok tovább hallgatni",
+          "mindig én alkalmazkodom",
+          "nehéz kiállnom magamért",
+          "őszinte szeretnék lenni, anélkül hogy megbántanám a másikat"
+        ]
+      },
+      "parenting": {
+        "tag": "Otthon",
+        "title": "Szülői kommunikáció és családi légkör",
+        "situation": "Amikor szeretnél másképp jelen lenni otthon. Neked szól, ha ismerősen csengenek az alábbiak:",
+        "chips": [
+          "„Már megint kiabáltam vele.”",
+          "„Nem hallgat rám.”",
+          "„Hogyan szabjak határt büntetés nélkül?”",
+          "„Hogyan mondjak nemet úgy, hogy ne legyen belőle harc?”",
+          "„A párommal sem értünk egyet a gyereknevelésben.”",
+          "„Milyen légkört teremtünk otthon?”"
+        ]
+      }
+    }
+  },
+  "community": {
+    "kicker": "Anyák egymásért · Nők önmagunkért",
+    "heading": "Légy része egy ítéletmentes, kapcsolódásban gazdag, támogató közösségnek.",
+    "body": "Támogatni. Kapcsolódni. Őszintén kimondani. Egy olyan hely, ahol nem kell egyedül vinni a terheket — ahol más anyák és nők értik, amit átélsz, és ahol biztonságos térben oszthatod meg a gondolataidat.",
+    "cta": "Csatlakozom"
+  },
+  "pricing": {
+    "heading": "Árak",
+    "freeCall": {
+      "badge": "Első lépés",
+      "heading": "Első beszélgetés",
+      "text": "Egy rövid online vagy személyes beszélgetés, ahol megismerjük egymást, és kiderül: én vagyok-e a megfelelő ember számodra.",
+      "priceLabel": "Díjmentes"
+    },
+    "tableCaption": "Coaching alkalmak",
+    "minutesUnit": "perc"
+  },
+  "booking": {
+    "heading": "Foglalj időpontot",
+    "intro": "Válaszd ki a szolgáltatást, majd egy szabad időpontot.",
+    "loadingEventTypes": "Kérjük, várj egy pillanatot, amíg betöltődik a naptár…",
+    "loadingEventTypesExtended": "Ez néhány másodpercig is eltarthat — köszönjük a türelmed!",
+    "noEventTypes": "Jelenleg nincs elérhető szolgáltatás.",
+    "pickService": "Válassz szolgáltatást",
+    "change": "Módosítás",
+    "free": "Díjmentes",
+    "detailsHeading": "Add meg az adataidat",
+    "location": {
+      "IN_PERSON": "Személyesen",
+      "GOOGLE_MEET": "Google Meet",
+      "PHONE": "Telefon"
+    },
+    "calendar": {
+      "prevMonth": "Előző hónap",
+      "nextMonth": "Következő hónap",
+      "loading": "Időpontok betöltése…",
+      "noSlotsThisMonth": "Ebben a hónapban nincs szabad időpont.",
+      "noSlotsThisDay": "Erre a napra nincs szabad időpont.",
+      "selectDay": "Válassz egy kiemelt napot az elérhető időpontokért.",
+      "selectLocationFirst": "Válassz helyszínt a szabad időpontok megtekintéséhez.",
+      "selectServiceFirst": "Válassz szolgáltatást először"
+    },
+    "form": {
+      "name": "Név",
+      "email": "Email cím",
+      "phone": "Telefonszám",
+      "note": "Megjegyzés (opcionális)",
+      "phoneInvalid": "Adj meg egy érvényes telefonszámot.",
+      "submit": "Foglalás véglegesítése",
+      "submitting": "Foglalás folyamatban…",
+      "back": "Vissza"
+    },
+    "confirmation": {
+      "heading": "Foglalás megerősítve!",
+      "body": "Hamarosan email visszaigazolást kapsz a részletekkel, egy naptárba illeszthető melléklettel.",
+      "newBooking": "Új időpont foglalása"
+    },
+    "manage": {
+      "heading": "Foglalásod",
+      "loading": "Betöltés…",
+      "notFound": "Nem található ilyen foglalás.",
+      "cancelledLabel": "Ez a foglalás le van mondva.",
+      "cancel": "Lemondás",
+      "cancelReasonLabel": "Indoklás (opcionális)",
+      "cancelConfirm": "Lemondás megerősítése",
+      "reschedule": "Átütemezés",
+      "rescheduleIntro": "Válassz új időpontot.",
+      "rescheduleSuccessHeading": "Időpontod módosítva!",
+      "rescheduleSuccessBody": "Hamarosan email értesítést kapsz az új időpontról.",
+      "backToHome": "Vissza a főoldalra",
+      "noticeWindowBlocked": "Ez a foglalás már csak legalább {{hours}} órával az időpont előtt módosítható vagy mondható le. Ha mégis változtatnál rajta, kérjük vedd fel velünk a kapcsolatot közvetlenül.",
+      "back": "Vissza"
+    },
+    "errors": {
+      "generic": "Váratlan hiba történt. Próbáld újra.",
+      "unavailable": "Karbantartás miatt az online időpontfoglalás jelenleg nem elérhető. Kérlek, írj emailt vagy hívj telefonon:"
+    }
+  },
+  "contact": {
+    "heading": "Kezdjük el a beszélgetést",
+    "intro": "Írj vagy hívj nyugodtan — az első, 30 perces beszélgetés díjmentes, és semmi kötelezettséggel nem jár.",
+    "labels": {
+      "address": "Cím",
+      "phone": "Telefonszám",
+      "email": "E-mail cím"
+    },
+    "mapLink": "Megnyitás Google Térképen ↗"
+  },
+  "footer": {
+    "tagline": "Családi és párkapcsolati coach"
+  }
+}

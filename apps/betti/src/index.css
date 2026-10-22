@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/* Tailwind's automatic content detection only scans this app's own
+   directory tree -- packages/coaching-core is a sibling outside it, so
+   without this, every utility class used in its components (which is most
+   of the UI) would silently never get generated. */
+@source "../../../packages/coaching-core/src";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+h1,
+h2,
+h3,
+.serif {
+  font-family: "Fraunces", serif;
+  font-weight: 480;
+  letter-spacing: -0.01em;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+blockquote {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 420;
+}
+
+/* Chrome/Edge force their own light autofill background via a UA stylesheet
+   that a plain `background` can't override. The inset box-shadow trick
+   paints over it with the site's own card color instead. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-card) inset;
+  box-shadow: 0 0 0 1000px var(--bg-card) inset;
+  -webkit-text-fill-color: var(--ink);
+  caret-color: var(--ink);
+}
+
+.brand-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-soft) transparent;
+}
+
+.brand-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--accent-soft);
+  border-radius: 9999px;
+}
+
+.brand-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --color-bg: var(--bg);
+  --color-bg-panel: var(--bg-panel);
+  --color-bg-card: var(--bg-card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--line);
+  --color-brown: var(--brown);
+
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 760px;
+  --breakpoint-md: 820px;
+  --breakpoint-lg: 860px;
+  --breakpoint-xl: 900px;
+  --breakpoint-2xl: 1024px;
+}
+
+:root,
+[data-theme="light"] {
+  --bg: #fbf0f0;
+  --bg-panel: #f0dada;
+  --bg-card: #fef7f7;
+  --ink: #2a1717;
+  /* Darkened slightly from the prototype's #8a6363 -- WCAG AA needs 4.5:1
+     for normal text and the original only reached 3.89:1 on --bg-panel. */
+  --ink-soft: #7c5959;
+  /* Darkened slightly from the prototype's #a15c6b -- reached 4.42:1 on
+     --bg, just under the 4.5:1 WCAG AA threshold for normal text. */
+  --accent: #9e5a69;
+  --accent-soft: #c99aa0;
+  --line: #e9cdcd;
+  --brown: #8b6b45;
+  --shadow: rgba(42, 23, 23, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #241717;
+    --bg-panel: #2e1c1c;
+    --bg-card: #331f1f;
+    --ink: #f5e1e1;
+    --ink-soft: #c99898;
+    --accent: #d98ca0;
+    --accent-soft: #a15c6b;
+    --line: #4a2c2c;
+    --brown: #c9a171;
+    --shadow: rgba(0, 0, 0, 0.35);
+  }
+}
+
+[data-theme="dark"] {
+  --bg: #241717;
+  --bg-panel: #2e1c1c;
+  --bg-card: #331f1f;
+  --ink: #f5e1e1;
+  --ink-soft: #c99898;
+  --accent: #d98ca0;
+  --accent-soft: #a15c6b;
+  --line: #4a2c2c;
+  --brown: #c9a171;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
