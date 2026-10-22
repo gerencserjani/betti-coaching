@@ -2,18 +2,33 @@
 
 What onboarding a new coach's site actually involves today, now that
 `packages/coaching-core` holds everything coach-agnostic and `apps/betti`
-is the one real example of how a per-coach app is put together. There's no
-generator/scaffold script yet -- `apps/betti` **is** the template, copied
-by hand. Build one once this runbook has actually been run at least once
-for real; writing it against zero real second-coach requirements would be
-guessing.
+is the one real example of how a per-coach app is put together.
+`scripts/create-coach-app.mjs` (step 1) handles the mechanical scaffolding;
+everything genuinely coach-specific (real copy, real assets, a real
+palette, backend/Vercel/DNS setup) still needs a human, covered by steps
+2-7 below.
 
 ## 1. Scaffold the app
 
-Copy `apps/betti` to `apps/<coach-slug>` (a short, URL-safe name -- it
-becomes the npm workspace name too, e.g. `apps/eszter`). Don't copy:
-`node_modules`, `dist`, `coverage`, `playwright-report`, `test-results`,
-`.env.local`, `CHANGELOG.md` (semantic-release generates a fresh one).
+```bash
+npm run create-coach-app -- <coach-slug>
+```
+
+(a short, URL-safe name -- it becomes the npm workspace name too, e.g.
+`eszter` -> `apps/eszter`, `eszter-coaching` workspace). This copies
+`apps/betti` to `apps/<coach-slug>` (skipping `node_modules`, `dist`,
+`coverage`, `playwright-report`, `test-results`, `.env.local`,
+`CHANGELOG.md`), then replaces everything coach-identifying with obvious
+`TODO` placeholders: `package.json`'s name/version, `release.config.js`'s
+`tagFormat` (own tag namespace, so this app's release tags never collide
+with `betti-coaching`'s unprefixed ones or another coach's), `.env`'s
+site-name/title/description/coach-id, `content/{contact,pricing,community}.ts`,
+and every string value in `i18n/locales/{hu,en}.json` (prefixed with
+`TODO:` and Betti's original text as a starting point -- the keys are the
+real contract, the values are Betti's voice and must never ship silently
+under another coach's name). Run `npm install` afterwards to link the new
+workspace. See `scripts/create-coach-app.mjs` for exactly what it does and
+doesn't touch -- it's mechanical only, never invents real content.
 
 The copy is picked up as its own workspace automatically (root
 `package.json`'s `"workspaces": ["apps/*", "packages/*"]` is a glob) -- no
@@ -21,19 +36,25 @@ registration step.
 
 ## 2. Replace the coach-specific content
 
-Everything in `apps/<coach-slug>/src/`:
+Step 1's script already pre-fills the genuinely coach-specific files with
+`TODO:`-prefixed placeholders (`contact.ts`, `pricing.ts`, `community.ts`,
+every locale string). `navLinks.ts` and `services.ts` are left as copied --
+their "values" are structural (anchor ids, i18n key references), not
+Betti's voice, so there's usually nothing coach-specific to change there
+unless this coach's site needs different sections entirely. Grep for
+`TODO:` across `apps/<coach-slug>/src/` to find everything that still needs
+a real value:
 
-- **`content/*.ts`** -- `navLinks.ts`, `services.ts`, `pricing.ts`,
-  `community.ts`, `contact.ts`. Keep the shape (the types come from
-  `@coaching/core`), replace the values.
+- **`content/contact.ts`, `pricing.ts`, `community.ts`** -- real address/
+  phone, real pricing, real community link (or `undefined`).
+- **`i18n/locales/{hu,en}.json`** -- the actual marketing copy (headlines,
+  service descriptions, etc.) in this coach's own voice, not Betti's
+  original text left behind the `TODO:` prefix. The keys are the contract
+  the shared components in `@coaching/core` read via `useTranslation()` --
+  keep every key, change every value.
 - **`coachConfig.ts`** -- assembles the above plus the images below into the
   `CoachConfig` object `main.tsx` provides via `CoachConfigProvider`. Should
   need no structural changes, just follows `content/*.ts`.
-- **`i18n/locales/{hu,en}.json`** -- the actual marketing copy (headlines,
-  service descriptions, etc.) in this coach's own voice, not Betti's with
-  find-replace. The keys are the contract the shared components in
-  `@coaching/core` read via `useTranslation()` -- keep every key, change
-  every value.
 - **`assets/*`** -- logo, hero image (+ a smaller srcset variant), community
   image (+ srcset variant). Same filenames is simplest (fewer places to
   touch), but not required -- `coachConfig.ts` is the only place that
