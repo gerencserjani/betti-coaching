@@ -19,7 +19,18 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-      - run: npx semantic-release
-        working-directory: apps/betti
+      - name: Release every coach app
+        shell: bash
+        run: |
+          set -e
+          for app_dir in apps/*/; do
+            if [ -f "${app_dir}release.config.js" ]; then
+              app="${app_dir%/}"
+              app="${app#apps/}"
+              echo "::group::Releasing $app"
+              (cd "$app_dir" && npx semantic-release)
+              echo "::endgroup::"
+            fi
+          done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

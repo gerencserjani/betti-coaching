@@ -118,11 +118,23 @@ emails an accept-invite link. The resulting coach id is this app's
   applies equally to the existing app once a second one exists to diverge
   from it.
 
-## 7. CI/release workflows -- not yet generic
+## 7. CI/release workflows -- already generic, nothing to do
 
-`.github/workflows/ci.yml` and `release.yml` currently hardcode
-`--workspace=betti-coaching` / `working-directory: apps/betti`. They need a
-matching block added for the new app (or turning into an
-Nx-affected-based/matrix workflow that covers every `apps/*` automatically)
--- not done proactively here since there was only one real app to write
-these against. Do this as part of adding the second app, not before.
+`.github/workflows/ci.yml` runs `npx nx run-many -t lint test build test:e2e`
+-- Nx auto-infers these targets from each project's own `package.json`
+scripts and `run-many` silently skips projects that don't define a given
+target (e.g. `@coaching/core` has no `build`/`test:e2e`). A new `apps/*`
+project is picked up automatically, no workflow edit needed, as long as its
+`package.json` has the usual `lint`/`test`/`build`/`test:e2e` scripts (true
+by default if scaffolded from the generator, see step 1).
+
+`.github/workflows/release.yml` loops over every `apps/*/` directory that has
+its own `release.config.js` and runs `npx semantic-release` in it,
+sequentially (avoids git-push races against `main` within the same job).
+**Give every new app's `release.config.js` its own `tagFormat`** (e.g.
+`tagFormat: "<slug>-v${version}"`, already done by the generator) so its
+release tags never collide with another app's -- `apps/betti`'s own
+`release.config.js` is the one exception, deliberately left on the default
+unprefixed `v*` tag format since it already has 50+ real release tags under
+that scheme and renaming it now would break its tag continuity for no
+benefit.
